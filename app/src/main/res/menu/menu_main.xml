@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" >
+    <item
+        android:id="@+id/action_Order"
+        android:orderInCategory="40"
+        android:icon="@drawable/ic_action_year"
+        android:title="@string/action_year"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_status"
+        android:orderInCategory="60"
+        android:title="@string/action_status"
+        android:icon="@drawable/ic_action_loc"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_reset"
+        android:orderInCategory="60"
+        android:title="Reset"
+        android:icon="@drawable/ic_action_reset"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="60"
+        android:title="Settings"
+        android:icon="@drawable/ic_action_reset"
+        app:showAsAction="ifRoom" />
+</menu>
