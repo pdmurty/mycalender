@@ -28,7 +28,7 @@ import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link GetYear#newInstance} factory method to
+ * Use the  factory method to
  * create an instance of this fragment.
  */
 public class GetYear extends DialogFragment
@@ -47,7 +47,7 @@ public class GetYear extends DialogFragment
     NumberPicker npOnes;
 
     public interface OnButtonDone{
-        public void OnGoButtonClicked(int year, int month);
+        void OnGoButtonClicked(int year, int month);
     }
 
     // TODO: Rename and change types of parameters
@@ -96,7 +96,7 @@ public class GetYear extends DialogFragment
         button.setOnClickListener(new View.OnClickListener() {
                   @Override
                   public void onClick(View v) {
-                      int year = 0;
+                      int year ;
                       int yCent = np.getValue();
                       int ytens = npTens.getValue();
                       int yOnes = npOnes.getValue();

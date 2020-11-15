@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">myCalender</string>
+    <string name="action_year">Set Year</string>
+    <string name="action_status">Location</string>
+    <string name="thithi">      तिथि :          </string>
+    <string name="Yoga">        योग :           </string>
+    <string name="sukla">       शू.           </string>
+    <string name="bahula">      ब.          </string>
+    <string name="sur_udayam">  सूर्योदय :     </string>
+    <string name="varjyam">     वि. घटि :       </string>
+    <string name="DurMuhurtham"> दु.मुहूरत :   </string>
+    <string name="the">         प्रा.          </string>
+    <string name="sayam">       शा.        </string>
+    <string name="Madhya">      म.            </string>
+    <string name="rathri">      रा.          </string>
+    <string name="udayam">      सु.            </string>
+    <string name="full">        पूरा      </string>
+    <string name="rahukal">     रा.कालम् :     </string>
+    <string name="adhika">     अधिक  \u0020  </string>
+    <string name="kshaya">      (क्षय)        </string>
+    <string name="Nakshatra"> नक्षत्र :              </string>
+    <string-array name="months">
+        <item>Jan</item>
+        <item>Feb</item>
+        <item>Mar</item>
+        <item>Apr</item>
+        <item>May</item>
+        <item>Jun</item>
+        <item>Jul</item>
+        <item>Aug</item>
+        <item>Sep</item>
+        <item>Oct</item>
+        <item>Nov</item>
+        <item>Dec</item>
+    </string-array>
+    <string-array name="lunar_months">
+        <item>छवि    </item>
+        <item>वैशाख    </item>
+        <item>जेष्ठ    </item>
+        <item>आषाढ </item>
+        <item> श्रावण    </item>
+        <item> भाध्रपद    </item>
+        <item> आश्वयुज    </item>
+        <item>कार्तिक    </item>
+        <item> मार्घशीर्ष   </item>
+        <item> पुष्यमि    </item>
+        <item> माघ    </item>
+        <item> फल्गुण    </item>
+    </string-array>
+    <string-array name="Nakshatras">
+        <item>अश्विनी</item>
+        <item>भरणी</item>
+        <item>कृत्तिक </item>
+        <item>रोहिणी</item>
+        <item> मृगशिर  </item>
+        <item> आरुद्र </item>
+        <item>पुनर्वास </item>
+        <item> पुष्यमि</item>
+        <item>अश्लेषा </item>
+        <item>माघ </item>
+        <item>पुब्ब </item>
+        <item>उत्तर </item>
+        <item>हस्त </item>
+        <item>चित्र </item>
+        <item>स्वाति </item>
+        <item>विशाख </item>
+        <item>अनुराधा   </item>
+        <item> जेष्ठ  </item>
+        <item> मूल   </item>
+        <item>पू.आषाढ़   </item>
+        <item>उ. आषाढ़   </item>
+        <item> श्रावण   </item>
+        <item>धनिष्ठा   </item>
+        <item>शतभिष   </item>
+        <item>पू.भाद्रा  </item>
+        <item>उ.भद्रा   </item>
+        <item>रेवती   </item>
+    </string-array>
+    <string-array name="thithis">
+        <item> प्रथम</item>
+        <item> द्वितीय</item>
+        <item> तृतीय</item>
+        <item> चतुर्धि</item>
+        <item> पंचम</item>
+        <item> षष्ठि</item>
+        <item> सप्तमि</item>
+        <item> अष्टमी</item>
+        <item> नवमि</item>
+        <item> दसमि</item>
+        <item> एकादशी</item>
+        <item> द्वादशि</item>
+        <item> त्रयोदशि </item>
+        <item> चतुर्दशी </item>
+        <item> पूर्णिमा </item>
+        <item> अमावश्य</item>
+    </string-array>
+    <string-array name="yogas">
+        <item>विषकुंभ             </item>
+        <item>प्रीति             </item>
+        <item>आयुष्मान         </item>
+        <item>सौभाग्य         </item>
+        <item>शोभना             </item>
+        <item>अतिगंड    </item>
+        <item>सुकर्म    </item>
+        <item>ध्रति    </item>
+        <item>शूल    </item>
+        <item>गंड    </item>
+        <item>वृद्धि    </item>
+        <item>ध्रुव    </item>
+        <item>व्याघाता </item>
+        <item>हर्षम    </item>
+        <item>वज्र     </item>
+        <item>सिद्धि      </item>
+        <item> व्यातिपात   </item>
+        <item>वारिय    </item>
+        <item>परिघ      </item>
+        <item>शिव       </item>
+        <item> सिद्ध      </item>
+        <item> साध्य     </item>
+        <item> शुभ        </item>
+        <item> सुक्ल        </item>
+        <item>ब्रह्मा        </item>
+        <item>इंद्र        </item>
+        <item> वैध्रिति      </item>
+    </string-array>
+    <string-array name="hindhu_years">
+        <item>प्रभाव </item>
+        <item> विभव  </item>
+        <item> शुक्ल  </item>
+        <item>प्रमोद्यूत </item>
+        <item>प्रजापति </item>
+        <item> अंगीरस  </item>
+        <item>श्रीमुख </item>
+        <item>भावना </item>
+        <item>युवा </item>
+        <item> धात्रि  </item>
+        <item>ईश्वर  </item>
+        <item>बहुधान्य़  </item>
+        <item>आनंद   </item>
+        <item>विक्रम   </item>
+        <item>वृष   </item>
+        <item>चित्राभानू   </item>
+        <item>सुभानू   </item>
+        <item>तारण   </item>
+        <item>पार्धिव   </item>
+        <item>व्यय   </item>
+        <item>सर्वजीत   </item>
+        <item>सर्वधारि   </item>
+        <item>वैरी   </item>
+        <item>विकृति   </item>
+        <item>खर </item>
+        <item>नंदना </item>
+        <item>विजया </item>
+        <item> जया </item>
+        <item>मन्मध </item>
+        <item>दुर्मखि </item>
+        <item>हेवळंबि </item>
+        <item>विलंबि </item>
+        <item>पादरी </item>
+        <item>शार्वरि </item>
+        <item>प्लव </item>
+        <item>शुभकृत </item>
+        <item>शोकृत</item>
+        <item>क्रोधि</item>
+        <item>वुश्वावसु</item>
+        <item>पराभव</item>
+        <item>प्लवंग</item>
+        <item>कीलक</item>
+        <item>सौम्य</item>
+        <item>साधारण</item>
+        <item>विरोधिकृत</item>
+        <item>परिधाव</item>
+        <item>प्रमोदित</item>
+        <item>आनँद</item>
+        <item>राक्षस </item>
+        <item>नल </item>
+        <item>पिंगला </item>
+        <item>कालयुक्त </item>
+        <item>सिद्धार्धि </item>
+        <item>रौद्रि </item>
+        <item>दुर्मति </item>
+        <item>दुंदुभि </item>
+        <item>रुधिरोद्गारि </item>
+        <item>रक्ताक्षि </item>
+        <item>क्रोधन </item>
+        <item>अक्षय </item>
+
+
+    </string-array>
+
+
+
+
+</resources>

@@ -1,40 +1,15 @@
 package com.example.mycalender;
 
-import android.os.Bundle;
+import android.content.Context;
+import android.content.res.TypedArray;
+import android.util.AttributeSet;
+import android.view.View;
+import android.widget.TimePicker;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.DialogPreference;
 
-/* time picker preferene code.
-https://android.googlesource.com/platform/packages/apps/Settings/+/refs/heads/master/src/com/android/settings/datetime/TimePreferenceController.java
- */
-public class SettingsActivity extends AppCompatActivity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.settings_activity);
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.settings, new SettingsFragment())
-                .commit();
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
-    }
-
-    public static class SettingsFragment extends PreferenceFragmentCompat {
-        @Override
-        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-            setPreferencesFromResource(R.xml.root_preferences, rootKey);
-        }
-    }
-}
-
-/* timepreference dialog
 public class TimePreference extends DialogPreference {
+
     private int lastHour=0;
     private int lastMinute=0;
     private TimePicker picker=null;
@@ -50,22 +25,19 @@ public class TimePreference extends DialogPreference {
 
         return(Integer.parseInt(pieces[1]));
     }
-
-    public TimePreference(Context ctxt, AttributeSet attrs) {
-        super(ctxt, attrs);
-
+    public TimePreference(Context context, AttributeSet attrs) {
+        super(context, attrs);
         setPositiveButtonText("Set");
         setNegativeButtonText("Cancel");
     }
 
-    @Override
+
     protected View onCreateDialogView() {
         picker=new TimePicker(getContext());
 
         return(picker);
     }
-
-    @Override
+/*
     protected void onBindDialogView(View v) {
         super.onBindDialogView(v);
 
@@ -73,7 +45,6 @@ public class TimePreference extends DialogPreference {
         picker.setCurrentMinute(lastMinute);
     }
 
-    @Override
     protected void onDialogClosed(boolean positiveResult) {
         super.onDialogClosed(positiveResult);
 
@@ -89,14 +60,14 @@ public class TimePreference extends DialogPreference {
         }
     }
 
-    @Override
+  */
     protected Object onGetDefaultValue(TypedArray a, int index) {
         return(a.getString(index));
     }
 
     @Override
     protected void onSetInitialValue(boolean restoreValue, Object defaultValue) {
-        String time=null;
+        String time ;
 
         if (restoreValue) {
             if (defaultValue==null) {
@@ -114,5 +85,3 @@ public class TimePreference extends DialogPreference {
         lastMinute=getMinute(time);
     }
 }
-
- */

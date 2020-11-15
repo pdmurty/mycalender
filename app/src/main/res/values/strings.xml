@@ -1,25 +1,25 @@
-    <resources>
+<resources>
     <string name="app_name">myCalender</string>
-    <string name="action_year">Set Year</string>
-    <string name="action_status">Location</string>
-    <string name="thithi">తిథి</string>
-    <string name="blank_space">\u0020</string>
-    <string name="Nakshatra">నక్షత్ర  </string>
-    <string name="Yoga">యోగం</string>
-    <string name="sukla">శు.</string>
-    <string name="bahula">బ.</string>
-    <string name="sur_udayam">సూర్యోదయం:</string>
-    <string name="varjyam">వర్ఙ్యం :</string>
-    <string name="DurMuhurtham">దు.మూహుర్త :</string>
-    <string name="the">   తె.     </string>
-    <string name="sayam"> సా.     </string>
-    <string name="Madhya">మ.     </string>
-    <string name="rathri">రా.    </string>
-    <string name="udayam">ఉ.     </string>
-    <string name="full">  పూర్తి</string>
-    <string name="rahukal">రా.కాలం:</string>
-    <string name="adhika">అధిక\u0020 </string>
-    <string name="kshaya">(క్షయ)</string>
+    <string name="action_year" translatable="false">Set Year</string>
+    <string name="action_status" translatable="false">Location</string>
+    <string name="thithi">      తిథి :        </string>
+    <string name="blank_space" translatable="false">\u0020     </string>
+    <string name="Nakshatra">   నక్షత్రం :     </string>
+    <string name="Yoga">        యోగం :        </string>
+    <string name="sukla">       "శుక్ల "         </string>
+    <string name="bahula">      "క్రిష్ణ "           </string>
+    <string name="sur_udayam">  సూర్యోదయం:  </string>
+    <string name="varjyam">     వరఙ్యం    :</string>
+    <string name="DurMuhurtham">దుర్ముహుర్త :</string>
+    <string name="the">         తె.         </string>
+    <string name="sayam">       సా.         </string>
+    <string name="Madhya">      మ.          </string>
+    <string name="rathri">      రా.         </string>
+    <string name="udayam">      ఉ.          </string>
+    <string name="full">        పూర్తి.      </string>
+    <string name="rahukal">     రాహుకాలం:    </string>
+    <string name="adhika">      అధిక\u0020  </string>
+    <string name="kshaya">      (క్షయ)      </string>
 
     <string-array name="months">
         <item>Jan</item>
@@ -50,80 +50,80 @@
         <item>ఫాల్గుణం</item>
     </string-array>
     <string-array name="Nakshatras">
-        <item>అశ్వని </item>
-        <item>భరణి   </item>
-        <item>కృత్తిక </item>
-        <item>రోహిణి </item>
-        <item>మృగశిర   </item>
-        <item>ఆరుద్ర  </item>
-        <item>పునర్వసు </item>
-        <item>పుష్యమి</item>
-        <item>ఆశ్లేష</item>
-        <item>మఘ</item>
-        <item>పుబ్బ</item>
-        <item>ఉత్తర</item>
-        <item>హస్త</item>
-        <item>చిత్ర</item>
-        <item>స్వాతి</item>
-        <item>విశాఖ</item>
-        <item>అనురాధ    </item>
-        <item>జ్యేష్ఠ   </item>
-        <item>మూల       </item>
-        <item>పూ.ఆషాఢ   </item>
-        <item>ఉ.ఆషాఢ    </item>
-        <item>శ్రవణం    </item>
-        <item>ధనిష్ఠ    </item>
-        <item>శతభిష     </item>
-        <item>పూ.భాద్ర  </item>
-        <item>ఉ.భాద్ర   </item>
-        <item>రేవతి     </item>
+        <item>అశ్వని. </item>
+        <item>భరణి.   </item>
+        <item>కృత్తిక. </item>
+        <item>రోహిణి. </item>
+        <item>మృగశిర.   </item>
+        <item>ఆరుద్ర.  </item>
+        <item>పునర్వసు. </item>
+        <item>పుష్యమి.</item>
+        <item>ఆశ్లేష.</item>
+        <item>మఘ.</item>
+        <item>పుబ్బ.</item>
+        <item>ఉత్తర.</item>
+        <item>హస్త.</item>
+        <item>చిత్ర.</item>
+        <item>స్వాతి.</item>
+        <item>విశాఖ.</item>
+        <item>అనురాధ.    </item>
+        <item>జ్యేష్ఠ.   </item>
+        <item>మూల.       </item>
+        <item>పూర్వాషాఢ.   </item>
+        <item>ఉత్తరాషాఢ.    </item>
+        <item>శ్రవణం.    </item>
+        <item>ధనిష్ఠ.    </item>
+        <item>శతభిష.     </item>
+        <item>పూర్వాభాద్ర.  </item>
+        <item>ఉత్తరాభాద్ర.   </item>
+        <item>రేవతి.     </item>
     </string-array>
     <string-array name="thithis">
-        <item> ప్రధమ   </item>
-        <item> ద్వితీయ </item>
-        <item> తృతీయ   </item>
-        <item> చతుర్ధి </item>
-        <item> పంచమ    </item>
-        <item> షష్ఠి   </item>
-        <item> సప్తమి  </item>
-        <item> అష్ఠమి  </item>
-        <item> నవమి    </item>
-        <item> దశమి    </item>
-        <item> ఏకాదశి  </item>
-        <item> ద్వాదశి </item>
-        <item> త్రయోదశి </item>
-        <item> చతుర్దశి </item>
-        <item> పూర్ణిమ  </item>
-        <item> అమావశ్య </item>
+        <item> ప్రధమ.   </item>
+        <item> ద్వితీయ. </item>
+        <item> తృతీయ.   </item>
+        <item> చతుర్ధి. </item>
+        <item> పంచమ.    </item>
+        <item> షష్ఠి.   </item>
+        <item> సప్తమి.  </item>
+        <item> అష్ఠమి.  </item>
+        <item> నవమి.    </item>
+        <item> దశమి.    </item>
+        <item> ఏకాదశి.  </item>
+        <item> ద్వాదశి. </item>
+        <item> త్రయోదశి. </item>
+        <item> చతుర్దశి. </item>
+        <item> పూర్ణిమ.  </item>
+        <item> అమావశ్య. </item>
     </string-array>
     <string-array name="yogas">
-        <item>విష్కుంభ              </item>
-        <item>ప్రీతి                </item>
-        <item>ఆయుష్మాన్         </item>
-        <item>సౌభాగ్య           </item>
-        <item>శోభన                  </item>
-        <item>అతిగండ       </item>
-        <item>సుకర్మ       </item>
-        <item>ధ్రితి       </item>
-        <item>శూల          </item>
-        <item>గండ          </item>
-        <item>వృధ్ధి       </item>
-        <item>ధృవ          </item>
-        <item>వ్యాఘాత   </item>
-        <item>హర్షణ        </item>
-        <item>వజ్ర          </item>
-        <item>సిధ్ధి         </item>
-        <item>వ్యాతిపాత    </item>
-        <item>వారియ         </item>
-        <item>పరిఘ           </item>
-        <item>శివ             </item>
-        <item>సిధ్ధ          </item>
-        <item>సాధ్య         </item>
-        <item>శుభ              </item>
-        <item>శుక్ల            </item>
-        <item>బ్రహ్మ           </item>
-        <item>ఇంద్ర            </item>
-        <item>వైధ్రితి        </item>
+        <item>విష్కుంభ.              </item>
+        <item>ప్రీతి.                </item>
+        <item>ఆయుష్మాన్.         </item>
+        <item>సౌభాగ్య.           </item>
+        <item>శోభన.                  </item>
+        <item>అతిగండ.       </item>
+        <item>సుకర్మ.       </item>
+        <item>ధ్రితి.       </item>
+        <item>శూల.          </item>
+        <item>గండ.          </item>
+        <item>వృధ్ధి.       </item>
+        <item>ధృవ.          </item>
+        <item>వ్యాఘాత.   </item>
+        <item>హర్షణ.        </item>
+        <item>వజ్ర.          </item>
+        <item>సిధ్ధి.         </item>
+        <item>వ్యాతిపాత.    </item>
+        <item>వారియ.         </item>
+        <item>పరిఘ.           </item>
+        <item>శివ.             </item>
+        <item>సిధ్ధ.          </item>
+        <item>సాధ్య.         </item>
+        <item>శుభ.              </item>
+        <item>శుక్ల.            </item>
+        <item>బ్రహ్మ.           </item>
+        <item>ఇంద్ర.            </item>
+        <item>వైధ్రితి.        </item>
     </string-array>
     <string-array name="hindhu_years">
         <item>ప్రభవ        </item>
@@ -191,22 +191,22 @@
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
+    <string name="messages_header" translatable="false">Messages</string>
+    <string name="Alaram_header" translatable="false">Alaram</string>
 
     <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
+    <string name="signature_title" translatable="false">Your signature</string>
+    <string name="reply_title" translatable="false">Default reply action</string>
 
     <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    <string name="alaram_title" translatable="false">Set alaram on/off </string>
+    <string name="attachment_title" translatable="false">Download incoming attachments</string>
+    <string name="attachment_summary_on" translatable="false">Automatically download attachments for incoming emails
     </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
-    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="attachment_summary_off" translatable="false">Only download attachments when manually requested</string>
+    <string name="title_activity_settings" translatable="false">SettingsActivity</string>
 </resources>
 
 

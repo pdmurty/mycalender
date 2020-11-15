@@ -334,8 +334,8 @@ public class CalcPanchang {
         if(hrs>=24) hrs-=24;
         if (hrs>=0 && hrs<sunrise){strPrefix=thela;}
         if (hrs>=sunrise && hrs<12) {strPrefix = udaya; }
-        if (hrs>=12 && hrs<15) {strPrefix = madhya; }
-        if (hrs>=15 && hrs<19) {strPrefix = sayam; }
+        if (hrs>=12 && hrs<16) {strPrefix = madhya; }
+        if (hrs>=16 && hrs<19) {strPrefix = sayam; }
         if (hrs>=19 ){strPrefix = rathri; }
         if (hrs>13 ) hrs-=12;
         double min = hrs*60;
