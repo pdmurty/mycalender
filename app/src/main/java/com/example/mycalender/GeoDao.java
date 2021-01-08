@@ -24,11 +24,11 @@ public interface GeoDao {
             " order by asciiname asc ")
     public LiveData<List<Geonames>> getAllNames(String country, String admin, String like);
     @Query("SELECT * FROM COUNTRIES")
-    public LiveData<List<Countries>> getCountries();
+    LiveData<List<Countries>> getCountries();
     @Query("SELECT * FROM ADMINCODES where country = :country_code order by asciiname asc ")
     public LiveData<List<Admins>> getAllAdmins( String country_code);
     @Query("SELECT * FROM TIMEZONES")
-    public LiveData<List<Timzones>> getTimeZones();
+    public LiveData<List<Timezones>> getTimeZones();
     @Query(" select g.asciiname as name, g.latitude as lat, g.longitude as lon , tz.`offset` as `offset` " +
             " from geonames g,  TIMEZONES tz  " +
             " where g.timezone = tz.name  " +

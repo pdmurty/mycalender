@@ -1,41 +1,45 @@
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+<androidx.preference.PreferenceScreen
 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <SwitchPreference
+        android:key="KEY_ALRMSET"
+        android:title="Set Alaram"
+        android:defaultValue="true"
+        />
+    <com.example.mycalender.TimePreference
+        android:key="KEY_ALARAM"
+        android:dependency="KEY_ALRMSET"
+        android:title="Time Preference"
+        android:summary="Time Summary"
+        android:defaultValue="90" />
+    <SwitchPreference
+        android:key="KEY_VOICE"
+        android:title="Set Voice"
+        android:defaultValue="true"
+        />
+
+    <com.example.mycalender.SpinnerPreference
+        android:key="monthstyle"
+        android:title="Month-Style"
+        android:defaultValue="Amantha"
+        app:entries="@array/reply_entries"
+        app:entryValues="@array/reply_values" />
+    <com.example.mycalender.SpinnerPreference
+        android:key="lan_style"
+        android:title="Language"
+        android:defaultValue="తెలుగు"
+        app:entries="@array/lan_entries"
+        app:entryValues="@array/lan_values" />
     <PreferenceCategory app:title="@string/messages_header">
 
         <EditTextPreference
             app:key="signature"
             app:title="@string/signature_title"
             app:useSimpleSummaryProvider="true" />
-
-        <ListPreference
-            app:defaultValue="reply"
-            app:entries="@array/reply_entries"
-            app:entryValues="@array/reply_values"
-            app:key="reply"
-            app:title="@string/reply_title"
-            app:useSimpleSummaryProvider="true" />
-
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="Set Alaram">
-
-        <SwitchPreferenceCompat
-            app:key="@string/Alaram_header"
-            app:title="@string/alaram_title" />
-
-
-
-        <SwitchPreferenceCompat
-            app:dependency="Alaram"
-            app:key="attachment"
-            app:summaryOff="@string/attachment_summary_off"
-            app:summaryOn="@string/attachment_summary_on"
-            app:title="@string/attachment_title" />
-        <com.example.mycalender.TimePreference
-              app:key = " alaramkey"
-              app:title = " setalaram"
-            />
-
-    </PreferenceCategory>
-
-</PreferenceScreen>
+</androidx.preference.PreferenceScreen>

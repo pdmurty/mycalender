@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/dlgTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select Location"
+        android:textAlignment="center"
+        android:gravity="center_horizontal"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"/>
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+
+        <RadioButton
+            android:id="@+id/locCur"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClickLOC"
+            android:text="Current Location" />
+
+        <RadioButton
+            android:id="@+id/locDb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Location DB"
+            android:onClick="onClickLOC"/>
+
+        <RadioButton
+            android:id="@+id/locMap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Get From Map"
+            android:onClick="onClickLOC"/>
+
+
+    </RadioGroup>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="OK"
+            android:onClick="onClickLOC"/>
+
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancel"
+            android:onClick="onClickLOC"/>
+    </LinearLayout>
+
+</LinearLayout>

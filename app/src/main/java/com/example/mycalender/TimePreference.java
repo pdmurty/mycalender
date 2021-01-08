@@ -2,17 +2,22 @@ package com.example.mycalender;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TimePicker;
 
 import androidx.preference.DialogPreference;
 
+
 public class TimePreference extends DialogPreference {
 
     private int lastHour=0;
     private int lastMinute=0;
     private TimePicker picker=null;
+    private int mTime;
+    private int mDialogLayoutResId = R.layout.pref_dialog_time;
 
     public static int getHour(String time) {
         String[] pieces=time.split(":");
@@ -25,28 +30,50 @@ public class TimePreference extends DialogPreference {
 
         return(Integer.parseInt(pieces[1]));
     }
+    public TimePreference(Context context) {
+        this(context, null);
+    }
     public TimePreference(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        setPositiveButtonText("Set");
-        setNegativeButtonText("Cancel");
+        this(context, attrs,R.attr.dialogPreferenceStyle);
+
     }
 
+    public TimePreference(Context context, AttributeSet attrs,
+                          int defStyleAttr) {
+        this(context, attrs, defStyleAttr, defStyleAttr);
+    }
+    public TimePreference(Context context, AttributeSet attrs,
+                          int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
 
+        // Do custom stuff here
+        // ...
+        // read attributes etc.
+    }
+
+    public int getTime() {
+        return mTime;
+    }
+    public void setTime(int time) {
+        mTime = time;
+        // Save to Shared Preferences
+        persistInt(time);
+    }
     protected View onCreateDialogView() {
         picker=new TimePicker(getContext());
 
         return(picker);
     }
-/*
+
     protected void onBindDialogView(View v) {
-        super.onBindDialogView(v);
+       // super.onBindDialogView(v);
 
         picker.setCurrentHour(lastHour);
         picker.setCurrentMinute(lastMinute);
     }
 
     protected void onDialogClosed(boolean positiveResult) {
-        super.onDialogClosed(positiveResult);
+       // super.onDialogClosed(positiveResult);
 
         if (positiveResult) {
             lastHour=picker.getCurrentHour();
@@ -60,28 +87,24 @@ public class TimePreference extends DialogPreference {
         }
     }
 
-  */
+
     protected Object onGetDefaultValue(TypedArray a, int index) {
         return(a.getString(index));
     }
 
     @Override
     protected void onSetInitialValue(boolean restoreValue, Object defaultValue) {
-        String time ;
+        String time = (String)defaultValue  ;
+// Read the value. Use the default value if it is not possible.
 
-        if (restoreValue) {
-            if (defaultValue==null) {
-                time=getPersistedString("00:00");
-            }
-            else {
-                time=getPersistedString(defaultValue.toString());
-            }
-        }
-        else {
-            time=defaultValue.toString();
-        }
+        setTime(restoreValue ?
+               getPersistedInt(mTime) : Integer.parseInt(time));
 
-        lastHour=getHour(time);
-        lastMinute=getMinute(time);
     }
+
+    @Override
+    public int getDialogLayoutResource() {
+        return  mDialogLayoutResId;
+    }
+
 }

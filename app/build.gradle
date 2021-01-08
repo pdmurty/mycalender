@@ -30,6 +30,7 @@ android {
 }
 
 dependencies {
+    implementation 'androidx.cardview:cardview:1.0.0'
     def preference_version = "1.1.1"
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -41,6 +42,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
    // preferences compat
+
     implementation "androidx.preference:preference:$preference_version"
     //room database comps.
     implementation "androidx.room:room-runtime:$rootProject.roomVersion"
@@ -48,5 +50,8 @@ dependencies {
     // life cycle comp.
     implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.archLifecycleVersion"
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:$rootProject.archLifecycleVersion"
-
+    //google play services
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
 }

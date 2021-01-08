@@ -1,6 +1,7 @@
 package com.example.mycalender;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -27,6 +28,7 @@ public class Geolocations extends AppCompatActivity {
     List<Admins> mAdminList;
     ArrayAdapter<String> arrCountries;
     ArrayAdapter<String> arrAdmins;
+    Spinner spCountries;
     private static String searchText = "";
     private static String countrycode = "";
     private static String admincode = "";
@@ -46,16 +48,15 @@ public class Geolocations extends AppCompatActivity {
             }
         });
 
-
-
-
-        Spinner spCountries = findViewById(R.id.countries);
-         arrCountries= new ArrayAdapter(this,R.layout.support_simple_spinner_dropdown_item);
+         spCountries = findViewById(R.id.countries);
+         arrCountries=  new ArrayAdapter(this,R.layout.support_simple_spinner_dropdown_item);
         if (spCountries!=null) {
             spCountries.setAdapter(arrCountries);
+
         }
+
         Spinner spAdmins = findViewById(R.id.admins);
-        arrAdmins= new ArrayAdapter(this,R.layout.support_simple_spinner_dropdown_item);
+        arrAdmins=  new ArrayAdapter(this,R.layout.support_simple_spinner_dropdown_item);
         if (spAdmins!=null) {
             spAdmins.setAdapter(arrAdmins);
            }
@@ -64,14 +65,15 @@ public class Geolocations extends AppCompatActivity {
         recycler.setAdapter(mAdapter);
         recycler.setLayoutManager( new LinearLayoutManager(this));
         mVwmodel = new ViewModelProvider( this).get(GeoVwModel.class);
-                //ViewModelProviders.of(this).get(GeoVwModel.class);
+
         UpdateCountryList();
-        spCountries.setSelection(4);
+
 
         spCountries.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                countrycode = mCountryList.get(position).CountryCode;
+                mAdapter.SetCountryName( mCountryList.get(position).countryName);
                 FillAdmins(position);
                 UpdateGeonames();
             }
@@ -81,10 +83,12 @@ public class Geolocations extends AppCompatActivity {
 
             }
         });
+
         spAdmins.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 admincode = mAdminList.get(position).admin1code;
+                searchText="";
                 UpdateGeonames();
             }
 
@@ -94,8 +98,13 @@ public class Geolocations extends AppCompatActivity {
             }
         });
 
-    }
 
+
+    }
+    String GetSelectedCountry(){
+       String strCountry = MainActivity.mPreferences.getString("KEY_LOCNAME","INDIA");
+        return TextUtils.split(strCountry,",")[1];
+    }
     private void FillAdmins(int position) {
         String countrycode = mCountryList.get(position).CountryCode;
         mVwmodel.getAllAdmins(countrycode).observe(this, new Observer<List<Admins>>() {
@@ -116,10 +125,17 @@ public class Geolocations extends AppCompatActivity {
             @Override
             public void onChanged(List<Countries> countries) {
                 arrCountries.clear();
-                for (int i =0; i<countries.size();++i)
-                    arrCountries.add(countries.get(i).countryName);
+                String strCountryName ;
+                String strSelCountryname = GetSelectedCountry();
+                for (int i =0; i<countries.size();++i) {
+                    strCountryName = countries.get(i).countryName;
+                    arrCountries.add(strCountryName);
+                    if(TextUtils.equals(strCountryName,strSelCountryname))
+                    spCountries.setSelection(i);
+                }
                 arrCountries.notifyDataSetChanged();
                 mCountryList=countries;
+
             }
         });
     }

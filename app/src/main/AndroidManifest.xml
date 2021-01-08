@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mycalender">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,20 +11,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+        <activity android:name=".Geomaps"></activity>
+
+        <service
+            android:name=".FetchAdressIntentService"
+            android:exported="false" />
+
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:parentActivityName=".MainActivity">
-
-        </activity>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".Geolocations"
+            android:label="Selet Location"
+            android:parentActivityName=".MainActivity"
             android:windowSoftInputMode="stateHidden" />
 
         <receiver
             android:name=".AlaramReciever"
             android:enabled="true"
-            android:exported="false" />
+            android:exported="false">
+
+        </receiver>
 
         <activity
             android:name=".MainActivity"
@@ -33,6 +46,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name=".MainActivity"
+            android:foregroundServiceType="location">
+
+            <!-- Any inner elements would go here. -->
+        </service>
     </application>
 
 </manifest>

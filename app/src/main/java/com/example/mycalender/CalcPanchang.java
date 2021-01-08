@@ -2,6 +2,7 @@ package com.example.mycalender;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.util.Log;
 
 public class CalcPanchang {
 
@@ -31,14 +32,16 @@ public class CalcPanchang {
     private static Context mapp;
     private static CalcPanchang instance = null;
 
-     public static CalcPanchang getInstance(Context app){
+     public static CalcPanchang  getInstance(Context app){
         if(instance == null) {
             mapp = app;
             instance = new CalcPanchang();
 
+
         }
         return instance;
      }
+     CalcPanchang(){}
 
     private void LoadStringResources() {
         Resources resource = mapp.getResources();
@@ -66,15 +69,16 @@ public class CalcPanchang {
         adhika       = resource.getString(R.string.adhika);
         kshaya       = resource.getString(R.string.kshaya);
     }
-    public String[] getPanchangNotify(int year , int month, int dayOfMonth, int tzoff){
-
+    public String  getPanchangNotify(int year , int month, int dayOfMonth, int tzoff){
+         return "శార్వరి పంచాంగం";
+       /*
         LoadStringResources();
         double dTzoffset = (double) tzoff/3600000;
         String str ;
         String[] strarr = new String[2];
         double[] dbl = Swlib.WritePanchang(year,month, dayOfMonth, dTzoffset);
         double sunrise = dbl[7];
-        strarr[0] = LunarMonth(dbl[13], year,month+1);
+        strarr[0] = LunarMonth(dbl[13], (int)dbl[0], year,month+1);
         str  = ThithiToString((int)dbl[0]);
         str += HourToString(dbl[1],sunrise);
         str+="\n";
@@ -88,23 +92,25 @@ public class CalcPanchang {
         { str += NakshatraToString((int)dbl[2]+1); str += HourToString(dbl[11],sunrise);
             str+="\n";}
            strarr[1] = str;
-        return strarr;
+        //return strarr;
 
-
+*/
     }
     public String ShowPanchang(int year , int month, int dayOfMonth, int tzoff){
         LoadStringResources();
-
-        double dTzoffset = (double) tzoff/3600000;
-
+        int tzone = MainActivity.mPreferences.getInt("KEY_TZONE",19800000);
+        double dTzoffset =  (double) tzone /3600000;  //default Tzone set to INDIA
         String str ;//= String.valueOf(dayOfMonth);
-        double[] dbl = Swlib.WritePanchang(year,month, dayOfMonth, dTzoffset);
+        float loc_lon = (float) MainActivity.mPreferences.getFloat("KEY_LON",(float)78.45);
+        float loc_lat = (float) MainActivity.mPreferences.getFloat("KEY_LAT",(float)17.44);
+        Swlib.SetLocation(loc_lon, loc_lat);
+        double[] dbl = Swlib.WritePanchang(year,month, dayOfMonth, dTzoffset );
 
         double sunrise = dbl[7];
         double sunset = dbl[8];
 
         //int nk_today=-1;
-        str = LunarMonth(dbl[13], year,month+1);str+="\n";
+        str = LunarMonth(dbl[13],(int)dbl[0], year,month+1);str+="\n";
 
         str += ThithiToString((int)dbl[0]);
         str += HourToString(dbl[1],sunrise);
@@ -297,19 +303,30 @@ public class CalcPanchang {
         return str;
     }
 
-    private String LunarMonth(double v, int greg_year, int greg_month) {
+    private String LunarMonth(double v, int thithi, int greg_year, int greg_month) {
         int lunar = (int)v;
+        int lunarMonth ;
         int hYear = greg_year - 1867;
+        boolean bAdhika = false;
         String strReturn;
+        String strMonthstyle = MainActivity.mPreferences.getString("monthstyle","1");
         hYear %= 60;
         if(greg_month<=4 && lunar<=11 && lunar!=0) hYear-=1;
         strReturn = strHinduYears[hYear] + " -  ";
+
         if ((v-lunar)==0) {
-            strReturn += strLunarMonths[(int) v];
-        }
+            lunarMonth= (int)v;
+         //  strReturn += strLunarMonths[(int) v];
+         }
         else {
-            strReturn +=  adhika + strLunarMonths[(int) v + 1];
+            bAdhika = true;
+            lunarMonth= (int)(v+1);
+            strReturn +=  adhika ; //+ strLunarMonths[(int) (v + 1)];
         }
+       if(!bAdhika)
+       if( Integer.parseInt(strMonthstyle)== 2 && thithi >14) lunarMonth++;
+        
+        strReturn += strLunarMonths[lunarMonth];
 
         return strReturn;
     }

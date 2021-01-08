@@ -8,6 +8,8 @@
 #include "swephexp.h"
 #include "swehouse.h"
 
+float  mloc_lon=78.45;  // default location set to HYD, INDIA
+float   mloc_lat=17.4333;
 JNIEXPORT jdouble JNICALL
 Java_com_example_mycalender_Swlib_GetJulDay(JNIEnv *env, jobject thiz, jint year, jint month,
                                             jint day, jdouble hours) {
@@ -225,6 +227,7 @@ double get_thithiend( double jd, int target)
     return ddif;
 
 }
+//gets target thithi after given julian-day
 double get_thithi_tgt( double jd, int target)
 {
 
@@ -273,6 +276,7 @@ double get_thithi_tgt( double jd, int target)
     return ddif;
 
 }
+// get prathama after given julian-day
 double get_thithi_pradhama(double jd)
 {
     int target=0;
@@ -282,6 +286,7 @@ double get_thithi_pradhama(double jd)
 
 }
 
+// get amavasya after given julian day
 double get_thithi_amantha( double jd)
 {
 
@@ -291,7 +296,8 @@ double get_thithi_amantha( double jd)
     return ddif/24;
 
 }
-double get_sankranthi_day( double jdn, int *tgt_sak)
+// get next-sankarthi day after given jdn
+double get_sankranthi_day( double jdn, int *tgt_sak /*sankranthi count.*/)
 {
     double  xx[6], slon,sspeed,dif=0,ddif=0;
     char err[255];
@@ -345,9 +351,11 @@ void get_all_LunarMonths(int year, double* darraydays)
     }
 
 }
+
+
 JNIEXPORT jdoubleArray JNICALL
-Java_com_example_mycalender_Swlib_WritePanchang(JNIEnv *env, jclass clazz, jint year, jint month,
-                                                jint day, jdouble timezone) {
+Java_com_example_mycalender_Swlib_WritePanchang(JNIEnv *env, jclass clazz, jint year /*greg-year*/,
+                      jint month /*greg-month*/, jint day /*gre-day*/, jdouble timezone) {
     // TODO: implement WritePanchang()
     double jdn,jdn_prathama,jdn_amantha, jdn_sank=0, retjdn[1], xx[14], slon,mlon,dif;
     double geopos[3];
@@ -366,8 +374,8 @@ Java_com_example_mycalender_Swlib_WritePanchang(JNIEnv *env, jclass clazz, jint 
     swe_calc_ut(jdn, SE_MOON,SEFLG_MOSEPH | SEFLG_SPEED | SEFLG_SIDEREAL,xx, err);
     mlon = xx[0];
     //sunrise
-    geopos[0] = 78.45;
-    geopos[1] = 17.4333;
+    geopos[0] = mloc_lon; //78.45; // hard coded to be used from geoloc.
+    geopos[1] = mloc_lat; //17.4333;
     geopos[2] = 0;
     swe_rise_trans(jdn, SE_SUN , starname,0,  SE_CALC_RISE, geopos, 0, 0, retjdn, err);
     //sunset
@@ -404,7 +412,10 @@ Java_com_example_mycalender_Swlib_WritePanchang(JNIEnv *env, jclass clazz, jint 
     jdn_sank = get_sankranthi_day( jdn_prathama, &sankranthi) + jdn_prathama;
     xx[13]= sankranthi%12;
     xx[12]  = get_thithi_amantha(jdn);
+    // no sankranthi between pradham and amavasya, it is adhikamasa
+    // reduce the month by 0.5 to let the caller know.
     if(jdn_sank > xx[12]+jdn) xx[13]-=0.5;
+
 
     // do nakshatra
     int nkCount = (int) (mlon) * 3 / 40;
@@ -437,3 +448,11 @@ Java_com_example_mycalender_Swlib_WritePanchang(JNIEnv *env, jclass clazz, jint 
   }
 
 
+JNIEXPORT void JNICALL
+Java_com_example_mycalender_Swlib_SetLocation(JNIEnv *env, jclass clazz, jfloat loc_lon,
+                                              jfloat loc_lat) {
+    // TODO: implement SetLocation()
+    mloc_lat = loc_lat;
+    mloc_lon = loc_lon;
+
+}

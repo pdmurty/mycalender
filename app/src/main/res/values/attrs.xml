@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="colorCardBackground" format="reference" />
+    <attr name="colorCardHighlight" format="reference" />
+    <attr name="backgroundDrawerHeader" format="reference" />
+    <attr name="titleTextSize" format="dimension|reference" />
+    <attr name="subtitleTextSize" format="dimension|reference" />
+    <attr name="contentTextSize" format="dimension|reference" />
+    <attr name="preferenceHelpStyle" format="reference" />
+    <declare-styleable name="PreferenceHelp">
+        <attr name="dialogTitle" />
+        <attr name="dialogLayout" />
+    </declare-styleable>
+    <declare-styleable name="SpinnerPreference">
+        <attr name="entries" />
+        <attr name="entryValues" />
+    </declare-styleable>
+    <declare-styleable name="StoryView">
+        <attr name="local" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="TintableTextView">
+        <attr name="iconStart" format="reference" />
+        <attr name="iconEnd" format="reference" />
+        <attr name="iconTop" format="reference" />
+        <attr name="iconBottom" format="reference" />
+    </declare-styleable>
+    <declare-styleable name="IconButton">
+        <attr name="tint" />
+    </declare-styleable>
+</resources>

@@ -51,6 +51,7 @@
         android:layout_below="@id/admins"
         android:onClick="UpdateGeonames"
         android:text="Find"
+        android:visibility="gone"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/admins" />
 

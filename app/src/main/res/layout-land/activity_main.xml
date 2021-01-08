@@ -5,7 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+    <TextView
+        android:id="@+id/locTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/calendarView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        android:paddingLeft="@dimen/alert_def_padding"
+        android:textAppearance=
+            "@android:style/TextAppearance.DeviceDefault.Large"
+        android:onClick="locClick"
 
+        />
     <TextView
         android:id="@+id/myTxt"
         android:layout_width="wrap_content"
@@ -13,10 +26,9 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toEndOf="@+id/calendarView"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/locTxt"
         app:layout_constraintVertical_bias="0.359" />
 
     <CalendarView

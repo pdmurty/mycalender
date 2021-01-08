@@ -207,6 +207,31 @@
     </string>
     <string name="attachment_summary_off" translatable="false">Only download attachments when manually requested</string>
     <string name="title_activity_settings" translatable="false">SettingsActivity</string>
+    <string name="theme_light" translatable="false">Light</string>
+    <string name="theme_dark" translatable="false">Dark</string>
+    <string name="theme_black" translatable="false">Black</string>
+    <string name="theme_sepia" translatable="false">Sepia</string>
+    <string name="theme_green" translatable="false">Green</string>
+    <string name="theme_transparent" translatable="false">Transparent</string>
+    <string name="theme_solarized_dark" translatable="false">Solarized Dark</string>
+    <string name="theme_solarized" translatable="false">Solarized</string>
+    <string name="pref_daynight_auto" translatable="false">pref_daynight_auto</string>
+    <!-- Location permissions-->
+    <string name="permission_rationale" translatable="false">Location permission is needed for core functionality</string>
+    <string name="permission_denied_explanation" translatable="false">Permission was denied, but is needed for core
+        functionality.</string>
+    <string name="settings" translatable="false">Settings</string>
+    <string name="no_geocoder_available" translatable="false">No geocoder available</string>
+
+    <string name="fetch_address" translatable="false">Fetch address</string>
+
+    <string name="address_found" translatable="false">Address found</string>
+
+    <string name="no_address_found" translatable="false">Sorry, no address found</string>
+    <string name="no_location_data_provided" translatable="false">No location data provided</string>
+    <string name="service_not_available" translatable="false">Sorry, the service is not available</string>
+    <string name="invalid_lat_long_used" translatable="false">Invalid latitude or longitude used</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyBxjA0Xq712usnWbfHDqqILqpK-xFCS1Cg</string>
 </resources>
 
 

@@ -90,6 +90,7 @@ public class GetYear extends DialogFragment
         ArrayAdapter<CharSequence>  aa= ArrayAdapter.createFromResource(getActivity(),R.array.months,R.layout.support_simple_spinner_dropdown_item);
         if (sp!=null) {
             sp.setAdapter(aa);
+            sp.setSelection(4);
             sp.setOnItemSelectedListener(this);
             }
         Button button = view.findViewById(R.id.button);

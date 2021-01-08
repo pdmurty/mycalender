@@ -22,11 +22,15 @@ public class GeoListAdapter extends RecyclerView.Adapter {
     LayoutInflater m_Inflater;
     GeoDao.GeoLoc selectedGeo;
     Activity parent;
+    private String mCountryName;
     GeoListAdapter(Context context){
 
         m_Inflater = LayoutInflater.from(context);
         parent = (Activity) context;
 
+    }
+    public void SetCountryName(String countryname){
+        mCountryName = countryname;
     }
     @NonNull
     @Override
@@ -72,7 +76,7 @@ public class GeoListAdapter extends RecyclerView.Adapter {
             int pos = getLayoutPosition();
             selectedGeo = mGeonamesList.get(pos);
             Intent intent = new Intent();
-            intent.putExtra("GEONAME",selectedGeo.name );
+            intent.putExtra("GEONAME",selectedGeo.name +","+mCountryName);
             intent.putExtra("LONG", selectedGeo.lon);
             intent.putExtra("LAT",selectedGeo.lat);
             intent.putExtra("TZONE", selectedGeo.offset);

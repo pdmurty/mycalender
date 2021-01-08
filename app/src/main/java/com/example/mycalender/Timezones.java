@@ -6,7 +6,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "TIMEZONES")
-public class Timzones {
+public class Timezones {
    @PrimaryKey
    @NonNull
     @ColumnInfo(name = "name")

@@ -1,24 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:id = "@+id/main_activity_container"
+    >
+    <TextView
+            android:id="@+id/locTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:background="#00E5FF"
+            android:paddingLeft="@dimen/alert_def_padding"
+            android:textAppearance=
+                "@android:style/TextAppearance.DeviceDefault.Large"
+        android:onClick="locClick"
+
+        />
+
+    <CalendarView
+        android:id="@+id/calendarView"
+        style="@android:style/Widget.Holo.CalendarView"
+        android:layout_width="match_parent"
+        android:layout_height="306dp"
+        android:background="#00E5FF"
+        android:clickable="true"
+        android:dateTextAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:focusedMonthDateColor="#FF3D00"
+        android:onClick="calenderClick"
+        android:selectedDateVerticalBar="@color/colorPrimary"
+        android:showWeekNumber="false"
+        android:visibility="visible"
+        android:weekDayTextAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:weekSeparatorLineColor="#651FFF"
+        android:layout_below="@id/locTxt" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/calendarView">
+        <TextView
+            android:id="@+id/myTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginLeft="@dimen/alert_def_padding"
+            android:textAppearance=
+                "@android:style/TextAppearance.DeviceDefault.Medium"
+        />
+    </ScrollView>
+
+</RelativeLayout>
+<!--
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-    <TextView
-        android:id="@+id/myTxt"
+    tools:context=".MainActivity"
+    android:id = "@+id/main_activity_container" >
+    <HorizontalScrollView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/calendarView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/calendarView"
-        app:layout_constraintVertical_bias="0.087" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/locScroll"
+        >
 
+
+    <TextView
+        android:id="@+id/locTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text="LOCATION TEXT"
+        app:layout_constraintBottom_toTopOf="@id/calendarView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.087" />
+</HorizontalScrollView>
     <CalendarView
         android:id="@+id/calendarView"
         style="@android:style/Widget.Holo.CalendarView"
@@ -37,18 +105,33 @@
         android:weekSeparatorLineColor="#651FFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/locScroll" />
 
-    <FrameLayout
-        android:id="@+id/fg_container"
-        android:layout_width="match_parent"
+   <ScrollView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       app:layout_constraintTop_toBottomOf="@+id/calendarView">
+    <TextView
+        android:id="@+id/myTxt"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#FFFFFF"
+        android:textStyle="bold"
 
-        android:foregroundGravity="center_vertical"
-        app:layout_constraintBottom_toTopOf="@+id/myTxt"
-        app:layout_constraintTop_toTopOf="@+id/calendarView">
 
-    </FrameLayout>
+       />
+   </ScrollView>
+-->
+<!--
+
+ app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calendarView"
+        app:layout_constraintVertical_bias="0.087"
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+-->
