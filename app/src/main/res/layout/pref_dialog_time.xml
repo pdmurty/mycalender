@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:paddingTop="@dimen/alert_def_padding"
     android:paddingBottom="@dimen/alert_def_padding"
-    android:theme="@style/AppAlertDialogContent"
+
 
     />
+    <!--android:theme="@style/AppAlertDialogContent" -->

@@ -9,6 +9,7 @@
     <string name="sukla">       "శుక్ల "         </string>
     <string name="bahula">      "క్రిష్ణ "           </string>
     <string name="sur_udayam">  సూర్యోదయం:  </string>
+    <string name="sur_astham">  అస్తమయం:  </string>
     <string name="varjyam">     వర్జ్యం    :</string>
     <string name="DurMuhurtham">దుర్ముహుర్త :</string>
     <string name="the">         తె.         </string>
@@ -20,7 +21,8 @@
     <string name="rahukal">     రాహుకాలం:    </string>
     <string name="adhika">      అధిక\u0020  </string>
     <string name="kshaya">      (క్షయ)      </string>
-
+    <string name="udaya_lgna">  ఉదయ లగ్నం :  </string>
+    <string name="sankranthi">" సంక్రాంతి "</string>
     <string-array name="months">
         <item>Jan</item>
         <item>Feb</item>
@@ -35,6 +37,15 @@
         <item>Nov</item>
         <item>Dec</item>
     </string-array>
+    <string-array name="wkdays">
+        <item>సోమ</item>
+        <item>మంగ</item>
+        <item>బుధ</item>
+        <item>గురు</item>
+        <item>శుక్ర</item>
+        <item>శని</item>
+        <item>ఆది</item>
+        </string-array>
     <string-array name="lunar_months">
         <item>చైత్రం</item>
         <item>వైశాఖం</item>
@@ -48,6 +59,20 @@
         <item>పుష్యం</item>
         <item>మాఘం</item>
         <item>ఫాల్గుణం</item>
+    </string-array>
+    <string-array name="solar_months">
+        <item>మేషం</item>
+        <item>వృషభం</item>
+        <item>మిథునం</item>
+        <item>కర్కాటకం</item>
+        <item>సింహం</item>
+        <item>కన్య</item>
+        <item>తుల</item>
+        <item>వృశ్చికం</item>
+        <item>ధనుస్సు</item>
+        <item>మకరం</item>
+        <item>కుంభం</item>
+        <item>మీనం</item>
     </string-array>
     <string-array name="Nakshatras">
         <item>అశ్వని. </item>
@@ -189,6 +214,60 @@
 
 
     </string-array>
+    <string-array name="lunarEvents">
+        <item>1సాంబ దశమి     </item>
+        <item>2వసంత పంచమి       </item>
+        <item>3రథసప్తమి   </item>
+        <item>4భీష్మ అష్టమి     </item>
+        <item>5భీష్మ ఏకాదశి       </item>
+        <item>6మహా శివరాత్రి       </item>
+        <item>7హోళికా పౌర్ణమి       </item>
+        <item>8పాప వ్మోచన ఏకాదశి </item>
+        <item>9ఉగాది          </item>
+        <item>10స్కంద షష్ఠి       </item>
+        <item>11శ్రీరామనవమి          </item>
+        <item>12కామదా ఏకాదశి   </item>
+        <item>13హనుమజ్జయంతి        </item>
+        <item>14వరూధిని ఏకాదశి          </item>
+        <item>15అక్షయ తృతీయ         </item>
+        <item>16మోహిని ఏకాదశి    </item>
+        <item>17భద్రకాళీ ఏకాదశి         </item>
+        <item>18నిర్జల ఏకాదశి           </item>
+        <item>19యోగినీ ఏకాదశి             </item>
+        <item>20రధ యాత్ర          </item>
+        <item>21కుమార షష్ఠి         </item>
+        <item>22తొలి(హరితశయన) ఏకాదశి              </item>
+        <item>23గురు(వ్యాస) పూర్ణిమ            </item>
+        <item>24కామిక ఏకాదశి           </item>
+        <item>25నాగ పంచమి            </item>
+        <item>26వరమహాలక్షిమీ వ్రతం        </item>
+        <item>27రాఖీ పూర్ణిమ    </item>
+
+        <item>28సంకష్ట చతుర్ధి    </item>
+        <item>29క్రిష్మాష్టమి    </item>
+        <item>30అజ ఏకాదశి    </item>
+        <item>31 వినాయక చవితి   </item>
+        <item>32ఋషి పంచమి    </item>
+        <item>33పార్శ పరివర్తనీ ఏకాదశి    </item>
+        <item>34అనంత చతుర్దశి    </item>
+        <item>35పితృపక్ష తర్పణారంభం    </item>
+        <item>36మహాలయ అమావశ్య    </item>
+        <item>37నవరాత్ర ఆరంభం    </item>
+        <item>38లలితా పంచమి    </item>
+        <item>39సరస్వతీ ఆవాహన   </item>
+        <item>40ఆయుధ పూజ    </item>
+        <item>41దసరా     </item>
+        <item>42పాపాంపకుశ ఏకాదశి    </item>
+        <item>43 రమా ఏకాదశి   </item>
+        <item>44 నరక చతుర్దశి   </item>
+        <item>45 దీపావళి    </item>
+        <item>46 భ్రాతృ ద్వితీయ   </item>
+        <item>47 నాగుల చవితి   </item>
+        <item>48 దేవప్రభోదినీ ఏకాదశి    </item>
+        <item>49 కార్తీక పూర్ణిమ   </item>
+        <item>50 ఉత్పన్న ఏకాదశి   </item>
+        <item>51 సుబ్రమణ్య షష్ఠి   </item>
+    </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
@@ -232,6 +311,14 @@
     <string name="service_not_available" translatable="false">Sorry, the service is not available</string>
     <string name="invalid_lat_long_used" translatable="false">Invalid latitude or longitude used</string>
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyBxjA0Xq712usnWbfHDqqILqpK-xFCS1Cg</string>
+
+    <string name="pref_font_title" translatable="false">Font</string>
+    <string name="pref_font" translatable="false">pref_font</string>
+    <string name="title_activity_tab_demo">TabDemo</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="eph_header">"Ephemeris Tables at 0:0 UT or 5:30 AM IST, click on YEAR to change: "</string>
+
 </resources>
 
 

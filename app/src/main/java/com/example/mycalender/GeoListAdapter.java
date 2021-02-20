@@ -3,18 +3,25 @@ package com.example.mycalender;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.GridView;
+import android.widget.ListAdapter;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class GeoListAdapter extends RecyclerView.Adapter {
@@ -42,8 +49,11 @@ public class GeoListAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+
         ((GeonameHolder)holder).mTxtVw.setText( mGeonamesList.get(position).name);
 
+
+          
     }
 
     public void SetGeoList(List<GeoDao.GeoLoc> geolist){
@@ -54,8 +64,11 @@ public class GeoListAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        if(mGeonamesList!=null)
-            return mGeonamesList.size();
+        if(mGeonamesList!=null) {
+            int count = mGeonamesList.size();
+            Log.d("EPH", "list size-"+ count);
+            return count ;
+        }
         else return 0;
 
     }
@@ -63,13 +76,20 @@ public class GeoListAdapter extends RecyclerView.Adapter {
     class GeonameHolder extends RecyclerView.ViewHolder
     implements View.OnClickListener{
         TextView mTxtVw;
+
+        View mview;
+        //GridView mgview;
         GeoListAdapter mAdapter;
         public GeonameHolder(@NonNull View itemView, GeoListAdapter adapter) {
             super(itemView);
             mAdapter = adapter;
             mTxtVw = itemView.findViewById(R.id.geoname);
+            //itemView.findViewById(R.id.rcView).setVisibility(View.GONE);
+            mview = itemView;
             itemView.setOnClickListener(this);
         }
+        void SetBackground(){
+           mview.setBackgroundColor(Color.rgb(220,220,220)); }
 
         @Override
         public void onClick(View v) {

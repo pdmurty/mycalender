@@ -11,10 +11,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ShowEvents"></activity>
+        <activity
+            android:name=".TabDemo"
+            android:label="@string/title_activity_tab_demo"
+            android:theme="@style/AppTheme.NoActionBar" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-        <activity android:name=".Geomaps"></activity>
+
+        <activity android:name=".Geomaps" />
 
         <service
             android:name=".FetchAdressIntentService"
@@ -25,6 +32,10 @@
             android:label="@string/title_activity_settings"
             android:parentActivityName=".MainActivity" />
         <activity
+            android:name=".CalcEphemeris"
+            android:label="Ephemeris"
+            android:parentActivityName=".MainActivity" />
+        <activity
             android:name=".Geolocations"
             android:label="Selet Location"
             android:parentActivityName=".MainActivity"
@@ -33,9 +44,7 @@
         <receiver
             android:name=".AlaramReciever"
             android:enabled="true"
-            android:exported="false">
-
-        </receiver>
+            android:exported="false" />
 
         <activity
             android:name=".MainActivity"

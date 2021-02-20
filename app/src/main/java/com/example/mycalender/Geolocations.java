@@ -15,6 +15,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 //import androidx.lifecycle.ViewModelProviders;
 import androidx.lifecycle.ViewModelStoreOwner;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,7 +38,6 @@ public class Geolocations extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_geolocations);
-
         final EditText edt = findViewById(R.id.searchtxt);
         edt.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -62,8 +62,11 @@ public class Geolocations extends AppCompatActivity {
            }
         recycler = findViewById(R.id.recylerVW);
         mAdapter = new GeoListAdapter(this);
+
         recycler.setAdapter(mAdapter);
+
         recycler.setLayoutManager( new LinearLayoutManager(this));
+
         mVwmodel = new ViewModelProvider( this).get(GeoVwModel.class);
 
         UpdateCountryList();

@@ -4,6 +4,8 @@
 
 #include <jni.h>
 #include <stdbool.h>
+#include<android/log.h>
+#include "sqlite3.h"
 #include "swedate.h"
 #include "swephexp.h"
 #include "swehouse.h"
@@ -320,22 +322,58 @@ double get_sankranthi_day( double jdn, int *tgt_sak /*sankranthi count.*/)
         dif /=sspeed;
         ddif+=dif;
         count++;
+      //  __android_log_print(ANDROID_LOG_DEBUG, "SANK", "slon=%f:count=%d\n",slon,count);
     }while( (dif>0.0001 || dif<-0.0001) && count <20);
     *tgt_sak = next_sak;
     //ddif*=24;
+    //__android_log_print(ANDROID_LOG_DEBUG, "SANK", "retddif=%f\n",ddif);
+    return ddif;
+
+}
+// get next-sankarthi day after given jdn
+double get_karthari_day( double jdn, int *tgt_kar /*sankranthi count.*/)
+{
+    double  xx[6], slon,sspeed,dif=0,ddif=0;
+    char err[255];
+    int cur_kar,count=0, next_kar;
+
+    swe_calc_ut(jdn, SE_SUN,SEFLG_MOSEPH | SEFLG_SPEED | SEFLG_SIDEREAL,xx, err);
+    slon = xx[0]; sspeed = xx[3];
+    next_kar = (int)(slon*3/40) +1;
+    do
+    {
+        swe_calc_ut(jdn + ddif, SE_SUN,
+                    SEFLG_MOSEPH | SEFLG_SPEED | SEFLG_SIDEREAL,
+                    xx, err);
+        slon = xx[0]; sspeed = xx[3];
+        cur_kar = (int)(slon*3/40) ;
+        dif = (double)(next_kar)*40/3 - slon;
+        if (next_kar ==27 &&  cur_kar==0) dif = -slon;
+        else if (cur_kar == 27 && next_kar == 0) dif += 360;
+
+        dif /=sspeed;
+        ddif+=dif;
+        count++;
+        //  __android_log_print(ANDROID_LOG_DEBUG, "SANK", "slon=%f:count=%d\n",slon,count);
+    }while( (dif>0.0001 || dif<-0.0001) && count <20);
+    *tgt_kar = next_kar;
+    //ddif*=24;
+    //__android_log_print(ANDROID_LOG_DEBUG, "SANK", "retddif=%f\n",ddif);
     return ddif;
 
 }
 void get_all_sankaranthis(int year, double* darraydays)
 {
     double jdn, tmpdays;
-    jdn = swe_julday(year,1,0,0, SE_GREG_CAL);
-    int sankranthi;
 
+    int sankranthi;
+    jdn = swe_julday(year,1,0,0, SE_GREG_CAL);
     for (int i=0; i<12 ; ++i) {
-        tmpdays = get_sankranthi_day(jdn, &sankranthi) ;
+        tmpdays = get_sankranthi_day(jdn , &sankranthi) ;
         jdn += tmpdays;
         darraydays[i] = jdn;//tmpdays;
+
+
     }
 
 }
@@ -359,34 +397,46 @@ Java_com_example_mycalender_Swlib_WritePanchang(JNIEnv *env, jclass clazz, jint 
     // TODO: implement WritePanchang()
     double jdn,jdn_prathama,jdn_amantha, jdn_sank=0, retjdn[1], xx[14], slon,mlon,dif;
     double geopos[3];
+    double tmp;
     int thithi=0 , yog;
     int sankranthi =0;
     char err[255];
     char starname[30];
     double nkStart, nextLength, thithiEnd, thithiNext;
-    double sunrise, sunset;
+    double sunrise, nextsunrise, sunset;
     int prev_thithi =0;
+    //__android_log_print(ANDROID_LOG_DEBUG, "DATEC", "yr=%d:m=%d:d=%d:tz=%4.2f\n",year,month,day,timezone);
+
     swe_set_ephe_path("");
     //get julian-day
     jdn = swe_julday(year,month+1,day,0, SE_GREG_CAL);
+   // __android_log_print(ANDROID_LOG_DEBUG, "DATEC", "jdn=%f\n",jdn);
+
     swe_calc_ut(jdn, SE_SUN,SEFLG_MOSEPH | SEFLG_SPEED | SEFLG_SIDEREAL,xx, err);
     slon = xx[0];
     swe_calc_ut(jdn, SE_MOON,SEFLG_MOSEPH | SEFLG_SPEED | SEFLG_SIDEREAL,xx, err);
     mlon = xx[0];
+    //__android_log_print(ANDROID_LOG_DEBUG, "DATEC", "lon=%f:lat=%f\n",mloc_lon,mloc_lat);
+
     //sunrise
     geopos[0] = mloc_lon; //78.45; // hard coded to be used from geoloc.
     geopos[1] = mloc_lat; //17.4333;
     geopos[2] = 0;
     swe_rise_trans(jdn, SE_SUN , starname,0,  SE_CALC_RISE, geopos, 0, 0, retjdn, err);
+
+    sunrise= xx[7]=(retjdn[0] - jdn )*24.0 + timezone;
+
+    swe_rise_trans(jdn+1, SE_SUN , starname,0,  SE_CALC_RISE, geopos, 0, 0, retjdn, err);
+
+    nextsunrise =(retjdn[0] - jdn-1 )*24.0 + timezone;;
+
     //sunset
-    sunrise= xx[7]= (retjdn[0] - jdn )*24.0 + timezone;
+
     swe_rise_trans(jdn, SE_SUN , starname,0,  SE_CALC_SET|SE_BIT_HINDU_RISING, geopos, 0, 0, retjdn, err);
-    sunset =xx[8]= (retjdn[0] - jdn )*24.0 + timezone;  // sunset
-    double d = (xx[8]-xx[7])/15;
+    xx[8]= (retjdn[0] - jdn )*24.0 + timezone;  // sunset
+    //double d = (xx[8]-xx[7])/15;
     thithi = (int) (jdn+1)%7;  //weekday mon=0
     xx[9] = (double) thithi;  // weekday
-
-
     dif = (mlon-slon);
     //do thithi
     if (dif < 0) {
@@ -395,26 +445,40 @@ Java_com_example_mycalender_Swlib_WritePanchang(JNIEnv *env, jclass clazz, jint 
     prev_thithi=thithi;
     thithiEnd = get_thithi_tgt(jdn, thithi)+timezone;
     thithiNext = get_thithi_tgt(jdn, prev_thithi+1)+timezone;
-    if (thithiEnd >= sunrise) {
+    if (thithiEnd > sunrise) { //thithi normal
         xx[0] = thithi; xx[1] = thithiEnd ;
-    }else {xx[0] = thithi+1; xx[1] = thithiNext ;}
+    }else {xx[0] = thithi+1; xx[1] = thithiNext ;} // there is thithikshaya
     //kshaya thithi
-    if (thithiEnd > sunrise && thithiNext < 24 + sunrise) {
+    if (thithiEnd > sunrise && thithiNext <= 24.0 + nextsunrise) {
        xx[6] = thithiNext;
 
     } else xx[6] = -1.1111; // let caller know there is thithi kshaya
-
     // sankranthi and lunar month
-    jdn_prathama = get_thithi_pradhama(jdn);
-    jdn_sank     = get_thithi_amantha(jdn +jdn_prathama-2); // get start of pradhama
-    jdn_prathama = jdn +jdn_prathama-2 + jdn_sank;
+    jdn_prathama = get_thithi_pradhama(jdn);  // end of pratham
+   // __android_log_print(ANDROID_LOG_DEBUG, "DATEC", "jdn_pra=%f\n",jdn_prathama);
 
+    jdn_sank     = get_thithi_amantha(jdn +jdn_prathama-2); // get start of pradhama,
+                        // jdn_sank used as temp used as temp holder not to be confused.
+
+    jdn_prathama = jdn +jdn_prathama-2 + jdn_sank;  // start of pradhama
+    //__android_log_print(ANDROID_LOG_DEBUG, "DATEC", "jdn_prastrt=%f\n",jdn_prathama);
     jdn_sank = get_sankranthi_day( jdn_prathama, &sankranthi) + jdn_prathama;
-    xx[13]= sankranthi%12;
-    xx[12]  = get_thithi_amantha(jdn);
+   // __android_log_print(ANDROID_LOG_DEBUG, "DATEC", "jdn_sank=%f: snk= %d\n",jdn_sank,sankranthi);
+         // first sankranthi after pradhama start
+    xx[13]= sankranthi%12; // snakranthi number
+    xx[12]  = get_thithi_amantha(jdn); // immdetiate amavasya after jdn.
+    //__android_log_print(ANDROID_LOG_DEBUG, "DATEC", "jdn_aman=%f\n",xx[12]);
     // no sankranthi between pradham and amavasya, it is adhikamasa
     // reduce the month by 0.5 to let the caller know.
     if(jdn_sank > xx[12]+jdn) xx[13]-=0.5;
+
+    jdn_sank = get_sankranthi_day( jdn, &sankranthi);
+    xx[12] = sankranthi-1;
+    xx[12]*=100;
+    jdn_sank+=timezone/24;
+    //if( jdn_sank <=1.0 )
+        xx[12]+= jdn_sank;
+
 
 
     // do nakshatra
@@ -454,5 +518,141 @@ Java_com_example_mycalender_Swlib_SetLocation(JNIEnv *env, jclass clazz, jfloat 
     // TODO: implement SetLocation()
     mloc_lat = loc_lat;
     mloc_lon = loc_lon;
+
+}
+
+JNIEXPORT jdoubleArray JNICALL
+Java_com_example_mycalender_Swlib_CalcEphimeris(JNIEnv *env, jclass clazz, jint year, jint month,
+                                                jint day, jdouble timezone) {
+    double jdn, retjdn[1], xx[14], slon,sspeed,mlon,mspeed,meqlon,marlon,juplon,venlon,satlon,rahlon;
+    char err[255];
+    int weekday;
+    jdn = swe_julday(year,month,day,0, SE_GREG_CAL);
+    swe_calc_ut(jdn, SE_SUN,SEFLG_MOSEPH | SEFLG_SPEED | SEFLG_SIDEREAL,xx, err);
+    slon = xx[0]; sspeed = xx[3];
+    swe_calc_ut(jdn, SE_MOON,SEFLG_MOSEPH | SEFLG_SPEED | SEFLG_SIDEREAL,xx, err);
+    mlon = xx[0]; mspeed = xx[3];
+    swe_calc_ut(jdn, SE_VENUS,SEFLG_MOSEPH | SEFLG_SPEED | SEFLG_SIDEREAL,xx, err);
+    venlon = xx[0];
+    swe_calc_ut(jdn, SE_JUPITER,SEFLG_MOSEPH | SEFLG_SPEED | SEFLG_SIDEREAL,xx, err);
+    juplon = xx[0];
+    swe_calc_ut(jdn, SE_MARS,SEFLG_MOSEPH | SEFLG_SPEED | SEFLG_SIDEREAL,xx, err);
+    marlon = xx[0];
+    swe_calc_ut(jdn, SE_MERCURY,SEFLG_MOSEPH | SEFLG_SPEED | SEFLG_SIDEREAL,xx, err);
+    meqlon = xx[0];
+    swe_calc_ut(jdn, SE_MEAN_NODE,SEFLG_MOSEPH | SEFLG_SPEED | SEFLG_SIDEREAL,xx, err);
+    rahlon = xx[0];
+    swe_calc_ut(jdn, SE_SATURN,SEFLG_MOSEPH | SEFLG_SPEED | SEFLG_SIDEREAL,xx, err);
+    satlon = xx[0];
+    //Planet positions.
+    xx[0] = slon; xx[1]=mlon;xx[2] = meqlon; xx[3]= venlon; xx[4]= marlon;
+    xx[5]= juplon; xx[6]= satlon; xx[7]=rahlon;
+    xx[10]= sspeed; xx[11]=mspeed; //speed of SUN and MOON
+    weekday = (int) (jdn+1)%7;
+    xx[8] = (double) weekday;
+    jdoubleArray jdbl = (*env)->NewDoubleArray(env,14);
+    (*env)->SetDoubleArrayRegion(env,jdbl,0,14,xx);
+    return jdbl;
+}
+
+JNIEXPORT jint JNICALL
+Java_com_example_mycalender_Swlib_SWeSqlitetest(JNIEnv *env, jclass clazz, jstring dbpath) {
+    // TODO: implement SWeSqlitetest()
+sqlite3 *db;
+jchar *result = "data base open success";
+    jchar *resultfail = "data base open failed";
+ jstring strret;
+ int iresult;
+ int ERROR_STATE =-1;
+ //iresult =sqlite3_open(dbpath,&db);
+
+   // strret = (*env)->NewString(env,result,20);
+//else strret = (*env)->NewString(env,resultfail,30);
+
+    char TAG[20] = "NATIVE_SQL";
+
+    char *err = 0;
+   // __android_log_print(ANDROID_LOG_DEBUG, TAG, "calling sqliteopen.%s" ,(*env)->GetCharArrayElements(env,dbpath,false));
+
+    if(iresult=sqlite3_open(dbpath, &db)) {
+        __android_log_print(ANDROID_LOG_DEBUG, TAG, "Error opened database.%s\n",sqlite3_errmsg(db));
+        }
+
+    return iresult;
+}
+
+JNIEXPORT jdoubleArray JNICALL
+Java_com_example_mycalender_Swlib_SWeCalcSankaranthiAndKartari(JNIEnv *env, jclass clazz,
+                                                               jint year, jint month) {
+    // TODO: implement SWeCalcSankaranthiAndKartari()
+    double jdays[4];
+    int Year, smonth, day, weekday;
+    int sankranthi=0;
+    int karthari=0;
+    double time;
+    double  jdn, tmpdays,tmpkr;
+    jdn= swe_julday(year,month+1,1,0,SE_GREG_CAL);
+
+
+    //for(int i=0;i<12;++i) {
+       // __android_log_print(ANDROID_LOG_DEBUG, "sank", "jd=%f:sank=%d",jdn,sankranthi);
+
+        tmpdays=get_sankranthi_day(jdn, &sankranthi);
+
+        //tmpkr = get_karthari_day(jdn, &karthari);
+        //jdn+=tmpdays;
+        //jdn++;
+        swe_revjul(jdn+tmpdays, SE_GREG_CAL, &Year, &month, &day, &time);
+         weekday = (int)(jdn+1+tmpdays)%7;
+         jdays[0]=(double)weekday;
+         jdays[1]=(double)day;
+         jdays[2]=(double)time;
+         jdays[3]=(double)(sankranthi%12);
+    //__android_log_print(ANDROID_LOG_DEBUG, "sank", "jd=%f:sank=%d:y=%d:m=%d:d=%d:time=%f\n",jdn+tmpdays,sankranthi,Year,month,day,time);
+        //swe_revjul(jdn+tmpkr, SE_GREG_CAL, &Year, &month, &day, &time);
+    //__android_log_print(ANDROID_LOG_DEBUG, "karthari", "jd=%f:kar=%d:y=%d:m=%d:d=%d:time=%f\n",jdn+tmpkr,karthari,Year,month,day,time);
+
+    //  }
+    jdoubleArray jdbl = (*env)->NewDoubleArray(env,4);
+    (*env)->SetDoubleArrayRegion(env,jdbl,0,4,jdays);
+    return jdbl;
+}
+
+JNIEXPORT jdoubleArray JNICALL
+Java_com_example_mycalender_Swlib_SWeCalcKarthariDays(JNIEnv *env, jclass clazz, jint year,
+                                                      jdouble timezone) {
+    // TODO: implement SWeCalcKarthariDays()
+
+    double jdays[5*27];
+    int Year, month, day, weekday, skip;
+    int sankranthi=0;
+    int karthari=0;
+    double time;
+    double  jdn, tmpdays,tmpkr;
+    jdn= swe_julday(year,1,1,0,SE_GREG_CAL);
+
+
+    for(int i=0;i<27;++i) {
+    // __android_log_print(ANDROID_LOG_DEBUG, "sank", "jd=%f:sank=%d",jdn,sankranthi);
+
+     skip= 5*i;
+
+    tmpkr = get_karthari_day(jdn, &karthari);
+    jdn+=tmpkr;
+
+    swe_revjul(jdn, SE_GREG_CAL, &Year, &month, &day, &time);
+    weekday = (int)(jdn+1)%7;
+    jdays[0+skip]= (double)weekday;
+    jdays[1+skip]= (double)day;
+    jdays[2+skip]= (double)time;
+    jdays[3+skip]= (double)(karthari%27);
+    jdays[4+skip]=  (double)month;
+
+   // __android_log_print(ANDROID_LOG_DEBUG, "karthari", "jd=%f:kar=%d:y=%d:m=%d:d=%d:time=%f\n",jdn+tmpkr,karthari,Year,month,day,time);
+        jdn++;
+      }
+    jdoubleArray jdbl = (*env)->NewDoubleArray(env,135);
+    (*env)->SetDoubleArrayRegion(env,jdbl,0,135,jdays);
+    return jdbl;
 
 }

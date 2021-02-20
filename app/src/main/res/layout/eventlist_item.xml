@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="horizontal">
+    <TextView
+        android:id="@+id/textwkday"
+        style="@style/eph_textview"
+        />
+    <TextView
+        android:id="@+id/textEvt"
+        android:layout_width="wrap_content"
+        android:layout_toRightOf="@+id/textwkday"
+        style="@style/eph_textview" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorAccent"
+        android:layout_below="@+id/textwkday"/>
+
+</RelativeLayout>

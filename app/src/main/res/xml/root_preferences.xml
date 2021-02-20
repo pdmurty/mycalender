@@ -24,22 +24,17 @@
 
     <com.example.mycalender.SpinnerPreference
         android:key="monthstyle"
-        android:title="Month-Style"
+        app:title="Month-Style"
         android:defaultValue="Amantha"
-        app:entries="@array/reply_entries"
-        app:entryValues="@array/reply_values" />
+        app:entries="@array/month_entries"
+        app:entryValues="@array/month_values" />
     <com.example.mycalender.SpinnerPreference
         android:key="lan_style"
         android:title="Language"
         android:defaultValue="తెలుగు"
         app:entries="@array/lan_entries"
         app:entryValues="@array/lan_values" />
-    <PreferenceCategory app:title="@string/messages_header">
 
-        <EditTextPreference
-            app:key="signature"
-            app:title="@string/signature_title"
-            app:useSimpleSummaryProvider="true" />
-    </PreferenceCategory>
+
 
 </androidx.preference.PreferenceScreen>

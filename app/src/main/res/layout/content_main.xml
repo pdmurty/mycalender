@@ -55,11 +55,11 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/admins" />
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recylerVW"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/searchtxt" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchtxt"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,12 +13,15 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:background="#00E5FF"
-            android:paddingLeft="@dimen/alert_def_padding"
+            android:padding="6dp"
+            android:textAlignment="center"
             android:textAppearance=
-                "@android:style/TextAppearance.DeviceDefault.Large"
-        android:onClick="locClick"
+            "@android:style/TextAppearance.DeviceDefault.Large"
+            android:onClick="locClick"
+            android:gravity="center_horizontal" />
+   <!--
 
-        />
+    -->
 
     <CalendarView
         android:id="@+id/calendarView"

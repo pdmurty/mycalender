@@ -14,5 +14,9 @@ public class Swlib {
     public static native void SWSetSidmode ( int sidmode, double t, double ayana_t );
     public static native double[] WritePanchang(int year, int month, int day, double timezone);
     public static native void SetLocation (  float loc_lon,  float Loc_lat );
+    public static native double[] CalcEphimeris(int year, int month, int day, double timezone);
+    public static native int SWeSqlitetest (String dbpath);
+    public static native double[] SWeCalcSankaranthiAndKartari (int year,int month);
+    public static native double[] SWeCalcKarthariDays (int year,double timezone);
 
 }

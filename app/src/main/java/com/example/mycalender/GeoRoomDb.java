@@ -15,7 +15,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 @Database(entities = {Geonames.class,Countries.class,Admins.class, Timezones.class },
                                   version = 2,exportSchema = false)
-public abstract class GeoRoomDb extends RoomDatabase {
+public abstract class      GeoRoomDb extends RoomDatabase {
     public abstract GeoDao getDao();
     private static Context appContext;
     private static GeoRoomDb Instance;

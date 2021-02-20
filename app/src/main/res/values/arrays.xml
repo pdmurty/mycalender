@@ -1,11 +1,11 @@
 <resources>
     <!-- Reply Preference -->
-    <string-array name="reply_entries">
+    <string-array name="month_entries">
         <item>Amantha</item>
         <item>Purnatha</item>
     </string-array>
 
-    <string-array name="reply_values">
+    <string-array name="month_values">
         <item>"1"</item>
         <item>"2"</item>
     </string-array>
@@ -18,4 +18,20 @@
         <item>"te"</item>
         <item>"hi"</item>
     </string-array>
+    <!-- Font -->
+    <string-array name="font_options">
+        <item>Default</item>
+        <item>Droid Sans</item>
+        <item>Droid Serif</item>
+        <item>Libre Baskerville</item>
+        <item>Roboto Slab</item>
+    </string-array>
+    <string-array name="font_values" translatable="false">
+        <item/>
+        <item>DroidSans.ttf</item>
+        <item>DroidSerif.ttf</item>
+        <item>LibreBaskerville-Regular.ttf</item>
+        <item>RobotoSlab-Regular.ttf</item>
+    </string-array>
+
 </resources>

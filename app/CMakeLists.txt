@@ -15,6 +15,7 @@ add_library( # Specifies the name of the library.
         src/main/cpp/swejpl.c
         src/main/cpp/swehouse.c
         src/main/cpp/swecl.c
+        src/main/cpp/sqlite3.c
 
         )
 

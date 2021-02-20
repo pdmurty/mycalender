@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,7 +41,7 @@ public class LocationDlgFragment extends DialogFragment {
         return builder.create();
 
     }
-
+/*
     public void onButtonClicked(View view) {
         // Is the button now checked?
         boolean checked = ((RadioButton) view).isChecked();
@@ -67,5 +68,7 @@ public class LocationDlgFragment extends DialogFragment {
                     break;
         }
     }
+
+ */
 }
 

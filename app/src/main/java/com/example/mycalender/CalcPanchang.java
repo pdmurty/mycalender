@@ -1,8 +1,14 @@
 package com.example.mycalender;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.util.Log;
+
+import androidx.preference.PreferenceManager;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CalcPanchang {
 
@@ -16,8 +22,10 @@ public class CalcPanchang {
     String[] strYogas;
     String[] strThithi;
     String[] strLunarMonths;
+    String[] strSolarMonths;
     String[] strHinduYears;
     String suryodayam;
+    String suryastham;
     String strVarjyam;
     String durmuhurtha;
     String rahukala;
@@ -29,9 +37,11 @@ public class CalcPanchang {
     String udaya;
     String adhika;
     String kshaya;
+    String udayalgna;
+    String sankranthi;
     private static Context mapp;
     private static CalcPanchang instance = null;
-
+    SharedPreferences mPreferences;
      public static CalcPanchang  getInstance(Context app){
         if(instance == null) {
             mapp = app;
@@ -41,9 +51,11 @@ public class CalcPanchang {
         }
         return instance;
      }
-     CalcPanchang(){}
+     CalcPanchang(){
+         mPreferences = PreferenceManager.getDefaultSharedPreferences(mapp);
+     }
 
-    private void LoadStringResources() {
+    private void LoadStringResources()  {
         Resources resource = mapp.getResources();
         space        = resource.getString(R.string.blank_space);
         sukla        = resource.getString(R.string.sukla);
@@ -55,8 +67,10 @@ public class CalcPanchang {
         strThithi    = resource.getStringArray(R.array.thithis);
         strNaks      = resource.getStringArray(R.array.Nakshatras);
         strLunarMonths= resource.getStringArray(R.array.lunar_months);
+        strSolarMonths= resource.getStringArray(R.array.solar_months);
         strHinduYears = resource.getStringArray(R.array.hindhu_years);
         suryodayam   = resource.getString(R.string.sur_udayam);
+        suryastham   = resource.getString(R.string.sur_astham);
         strVarjyam   = resource.getString(R.string.varjyam);
         durmuhurtha  = resource.getString(R.string.DurMuhurtham);
         rahukala     = resource.getString(R.string.rahukal);
@@ -68,17 +82,18 @@ public class CalcPanchang {
         udaya        = resource.getString(R.string.udayam);
         adhika       = resource.getString(R.string.adhika);
         kshaya       = resource.getString(R.string.kshaya);
+        udayalgna   = resource.getString(R.string.udaya_lgna);
+        sankranthi   = resource.getString(R.string.sankranthi);
     }
     public String  getPanchangNotify(int year , int month, int dayOfMonth, int tzoff){
-         return "శార్వరి పంచాంగం";
-       /*
+
         LoadStringResources();
         double dTzoffset = (double) tzoff/3600000;
         String str ;
-        String[] strarr = new String[2];
+        String strret ;
         double[] dbl = Swlib.WritePanchang(year,month, dayOfMonth, dTzoffset);
         double sunrise = dbl[7];
-        strarr[0] = LunarMonth(dbl[13], (int)dbl[0], year,month+1);
+        strret = LunarMonth(dbl[13], (int)dbl[0], year,month+1);
         str  = ThithiToString((int)dbl[0]);
         str += HourToString(dbl[1],sunrise);
         str+="\n";
@@ -91,18 +106,18 @@ public class CalcPanchang {
         else
         { str += NakshatraToString((int)dbl[2]+1); str += HourToString(dbl[11],sunrise);
             str+="\n";}
-           strarr[1] = str;
-        //return strarr;
+           strret += str;
+        return strret;
 
-*/
+
     }
     public String ShowPanchang(int year , int month, int dayOfMonth, int tzoff){
         LoadStringResources();
-        int tzone = MainActivity.mPreferences.getInt("KEY_TZONE",19800000);
+        int tzone = mPreferences.getInt("KEY_TZONE",19800000);
         double dTzoffset =  (double) tzone /3600000;  //default Tzone set to INDIA
         String str ;//= String.valueOf(dayOfMonth);
-        float loc_lon = (float) MainActivity.mPreferences.getFloat("KEY_LON",(float)78.45);
-        float loc_lat = (float) MainActivity.mPreferences.getFloat("KEY_LAT",(float)17.44);
+        float loc_lon =(float) mPreferences.getFloat("KEY_LON",(float)78.45);
+        float loc_lat =(float) mPreferences.getFloat("KEY_LAT",(float)17.44);
         Swlib.SetLocation(loc_lon, loc_lat);
         double[] dbl = Swlib.WritePanchang(year,month, dayOfMonth, dTzoffset );
 
@@ -134,11 +149,24 @@ public class CalcPanchang {
         str += HourToString(dbl[5],sunrise);
         str += "\n" + suryodayam;
         str += HourToString(dbl[7],0);
-        str += "-" + HourToString(dbl[8],0);  //sunset
+        str += "\n" + suryastham + HourToString(dbl[8],0);  //sunset
         str += getStringVarjyam(dbl, sunrise);
         str += getStringDurmuhurthaAndRahukalam(dbl, sunrise, sunset);
+        str +="\n" + udayalgna ;
+        //str+= String.format("%f",dbl[12]);str+="\n";
+        int tmpdbl = (int) dbl[12]/100;
+        // dbl holds diff between sankranthi day and current day
+          double dblSankranthi = dbl[12]-tmpdbl*100;
+        dblSankranthi*=24;
+        if(dblSankranthi<30) {
+            str += strSolarMonths[(tmpdbl + 1) % 12];
+            str += ",";
+            str += sankranthi;
+            str += HourToString(dblSankranthi , sunrise);
+        }else str += strSolarMonths[tmpdbl];
 
-        // str+="\n"+ String.format("%f",dbl[10]) +","
+
+        // str+="\n"+ String.format("lm=%f:ld =%f:yr=%d:m=%d:d=%d",dbl[13],dbl[0],year,month,dayOfMonth) ;  //+","
         //      + String.format(":%4.2f", dbl[3]) +","
         //      +  String.format(":% 4.2f",dbl[11]) ;
         //       String.format(":%4.2f", dblVarjyam1)+
@@ -309,7 +337,7 @@ public class CalcPanchang {
         int hYear = greg_year - 1867;
         boolean bAdhika = false;
         String strReturn;
-        String strMonthstyle = MainActivity.mPreferences.getString("monthstyle","1");
+        String strMonthstyle = mPreferences.getString("monthstyle","1");
         hYear %= 60;
         if(greg_month<=4 && lunar<=11 && lunar!=0) hYear-=1;
         strReturn = strHinduYears[hYear] + " -  ";
@@ -373,5 +401,6 @@ public class CalcPanchang {
     String YogaToString(int yoga){
         return strYoga + space+ strYogas[yoga] + space;
     }
+
 
 }

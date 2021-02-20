@@ -3,8 +3,10 @@ package com.example.mycalender;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.TimePicker;
 
@@ -19,33 +21,24 @@ public class TimePreference extends DialogPreference {
     private int mTime;
     private int mDialogLayoutResId = R.layout.pref_dialog_time;
 
-    public static int getHour(String time) {
-        String[] pieces=time.split(":");
-
-        return(Integer.parseInt(pieces[0]));
-    }
-
-    public static int getMinute(String time) {
-        String[] pieces=time.split(":");
-
-        return(Integer.parseInt(pieces[1]));
-    }
     public TimePreference(Context context) {
         this(context, null);
     }
     public TimePreference(Context context, AttributeSet attrs) {
         this(context, attrs,R.attr.dialogPreferenceStyle);
+        Log.d("Pref", "TimePreference:1 ");
 
     }
 
-    public TimePreference(Context context, AttributeSet attrs,
-                          int defStyleAttr) {
-        this(context, attrs, defStyleAttr, defStyleAttr);
+    public TimePreference(Context context, AttributeSet attrs,int defStyleAttr) {
+
+        this(context, attrs, defStyleAttr, 0);
+        Log.d("Pref", "TimePreference:2 ");
     }
     public TimePreference(Context context, AttributeSet attrs,
                           int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-
+        Log.d("Pref", "TimePreference:3 ");
         // Do custom stuff here
         // ...
         // read attributes etc.
@@ -56,9 +49,13 @@ public class TimePreference extends DialogPreference {
     }
     public void setTime(int time) {
         mTime = time;
+        String strampm = " AM";
         // Save to Shared Preferences
         persistInt(time);
+        if(time>720){ time-=720; strampm= " PM";}
+        setSummary(String.format("%2d:%2d %s",(int)time/60,(int)time%60,strampm));
     }
+    /*
     protected View onCreateDialogView() {
         picker=new TimePicker(getContext());
 
@@ -75,6 +72,7 @@ public class TimePreference extends DialogPreference {
     protected void onDialogClosed(boolean positiveResult) {
        // super.onDialogClosed(positiveResult);
 
+        Log.d("time"," dialog close");
         if (positiveResult) {
             lastHour=picker.getCurrentHour();
             lastMinute=picker.getCurrentMinute();
@@ -82,23 +80,25 @@ public class TimePreference extends DialogPreference {
             String time=String.valueOf(lastHour)+":"+String.valueOf(lastMinute);
 
             if (callChangeListener(time)) {
-                persistString(time);
+               // persistString(time);
+
+                setSummary("time");
             }
         }
     }
 
+*/
 
     protected Object onGetDefaultValue(TypedArray a, int index) {
         return(a.getString(index));
     }
 
     @Override
-    protected void onSetInitialValue(boolean restoreValue, Object defaultValue) {
-        String time = (String)defaultValue  ;
-// Read the value. Use the default value if it is not possible.
+    protected void onSetInitialValue( Object defaultValue) {
 
-        setTime(restoreValue ?
-               getPersistedInt(mTime) : Integer.parseInt(time));
+        int persisttime = getPersistedInt(mTime);
+        setTime(persisttime);
+
 
     }
 

@@ -27,4 +27,16 @@
         android:title="Settings"
         android:icon="@drawable/ic_action_reset"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_eph"
+        android:orderInCategory="60"
+        android:title="ShowEphimris"
+        android:icon="@drawable/ic_action_reset"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_Tabs"
+        android:orderInCategory="60"
+        android:title="ShowTabs"
+        android:icon="@drawable/ic_action_reset"
+        app:showAsAction="never" />
 </menu>

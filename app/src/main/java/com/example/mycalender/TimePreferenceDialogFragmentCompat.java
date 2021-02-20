@@ -32,6 +32,7 @@ public class  TimePreferenceDialogFragmentCompat
                     // Save the value
                     timePreference.setTime(minutesAfterMidnight);
                 }
+
             }
         }
    }

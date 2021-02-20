@@ -5,7 +5,6 @@ import android.content.res.TypedArray;
 import android.database.DataSetObserver;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,13 +16,14 @@ import android.widget.TextView;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
+
 public class SpinnerPreference extends Preference {
     private final LayoutInflater mLayoutInflater;
     String[] mEntries = new String[0];
     String[] mEntryValues = new String[0];
     int mSelection = 0;
     public SpinnerPreference(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
+        this(context, attrs,R.attr.preferenceStyle);
     }
     public SpinnerPreference(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
@@ -43,6 +43,7 @@ public class SpinnerPreference extends Preference {
             mEntryValues = context.getResources().getStringArray(valuesResId);
         }
         ta.recycle();
+
     }
 
     @Override
@@ -147,27 +148,19 @@ public class SpinnerPreference extends Preference {
         });
     }
 
-    /**
-     * Create dropdown view for item at given position
-     * @param position    item position
-     * @param parent      parent view
-     * @return  created view
-     */
-    private View createDropDownView(int position, ViewGroup parent){
-        return mLayoutInflater.inflate(R.layout.support_simple_spinner_dropdown_item, parent, false);
+
+   private View createDropDownView(int position, ViewGroup parent){
+       return mLayoutInflater.inflate(R.layout.support_simple_spinner_dropdown_item, parent, false);
+
+   }
 
 
-    }
 
-    /**
-     * Customize dropdown view for given spinner item
-     * @param position  item position
-     * @param view      item view
-     */
     private void bindDropDownView(int position, View view){
         TextView textView = (TextView) view.findViewById(android.R.id.text1);
         textView.setText(mEntries[position]);
 
     }
+
 
 }

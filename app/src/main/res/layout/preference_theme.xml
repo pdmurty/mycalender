@@ -62,7 +62,7 @@
 
             <com.example.mycalender.ThemeView
                 android:id="@+id/theme_dark"
-                android:theme="@style/AppTheme.Dark"
+
                 android:layout_marginTop="@dimen/margin"
                 android:layout_marginBottom="@dimen/margin"
                 android:layout_marginRight="@dimen/margin"
@@ -71,7 +71,7 @@
 
             <com.example.mycalender.ThemeView
                 android:id="@+id/theme_black"
-                android:theme="@style/Black"
+
                 android:layout_marginTop="@dimen/margin"
                 android:layout_marginBottom="@dimen/margin"
                 android:layout_marginRight="@dimen/margin"
@@ -80,7 +80,7 @@
 
             <com.example.mycalender.ThemeView
                 android:id="@+id/theme_sepia"
-                android:theme="@style/Sepia"
+
                 android:layout_marginTop="@dimen/margin"
                 android:layout_marginBottom="@dimen/margin"
                 android:layout_marginRight="@dimen/margin"
@@ -89,7 +89,7 @@
 
             <com.example.mycalender.ThemeView
                 android:id="@+id/theme_green"
-                android:theme="@style/Green"
+
                 android:layout_marginTop="@dimen/margin"
                 android:layout_marginBottom="@dimen/margin"
                 android:layout_marginRight="@dimen/margin"
@@ -98,7 +98,7 @@
 
             <com.example.mycalender.ThemeView
                 android:id="@+id/theme_solarized"
-                android:theme="@style/Solarized"
+
                 android:layout_marginTop="@dimen/margin"
                 android:layout_marginBottom="@dimen/margin"
                 android:layout_marginRight="@dimen/margin"
@@ -107,7 +107,7 @@
 
             <com.example.mycalender.ThemeView
                 android:id="@+id/theme_solarized_dark"
-                android:theme="@style/Solarized.Dark"
+
                 android:layout_marginTop="@dimen/margin"
                 android:layout_marginBottom="@dimen/margin"
                 android:layout_marginRight="@dimen/margin"

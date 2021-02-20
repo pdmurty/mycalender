@@ -6,9 +6,9 @@ tools:ignore="HardcodedText">
 <TextView
     android:id="@id/content"
     android:text="T"
-    style="@style/textTitleStyle"
+
     android:gravity="center"
     android:layout_width="?attr/listPreferredItemHeightSmall"
     android:layout_height="?attr/listPreferredItemHeightSmall" />
-
+    <!--style="@style/textTitleStyle" -->
 </merge>

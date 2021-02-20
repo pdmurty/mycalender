@@ -20,6 +20,7 @@
     <string name="adhika">     अधिक  \u0020  </string>
     <string name="kshaya">      (क्षय)        </string>
     <string name="Nakshatra"> नक्षत्र :              </string>
+    <string name="udaya_lgna">  उदय लग्न :  </string>
     <string-array name="months">
         <item>Jan</item>
         <item>Feb</item>
@@ -188,8 +189,8 @@
 
 
     </string-array>
-
-
+    <string name="sur_astham">अस्तमय</string>
+    <string name="sankranthi">संक्रांति</string>
 
 
 </resources>

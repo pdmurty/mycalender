@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/colorAccent"
+            >
+            <!--LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/planetheaders"
+                android:padding="6dp"
+                -->
+                <TextView
+                    android:id="@+id/week"
+                    style="@style/eph_textview"
+                    android:text="Dt" />
+                <TextView
+                    android:id="@+id/sun"
+                    style="@style/eph_textview"
+                    android:layout_toRightOf="@+id/week"
+                    android:text="SUN"/>
+                <TextView
+                    android:id="@+id/moon"
+                    style="@style/eph_textview"
+                    android:layout_toRightOf="@+id/sun"
+                    android:text="MOON"/>
+                <TextView
+                    android:id="@+id/mercury"
+                    style="@style/eph_textview"
+                    android:layout_toRightOf="@+id/moon"
+                    android:text="MERCURY"/>
+                <TextView
+                    android:id="@+id/venus"
+                    style="@style/eph_textview"
+                    android:text="VENUS"
+                    android:layout_toRightOf="@+id/mercury"/>
+                <TextView
+                    android:id="@+id/mars"
+                    style="@style/eph_textview"
+                    android:text="MARS"
+                    android:layout_toRightOf="@+id/venus"/>
+                <TextView
+                    android:id="@+id/jupiter"
+                    style="@style/eph_textview"
+                    android:text="JUPITER"
+                    android:layout_toRightOf="@+id/mars"/>
+                <TextView
+                    android:id="@+id/saturn"
+                    style="@style/eph_textview"
+                    android:text="SATURN"
+                    android:layout_toRightOf="@+id/jupiter"/>
+                <TextView
+                    android:id="@+id/rahu"
+                    style="@style/eph_textview"
+                    android:text="RAHU"
+                    android:layout_toRightOf="@+id/saturn"/>
+            <!-- /LinearLayout -->
+
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recylerEph"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/week"/>
+        </RelativeLayout>
+
+    </HorizontalScrollView>
+
+</LinearLayout>

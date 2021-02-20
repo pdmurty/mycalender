@@ -42,8 +42,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -56,7 +58,8 @@ import static android.util.Log.d;
 
 
 public class MainActivity extends AppCompatActivity
-        implements GetYear.OnButtonDone {
+        implements GetYear.OnButtonDone,
+        SharedPreferences.OnSharedPreferenceChangeListener{
     private static final int REQUESTCODE = 1;
     private static final String PRIMARY_CHANNEL_ID = "panchang_notification_channel";
     private NotificationManager mNotificationManager;
@@ -90,12 +93,14 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
         mCurrentLocation = new Location("");
         mLocationProvider = new FusedLocationProviderClient(this);
         mResultReceiver= new AddressResultReceiver(new Handler());
         mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mPreferences.registerOnSharedPreferenceChangeListener(this);
+         if(mPreferences.getInt("LOC_PREF",0)==0) GetCurLocation();
+
         locale = mPreferences.getString("lan_style", "te");
         setLocale(locale);
         setContentView(R.layout.activity_main);
@@ -113,8 +118,6 @@ public class MainActivity extends AppCompatActivity
         instancePanchang = CalcPanchang.getInstance(this);
         Swlib.SWSetSidmode(1, 0, 0);
         dlg = new GetYear();
-        Date dt = new Date();
-        dt.setTime(currTime);
         Calendar c = Calendar.getInstance();
         int day = c.get(Calendar.DAY_OF_MONTH);
         int month = c.get(Calendar.MONTH);
@@ -249,7 +252,14 @@ public class MainActivity extends AppCompatActivity
             case R.id.action_settings:
                 ShowSettings();
                 break;
-            default:
+            case R.id.action_eph:
+                ShowEphemiris();
+                break;
+                case R.id.action_Tabs:
+                    Intent eventIntent = new Intent(this, ShowEvents.class);
+                    startActivity(eventIntent);
+                break;
+                default:
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -274,9 +284,15 @@ public class MainActivity extends AppCompatActivity
     }
     private void ShowSettings() {
 
-        Intent prefIntent = new Intent(this, SettingsActivity.class);
-        startActivity(prefIntent);
+       Intent prefIntent = new Intent(this, SettingsActivity.class);
+       startActivity(prefIntent);
 
+    }
+
+    private void ShowEphemiris() {
+
+        Intent ephIntent = new Intent(this, CalcEphemeris.class);
+        startActivity(ephIntent);
     }
 
     private void showGeoDb() {
@@ -333,10 +349,11 @@ public class MainActivity extends AppCompatActivity
 
     public String ShowPanchang(int year, int month, int dayOfMonth, int tzoff) {
 
-        String str = instancePanchang.ShowPanchang(year, month, dayOfMonth, tzOffset);
+        String str = //instancePanchang.getEvent(year);
+                instancePanchang.ShowPanchang(year, month, dayOfMonth, tzOffset);
         WriteText(str);
         if (mPreferences.getBoolean("KEY_VOICE", true)) {
-            tts.setLanguage(new Locale(locale));
+           tts.setLanguage(new Locale(locale));
             tts.speak(str, TextToSpeech.QUEUE_FLUSH, null);
         }
         return str;
@@ -351,7 +368,6 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     void setUpalaramservice() {
 
         int alaramMinutes = mPreferences.getInt("KEY_ALARAM", 0);
@@ -362,23 +378,17 @@ public class MainActivity extends AppCompatActivity
         calendar.set(Calendar.MINUTE, alrmMinute);
 
         Intent notifyIntent = new Intent(this, AlaramReciever.class);
-       // notifyIntent.setAction("com.example.mycalender.ACTION");
-
         final PendingIntent notifyPendingIntent =
                 PendingIntent.getBroadcast(this, NOTIFICATION_ID, notifyIntent,
                         PendingIntent.FLAG_UPDATE_CURRENT);
         final AlarmManager alarmManager = (AlarmManager) this.getSystemService(ALARM_SERVICE);
-        long repeatInterval = 300000; //AlarmManager.INTERVAL_FIFTEEN_MINUTES; //.INTERVAL_DAY;
-        long triggerTime = SystemClock.elapsedRealtime() + repeatInterval;
-                //calendar.getTimeInMillis();
+        long repeatInterval = AlarmManager.INTERVAL_DAY;
+        long triggerTime =   //SystemClock.elapsedRealtime() + repeatInterval;
+                calendar.getTimeInMillis();
 
-      //  alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, triggerTime, repeatInterval,
-       //         notifyPendingIntent);
-        alarmManager.setInexactRepeating
-                (AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                        triggerTime, repeatInterval,
-                        notifyPendingIntent);
 
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, triggerTime, repeatInterval,
+               notifyPendingIntent);
         createNotificationChannel();
 
     }
@@ -645,7 +655,7 @@ public class MainActivity extends AppCompatActivity
         fm.beginTransaction();
         LocationDlgFragment dlg = (LocationDlgFragment) fm.findFragmentByTag("SetLocation");
         if(dlg!=null) dlg.dismiss();
-
+       mPreferences.edit().putInt("LOC_PREF",locSelection).commit();
         switch (locSelection){
             case 0:
                 break;
@@ -671,6 +681,12 @@ public class MainActivity extends AppCompatActivity
     public void locClick(View view) {
         onMenuLocation();
     }
+
+     @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
+
+             this.setUpalaramservice();
+            }
 
     private class AddressResultReceiver extends ResultReceiver {
         AddressResultReceiver(Handler handler) {
@@ -714,5 +730,6 @@ public class MainActivity extends AppCompatActivity
         edit.commit();
 
     }
-   
+
+
 }
