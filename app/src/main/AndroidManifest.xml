@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.mycalender">
+    package="com.pdmurty.mycalender">
 
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="true"
@@ -11,11 +12,38 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ShowEvents"></activity>
+
+        <activity android:name=".AlarmActivity" />
         <activity
-            android:name=".TabDemo"
-            android:label="@string/title_activity_tab_demo"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:name=".HelpActivity"
+            android:label="Help"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".InitActivity" />
+        <activity android:name=".LocationActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:windowSoftInputMode="adjustResize">
+
+            <!--
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            -->
+        </activity>
+        <activity android:name=".launcher">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".DoAlaram" />
+        <activity
+            android:name=".ShowEvents"
+            android:label="Events"
+            android:parentActivityName=".MainActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -45,16 +73,6 @@
             android:name=".AlaramReciever"
             android:enabled="true"
             android:exported="false" />
-
-        <activity
-            android:name=".MainActivity"
-            android:windowSoftInputMode="adjustResize">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
 
         <service
             android:name=".MainActivity"

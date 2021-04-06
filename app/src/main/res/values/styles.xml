@@ -14,11 +14,24 @@
     </style>
     <style name="eph_textview" parent="Widget.AppCompat.TextView">
         <item name="android:layout_width">80dp</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">40dp</item>
         <item name="android:padding">3dp</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:layout_marginBottom">1dp</item>
+        <item name="android:layout_marginRight">1dp</item>
+        <item name="android:background">@color/white</item>
+    </style>
+    <style name="eph_textview_hdr" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_width">80dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:padding">3dp</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:layout_margin">1dp</item>
+
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="bodytext" parent="TextAppearance.AppCompat.Body1" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 

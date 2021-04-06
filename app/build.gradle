@@ -1,11 +1,14 @@
 apply plugin: 'com.android.application'
 
+
 android {
+
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
 
+
     defaultConfig {
-        applicationId "com.example.mycalender"
+        applicationId "com.pdmurty.mycalender"
         minSdkVersion 16
         targetSdkVersion 29
         versionCode 1
@@ -15,9 +18,11 @@ android {
     }
 
     buildTypes {
+        //keystore pwd - uploadkeystorepwd ; kwy pwd - uploadkeypwd
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
         }
     }
     externalNativeBuild {
@@ -48,6 +53,7 @@ dependencies {
     //room database comps.
     implementation "androidx.room:room-runtime:$roomVersion"
     annotationProcessor "androidx.room:room-compiler:$roomVersion"
+    implementation "androidx.work:work-runtime:$workVersion"
     // life cycle comp.
     implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.archLifecycleVersion"
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:$rootProject.archLifecycleVersion"

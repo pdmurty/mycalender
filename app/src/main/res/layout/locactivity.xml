@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/loc">
+
+    <TextView
+        android:id="@+id/locwarn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:padding="10dp"
+        android:textSize="20dp"
+        android:textAlignment="center"
+        android:visibility="gone"
+        android:text="Getting current location, please wait"
+        android:gravity="center_horizontal" />
+    <ProgressBar
+        android:id="@+id/progressLoc"
+        android:visibility="gone"
+        android:background="@color/colorAccent"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="20dp"/>
+
+</LinearLayout>

@@ -14,15 +14,18 @@
             android:textStyle="bold"
             android:background="#00E5FF"
             android:padding="6dp"
+            android:textSize="20dp"
             android:textAlignment="center"
             android:textAppearance=
             "@android:style/TextAppearance.DeviceDefault.Large"
             android:onClick="locClick"
             android:gravity="center_horizontal" />
-   <!--
-
-    -->
-
+    <View
+        android:id="@+id/blank"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#00ccaa"
+        android:layout_below="@id/locTxt"/>
     <CalendarView
         android:id="@+id/calendarView"
         style="@android:style/Widget.Holo.CalendarView"
@@ -30,15 +33,15 @@
         android:layout_height="306dp"
         android:background="#00E5FF"
         android:clickable="true"
-        android:dateTextAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:dateTextAppearance="@style/TextAppearance.AppCompat.Body1"
         android:focusedMonthDateColor="#FF3D00"
         android:onClick="calenderClick"
         android:selectedDateVerticalBar="@color/colorPrimary"
         android:showWeekNumber="false"
         android:visibility="visible"
-        android:weekDayTextAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:weekDayTextAppearance="@style/TextAppearance.AppCompat.Body1"
         android:weekSeparatorLineColor="#651FFF"
-        android:layout_below="@id/locTxt" />
+        android:layout_below="@id/blank" />
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -48,11 +51,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
+            android:textSize="20dp"
+            android:fontFamily="sans-serif-thin"
+
             android:layout_marginLeft="@dimen/alert_def_padding"
-            android:textAppearance=
-                "@android:style/TextAppearance.DeviceDefault.Medium"
+
         />
     </ScrollView>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:src="@android:drawable/ic_dialog_email"
+        android:contentDescription="feedback"
+        android:layout_margin="16dp" />
 
 </RelativeLayout>
 <!--

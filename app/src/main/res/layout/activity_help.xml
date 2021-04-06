@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HelpActivity"
+
+    >
+    <TextView
+        android:id="@+id/locTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:background="#00E5FF"
+        android:padding="6dp"
+        android:textAlignment="center"
+        android:text="Help"
+        android:textAppearance=
+            "@android:style/TextAppearance.DeviceDefault.Large"
+        android:gravity="center_horizontal" />
+     <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/locTxt">
+        <TextView
+            android:text="@string/helptxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="italic|bold"
+            android:padding="10dp"
+            android:layout_marginLeft="@dimen/alert_def_padding"
+            android:textAppearance=
+                "@android:style/TextAppearance.DeviceDefault.Medium"
+            />
+    </ScrollView>
+</RelativeLayout>

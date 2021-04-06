@@ -4,22 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="2dp"
-
     >
     <TextView
         android:id="@+id/geoname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/grey100"
+        style="@style/eph_textview"
 
         />
 
-
-    <!--View
-        android:id="@+id/blankline"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/colorAccent"
-        /-->
 </LinearLayout>

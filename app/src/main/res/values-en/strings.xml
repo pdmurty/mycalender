@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Mythreya</string>
+
+    <string name="thithi">     thithi        </string>
+
+    <string name="Nakshatra">  nakshthra:     </string>
+    <string name="Yoga">        yoga :        </string>
+    <string name="sukla">       "sukla "         </string>
+    <string name="bahula">      "krishna "           </string>
+    <string name="sur_udayam">  sunraise:  </string>
+    <string name="sur_astham">  sunset:  </string>
+    <string name="varjyam">     vishghati:</string>
+    <string name="DurMuhurtham">durmuhurtha :</string>
+    <string name="the">         am         </string>
+    <string name="sayam">       pm         </string>
+    <string name="Madhya">      pm          </string>
+    <string name="rathri">      pm         </string>
+    <string name="udayam">      am          </string>
+    <string name="full">        full      </string>
+    <string name="rahukal">     rahu kalam    </string>
+    <string name="adhika">      upari\u0020  </string>
+    <string name="kshaya">      (kshaya)      </string>
+    <string name="udaya_lgna">  lagna :  </string>
+    <string name="sankranthi">" ingress "</string>
+    <string-array name="months">
+        <item>Jan</item>
+        <item>Feb</item>
+        <item>Mar</item>
+        <item>Apr</item>
+        <item>May</item>
+        <item>Jun</item>
+        <item>Jul</item>
+        <item>Aug</item>
+        <item>Sep</item>
+        <item>Oct</item>
+        <item>Nov</item>
+        <item>Dec</item>
+    </string-array>
+    <string-array name="wkdays">
+        <item>Mon</item>
+        <item>Tue</item>
+        <item>Wed</item>
+        <item>Thu</item>
+        <item>Fri</item>
+        <item>Sat</item>
+        <item>Sun</item>
+    </string-array>
+    <string-array name="lunar_months">
+        <item>chithra</item>
+        <item>visakha</item>
+        <item>jyeshta</item>
+        <item>ashadha</item>
+        <item>sravan</item>
+        <item>bhadhrapadha</item>
+        <item>asvayuja</item>
+        <item>kartheeka</item>
+        <item>marghaseersha</item>
+        <item>pushya</item>
+        <item>maagha</item>
+        <item>phalguna</item>
+    </string-array>
+    <string-array name="solar_months">
+        <item>Mesha</item>
+        <item>vrishabh</item>
+        <item>Mithuna</item>
+        <item>Karkatak</item>
+        <item>Simha</item>
+        <item>Kanya</item>
+        <item>Thula</item>
+        <item>Vrischika</item>
+        <item>Dhanush</item>
+        <item>Makara</item>
+        <item>Kumbha</item>
+        <item>Meena</item>
+        <item>Bhogi</item>
+        <item>Kanuma</item>
+    </string-array>
+    <string-array name="Nakshatras">
+        <item>Aswani </item>
+        <item>Bharani   </item>
+        <item>Kriththika </item>
+        <item>Rohini </item>
+        <item>Mrigasira   </item>
+        <item>Aadhra  </item>
+        <item>Punarvasu. </item>
+        <item>Pushyami</item>
+        <item>Aslesha</item>
+        <item>Makha</item>
+        <item>Pubba</item>
+        <item>Uththara</item>
+        <item>Hastha</item>
+        <item>Chiththa</item>
+        <item>Swathi</item>
+        <item>Visakha</item>
+        <item>Anuradha    </item>
+        <item>Jyeshta   </item>
+        <item>Moola       </item>
+        <item>Poorvashada   </item>
+        <item>Uththarashada    </item>
+        <item>Sravana    </item>
+        <item>Dhanishta    </item>
+        <item>Sthabhisha     </item>
+        <item>Poorvabhadhra  </item>
+        <item>Uththarabhadra   </item>
+        <item>Revathi     </item>
+    </string-array>
+    <string-array name="thithis">
+        <item> Pradhama   </item>
+        <item> Dvitheeya </item>
+        <item> Thruthuya   </item>
+        <item> Chathirdhi </item>
+        <item> Panchami    </item>
+        <item> Shashti   </item>
+        <item> Sapthami  </item>
+        <item> Ashthami  </item>
+        <item> Navami    </item>
+        <item> Dhasami    </item>
+        <item> Ekadhasi  </item>
+        <item> Dwadhasi </item>
+        <item> Thrayodhasi </item>
+        <item> Chathurdhasi </item>
+        <item> Purnima  </item>
+        <item> Amavasya </item>
+    </string-array>
+    <string-array name="yogas">
+        <item>Vishkumbha              </item>
+        <item>Prethi                </item>
+        <item>Aayushman         </item>
+        <item>Suobhagya           </item>
+        <item>Shobhana                  </item>
+        <item>Athiganda       </item>
+        <item>Sukarma      </item>
+        <item>Dhrithi       </item>
+        <item>Soola          </item>
+        <item>Ganda         </item>
+        <item>Vridhdhi       </item>
+        <item>Dhruva          </item>
+        <item>Vyaghaatha   </item>
+        <item>Harshana        </item>
+        <item>Vajra          </item>
+        <item>Sidhdha         </item>
+        <item>Vyathipatha    </item>
+        <item>Variya         </item>
+        <item>Parigha           </item>
+        <item>Shiva             </item>
+        <item>Sidhdha          </item>
+        <item>Sadhya         </item>
+        <item>Shubha              </item>
+        <item>Shukla            </item>
+        <item>Brahma           </item>
+        <item>Indhra            </item>
+        <item>Vydhrithi        </item>
+    </string-array>
+    <string-array name="hindhu_years">
+        <item>Prabhava        </item>
+        <item>Vibhava          </item>
+        <item>Sukla         </item>
+        <item>Pramodhyutha</item>
+        <item>Prajapathi     </item>
+        <item>Angeerasa        </item>
+        <item>Srimukha      </item>
+        <item>Bhava          </item>
+        <item>Yuva          </item>
+        <item>Dhathri        </item>
+        <item>Eeswara         </item>
+        <item>Bhahudhanya      </item>
+        <item>Pramodhi        </item>
+        <item>Vikrama         </item>
+        <item>Vrusha            </item>
+        <item>Chithrabhanu      </item>
+        <item>Subhanau         </item>
+        <item>Tharana           </item>
+        <item>Pardhiva        </item>
+        <item>Vyaya           </item>
+        <item>Saarvajith      </item>
+        <item>Sarvadhari       </item>
+        <item>Virodhi         </item>
+        <item>Vikrutha         </item>
+        <item>Khara           </item>
+        <item>Nadana         </item>
+        <item>Vijaya         </item>
+        <item>Jaya           </item>
+        <item>Manmadha        </item>
+        <item>Dhurmukhi     </item>
+        <item>Hevalambi      </item>
+        <item>Vilambi       </item>
+        <item>Vikari       </item>
+        <item>Saarvari      </item>
+        <item>Plava         </item>
+        <item>Subhakrutha       </item>
+        <item>Shobhakrutha      </item>
+        <item>Krodhi      </item>
+        <item>Viswavasu   </item>
+        <item>Parabhava       </item>
+        <item>Plavanga      </item>
+        <item>Keelak        </item>
+        <item>Soumya       </item>
+        <item>Saadharana      </item>
+        <item>Virodhikrutha   </item>
+        <item>Paridhava     </item>
+        <item>Pramodhicha    </item>
+        <item>Aandha        </item>
+        <item>Raakshasa       </item>
+        <item>Nala           </item>
+        <item>Pingala        </item>
+        <item>Kalayukthi    </item>
+        <item>Siddhardha   </item>
+        <item>Roudhra       </item>
+        <item>Dhurmathi      </item>
+        <item>Dhumdhubhi      </item>
+        <item>Rudhirodhgari </item>
+        <item>Rakthakshi    </item>
+        <item>Krodhana       </item>
+        <item>Akshaya        </item>
+
+
+    </string-array>
+    <string-array name="lunarEvents">
+        <item>1Sambadhasami     </item>
+        <item>2nandha ekadhasi    </item>
+        <item>3Sankashta chathurdhi       </item>
+        <item>4Saphala ekadhasi       </item>
+        <item>5Meru thryodhasu       </item>
+        <item>6Mouni amavasya       </item>
+        <item>7Thila chathurdhi     </item>
+        <item>8Vasantha panchami       </item>
+        <item>9Rathasapthami   </item>
+        <item>10Bhisma ashtami.     </item>
+        <item>11Bheeshama ekadhasi       </item>
+        <item>12Magha purnima       </item>
+        <item>13Vijaya ekadhasi        </item>
+        <item>14Maha sivarathri     </item>
+        <item>15Amalaka ekadhasi       </item>
+        <item>16Holika purnima       </item>
+        <item>17Ranga panchami       </item>
+        <item>18Seethalashtami       </item>
+        <item>19Papavimochana ekadhasi </item>
+        <item>20Madhikrishana thryodhasi       </item>
+        <item>21Ugadhi          </item>
+        <item> 22Guari thrithiya      </item>
+        <item>23Lakshmi panchami       </item>
+        <item>24Skanda shashti       </item>
+        <item>25Ashokasthami, Annapurna pooja       </item>
+        <item>26Sriramanavami          </item>
+        <item>27Kamadha ekadhasi   </item>
+        <item>28Ananga thryodhasi       </item>
+        <item>29Hanuman jayanthi        </item>
+        <item>30Varudhini ekadhasi          </item>
+        <item>31Prasurma jayanthi       </item>
+        <item>32Akshaya thrithiya         </item>
+        <item>33Sankara jayanthi       </item>
+        <item>34Ramanuja jayanthi       </item>
+        <item>35Gangothpaththi       </item>
+        <item>36Mohini ekadhasi    </item>
+        <item>37Nrisimha jayanthi       </item>
+        <item>38Bhadhrakali ekadasi         </item>
+        <item>39Rambha thrithiya       </item>
+        <item>40Nirjala ekadhasi           </item>
+        <item>41Champa ekadhasi       </item>
+        <item>42vata savithri vratham       </item>
+        <item>43Yogini ekadhasi             </item>
+        <item>44Ratha yathra          </item>
+        <item>45Kumara shashthi         </item>
+        <item>46harithasayana ekadhasi              </item>
+        <item>47Guru(vyasa) purnima            </item>
+        <item>48kamika ekadhasi           </item>
+        <item>49Naga panchami            </item>
+        <item>50Vara mahalakshmi vratham        </item>
+        <item>51Puthrdhaa ekadhasi       </item>
+        <item>52Varaaha jayanthi       </item>
+        <item>53Rakhi purnima    </item>
+
+        <item>54Sankhashta chathurdhi    </item>
+        <item>55Krishnashthami    </item>
+        <item>56Aaja ekadhasi     </item>
+        <item>57Vinayaka chathirdhi   </item>
+        <item>58Rishi panchami    </item>
+        <item>59Surya shashti       </item>
+        <item>60Radhaashtami, kedhara vratham       </item>
+        <item>61Parsva parivathani ekadhasi    </item>
+        <item>62Aanantha chathurdhasi    </item>
+        <item>63Pithrupaksha tharpanarambha    </item>
+        <item>64Padhmini ekadhasi    </item>
+        <item>65Mahalaya amavasya    </item>
+        <item>66Navarathra arambha    </item>
+        <item>67Lalitha panchami    </item>
+        <item>68Sarsvathi aavahana   </item>
+        <item>69Aayudha pooja    </item>
+        <item>70Dhashahara     </item>
+        <item>71Papankusha ekadhasi    </item>
+        <item>72Atla thaddhi      </item>
+        <item>73Rama ekadhasi   </item>
+        <item>74Govthsa dhvadhasi </item>
+        <item>75Dhana Thrayodhasi       </item>
+        <item>76Naraka chathirdhasi   </item>
+        <item>77Deepavali    </item>
+        <item>78Bhathru dhvutheeya   </item>
+        <item>79Nagula chavithi   </item>
+        <item>80Gopasthami       </item>
+        <item>81Dheva prabhodhini ekadhasi    </item>
+        <item>82Ksheerabdhi dhavadhasi       </item>
+        <item>83Kartheeka purnima   </item>
+        <item>84Kalabhirva ashtami       </item>
+        <item>85Uthpanna ekadhasi   </item>
+        <item>86Subrhamanya shashti   </item>
+        <item>87Moukshika ekadhasi   </item>
+        <item>88Dhaththa jayanthi       </item>
+        <item>89Vimala ekadhasi   </item>
+        <item>90Vykuntha ekadhasi       </item>
+        <item>91Solar eclipse       </item>
+        <item>92Lunar eclipse       </item>
+    </string-array>
+    <string-array name="gregevents">
+        <item> New year day    </item>
+        <item> Republic day       </item>
+        <item> Independence day   </item>
+        <item> Gandhi birth day       </item>
+        <item> Christmas   </item>
+
+    </string-array>
+    <string name="samvtsara">" samvathsara "</string>
+    <string name="masam">" masa "</string>
+    <string name="wakeup">" please wakeup "</string>
+    <string name="mahanubhava"></string>
+    <string name="garu">" Sir "</string>
+    <string name="supra">" good moring "</string>
+    <string name="krishna">" krishnadhi "</string>
+    <string name="sukladi">" sukladhi "</string>
+    <string name="chandra">" chandraman "</string>
+</resources>

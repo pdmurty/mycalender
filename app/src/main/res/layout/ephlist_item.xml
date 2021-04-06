@@ -3,14 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/rcView"
-    android:padding="1dp"
-    android:background="@color/colorAccent"
     android:orientation="vertical"
     >
  <LinearLayout
      android:layout_width="wrap_content"
      android:layout_height="wrap_content"
-     android:background="@color/white">
+     >
 
        <TextView
             android:id="@+id/textwk"

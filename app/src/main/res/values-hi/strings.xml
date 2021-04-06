@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">myCalender</string>
+    <string name="app_name">मैत्रेय</string>
     <string name="action_year">Set Year</string>
     <string name="action_status">Location</string>
     <string name="thithi">      तिथि :          </string>
@@ -48,6 +48,22 @@
         <item> पुष्यमि    </item>
         <item> माघ    </item>
         <item> फल्गुण    </item>
+    </string-array>
+    <string-array name="solar_months">
+        <item>मेष       </item>
+        <item>वृषभ      </item>
+        <item>मिथुन     </item>
+        <item>कर्क   </item>
+        <item>सिंह       </item>
+        <item>कन्या     </item>
+        <item>तुला        </item>
+        <item>वृश्चिक     </item>
+        <item>धनुष    </item>
+        <item>मकर        </item>
+        <item>कुंभ       </item>
+        <item>मीन       </item>
+        <item>भोगी</item>
+        <item>कनुम</item>
     </string-array>
     <string-array name="Nakshatras">
         <item>अश्विनी</item>
@@ -186,9 +202,118 @@
         <item>रक्ताक्षि </item>
         <item>क्रोधन </item>
         <item>अक्षय </item>
-
+    </string-array>
+    <string-array name="lunarEvents">
+        <item>1सांबदशमी        </item>
+        <item>2नंद एकादशी       </item>
+        <item>3. संकस्ट चतुर्थी       </item>
+        <item>4. साफला एकादशी          </item>
+        <item>5मेरू टत्रयोेदशी       </item>
+        <item>6. मौनी अमावस्या       </item>
+        <item>7तिला चतुर्थी         </item>
+        <item>8. वसंत पंचमी         </item>
+        <item>9. रथसप्तमी          </item>
+        <item>10. भीष्म अष्टमी     </item>
+        <item>11. भीष्म एकादशी       </item>
+        <item>12. माघ पूर्णिमा       </item>
+        <item>13विजय एकादशी       </item>
+        <item>14.महा शिवरात्रि                </item>
+        <item>15. अमलका एकादशी                  </item>
+        <item>16होलिका पूर्णिमा               </item>
+        <item>17रंग पंचमी                    </item>
+        <item>18. सीताष्टमी                   </item>
+        <item>19. पापविमोचन एकादशी            </item>
+        <item>20मधुकृष्ण त्रयोदशी            </item>
+        <item>21 उगादी                            </item>
+        <item> 22गौरी तृतीय                      </item>
+        <item>23 लक्ष्मी पंचमी                    </item>
+        <item>24. स्कंद षष्ठी                      </item>
+        <item>25. अशोकाअष्टमी, अन्नपूर्णा पूजा       </item>
+        <item>26. श्री रामनवमी                        </item>
+        <item>27. कामदा एकादशी                          </item>
+        <item>28 अनंग त्रयोदशी                  </item>
+        <item>29 हनुमान जयंती                   </item>
+        <item>30 वरुधिनी एकादशी                    </item>
+        <item>31. परशुराम जयंती                     </item>
+        <item>32 अक्षय तृतीया                   </item>
+        <item>33 शंकर जयंती                   </item>
+        <item>34 रामानुज जयंती                 </item>
+        <item>35. गंगा उत्पादन                    </item>
+        <item>36 मोहिनी एकादशी                 </item>
+        <item>37 नृसिमहा जयंती                 </item>
+        <item>38 भद्रकाली एकादशी                </item>
+        <item>39. रंभातृतीय                </item>
+        <item>40 निर्जल एकादशी                  </item>
+        <item>41चम्पा द्वादशी           </item>
+        <item>42वट सावित्री व्रत       </item>
+        <item>43 योगिनी एकादशी             </item>
+        <item>44. रथयात्रा                 </item>
+        <item>45कुमार षष्ठी                </item>
+        <item>46हरितशयन एकादशी              </item>
+        <item>47 गुरु (व्यास) पूर्णिमा            </item>
+        <item>48कामिका एकादशी                 </item>
+        <item>49 नाग पंचमी                   </item>
+        <item>50वर महालक्ष्मी व्रत        </item>
+        <item>51पुत्रदा एकादशी            </item>
+        <item>52वराह जयंती              </item>
+        <item>53 राखी पूर्णिमा             </item>
+        <item>54 संकष्ट चतुर्थी            </item>
+        <item>55 कृष्णष्टमी             </item>
+        <item>56 अजा एकादशी                     </item>
+        <item>57 विनायक चतुर्थी                 </item>
+        <item>58. ऋषि पंचमी                    </item>
+        <item>59 सूर्य षष्ठी                </item>
+        <item>60 राधाअष्टमी, केदारवतम       </item>
+        <item>61पारश्व परिवर्तन एकादशी            </item>
+        <item>62 अनंत चतुर्दशी             </item>
+        <item>63. पितृपक्ष तर्पणम             </item>
+        <item>64 पद्मिनी एकादशी            </item>
+        <item>65 महालय अमावस्य            </item>
+        <item>66 नवरात्रि शुरू            </item>
+        <item>67 ललिता पंचमी              </item>
+        <item>68 सरस्वती अवाहाना            </item>
+        <item>69. आयुध पूजा                 </item>
+        <item>70 दशहरा                     </item>
+        <item>71पापांकुश एकादशी          </item>
+        <item>72.अट्ल तदिय                </item>
+        <item>73 रमा एकादशी                  </item>
+        <item>74 गोवत्सा द्वादशी           </item>
+        <item>75 धन त्रयोदशि               </item>
+        <item>76. नरक चतुर्दशी            </item>
+        <item>77 दिवाली                 </item>
+        <item>78 भातृ द्वितीय          </item>
+        <item>79 नग चविति             </item>
+        <item>80 गोपाष्टमी                </item>
+        <item>81. देवप्रभोदिनी एकादशी    </item>
+        <item>82. क्षीराब्धि द्वादशी       </item>
+        <item>83 कार्तीक पूर्णिमा         </item>
+        <item>84 कालभैरवाष्टमी             </item>
+        <item>85 उत्पन्ना एकादशी              </item>
+        <item>86 सुब्रमण्य षष्ठी         </item>
+        <item>87 मोक्ष एकादशी          </item>
+        <item>88 दत्त जयंती               </item>
+        <item>89 विमला एकादशी             </item>
+        <item>90 वैकुंठ एकादशी             </item>
+        <item>91सूर्य ग्रहण              </item>
+        <item>92चंद्र ग्रहण             </item>
+    </string-array>
+    <string-array name="gregevents">
+        <item> अंग्रेजी नया साल    </item>
+        <item> गणतंत्र दिवस       </item>
+        <item> स्वातंत्र दिवस   </item>
+        <item> गांधी जयंति       </item>
+        <item> क्रीस्तमस्   </item>
 
     </string-array>
+    <string name="samvtsara">संवत्सर</string>
+    <string name="masam">माह</string>
+    <string name="wakeup"> जागिेए </string>
+    <string name="mahanubhava"> श्रीमान </string>
+    <string name="garu"> जी </string>
+    <string name="supra">आपका शुप्रभात</string>
+    <string name="krishna">क्रिष्णादि</string>
+    <string name="sukladi">शुक्लादि</string>
+    <string name="chandra"> चांद्रमान </string>
     <string name="sur_astham">अस्तमय</string>
     <string name="sankranthi">संक्रांति</string>
 

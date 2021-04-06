@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/colorAccent"
+            >
+            <TextView
+                android:id="@+id/week"
+                style="@style/eph_textview_hdr"
+                android:text="Dt" />
+            <TextView
+                style="@style/eph_textview_hdr"
+                android:layout_toRightOf="@+id/week"
+                android:text="Events"
+                />
+
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recylerEvts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/week"/>
+        </RelativeLayout>
+
+    </HorizontalScrollView>
+
+</LinearLayout>
+
+
+<!--
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ShowEvents">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/week"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:background="@color/colorAccent" >
+        <TextView
+            style="@style/eph_textview_hdr"
+            android:text="Dt"
+            />
+        <TextView
+            style="@style/eph_textview_hdr"
+            android:text="Events"
+            />
+
+    </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recylerEvts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/week"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:background="@color/colorAccent"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>
+-->

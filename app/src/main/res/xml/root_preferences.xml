@@ -7,33 +7,36 @@
 
     <SwitchPreference
         android:key="KEY_ALRMSET"
-        android:title="Set Alaram"
+        android:title="Set Alarm"
         android:defaultValue="true"
         />
-    <com.example.mycalender.TimePreference
+    <com.pdmurty.mycalender.TimePreference
         android:key="KEY_ALARAM"
         android:dependency="KEY_ALRMSET"
-        android:title="Time Preference"
+        android:title="Set Alarm time"
         android:summary="Time Summary"
-        android:defaultValue="90" />
+        android:defaultValue="300" />
     <SwitchPreference
         android:key="KEY_VOICE"
         android:title="Set Voice"
         android:defaultValue="true"
         />
 
-    <com.example.mycalender.SpinnerPreference
+    <com.pdmurty.mycalender.SpinnerPreference
         android:key="monthstyle"
         app:title="Month-Style"
         android:defaultValue="Amantha"
         app:entries="@array/month_entries"
         app:entryValues="@array/month_values" />
-    <com.example.mycalender.SpinnerPreference
+    <com.pdmurty.mycalender.SpinnerPreference
         android:key="lan_style"
         android:title="Language"
         android:defaultValue="తెలుగు"
         app:entries="@array/lan_entries"
         app:entryValues="@array/lan_values" />
+    <EditTextPreference
+        android:key="USERNAME"
+        android:title="Your Name" />
 
 
 
