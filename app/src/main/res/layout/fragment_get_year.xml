@@ -22,7 +22,7 @@
 
     <NumberPicker
         android:id="@+id/idCent"
-        android:layout_width="42dp"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
@@ -33,7 +33,7 @@
 
     <NumberPicker
         android:id="@+id/idYearones"
-        android:layout_width="42dp"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:showDividers="middle"
         android:splitMotionEvents="true"
@@ -44,7 +44,7 @@
 
     <NumberPicker
         android:id="@+id/idYeartens"
-        android:layout_width="42dp"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:showDividers="middle"
         android:splitMotionEvents="true"

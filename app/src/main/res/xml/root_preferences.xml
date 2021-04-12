@@ -36,7 +36,7 @@
         app:entryValues="@array/lan_values" />
     <EditTextPreference
         android:key="USERNAME"
-        android:title="Your Name" />
+        android:title="Set Your Name" />
 
 
 

@@ -305,17 +305,17 @@
         <item> क्रीस्तमस्   </item>
 
     </string-array>
-    <string name="samvtsara">संवत्सर</string>
-    <string name="masam">माह</string>
-    <string name="wakeup"> जागिेए </string>
+    <string name="samvtsara">" संवत्सर "</string>
+    <string name="masam">" माह "</string>
+    <string name="wakeup"> " जागिेए "</string>
     <string name="mahanubhava"> श्रीमान </string>
     <string name="garu"> जी </string>
-    <string name="supra">आपका शुप्रभात</string>
+    <string name="supra">" आपका शुप्रभात "</string>
     <string name="krishna">क्रिष्णादि</string>
-    <string name="sukladi">शुक्लादि</string>
-    <string name="chandra"> चांद्रमान </string>
-    <string name="sur_astham">अस्तमय</string>
-    <string name="sankranthi">संक्रांति</string>
+    <string name="sukladi">" शुक्लादि "</string>
+    <string name="chandra">" चांद्रमान " </string>
+    <string name="sur_astham">" अस्तमय "</string>
+    <string name="sankranthi">" संक्रांति "</string>
 
 
 </resources>

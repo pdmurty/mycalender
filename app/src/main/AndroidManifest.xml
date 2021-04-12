@@ -72,7 +72,8 @@
         <receiver
             android:name=".AlaramReciever"
             android:enabled="true"
-            android:exported="false" />
+            android:exported="false">
+        </receiver>
 
         <service
             android:name=".MainActivity"

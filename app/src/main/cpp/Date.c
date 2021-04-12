@@ -109,7 +109,7 @@ double get_yoga_end( double jd, int yog )
 
 }
 
-//gets target thithi after given julian-day
+//gets target thithi after given julian-day in hrs
 double get_thithi_tgt( double jd, int target)
 {
 
@@ -158,7 +158,7 @@ double get_thithi_tgt( double jd, int target)
     return ddif;
 
 }
-// get prathama after given julian-day
+// get prathama after given julian-day in days
 double get_thithi_pradhama(double jd)
 {
     int target=0;
@@ -168,7 +168,7 @@ double get_thithi_pradhama(double jd)
 
 }
 
-// get amavasya after given julian day
+// get amavasya after given julian day in days
 double get_thithi_amantha( double jd)
 {
 
@@ -508,6 +508,7 @@ Java_com_pdmurty_mycalender_Swlib_WritePanchang(JNIEnv *env, jclass clazz, jint 
     swe_set_ephe_path("");
     //get julian-day
     jdn = swe_julday(year,month+1,day,0, SE_GREG_CAL);
+
     // __android_log_print(ANDROID_LOG_DEBUG, "DATEC", "jdn=%f\n",jdn);
 
     swe_calc_ut(jdn, SE_SUN,SEFLG_MOSEPH | SEFLG_SPEED | SEFLG_SIDEREAL,xx, err);
@@ -553,17 +554,17 @@ Java_com_pdmurty_mycalender_Swlib_WritePanchang(JNIEnv *env, jclass clazz, jint 
     } else xx[6] = -1.1111; // let caller know there is thithi kshaya
     // sankranthi and lunar month
     jdn_prathama = get_thithi_pradhama(jdn);  // end of pratham
-    // __android_log_print(ANDROID_LOG_DEBUG, "DATEC", "jdn_pra=%f\n",jdn_prathama);
+     //__android_log_print(ANDROID_LOG_DEBUG, "LUN", "jdn=%f:jdn_pra=%f\n",jdn,jdn_prathama);
 
     jdn_sank     = get_thithi_amantha(jdn +jdn_prathama-2); // get start of pradhama,
     // jdn_sank used as temp used as temp holder not to be confused.
 
     jdn_prathama = jdn +jdn_prathama-2 + jdn_sank;  // start of pradhama
-    //__android_log_print(ANDROID_LOG_DEBUG, "DATEC", "jdn_prastrt=%f\n",jdn_prathama);
-    jdn_sank = get_sankranthi_day( jdn_prathama, &sankranthi) + jdn_prathama;
+    //__android_log_print(ANDROID_LOG_DEBUG, "LUN", "jdn_prastrt=%f\n",jdn_prathama);
+    jdn_sank = get_sankranthi_day( jdn_prathama, &sankranthi) + (jdn_prathama);
     // __android_log_print(ANDROID_LOG_DEBUG, "DATEC", "jdn_sank=%f: snk= %d\n",jdn_sank,sankranthi);
     // first sankranthi after pradhama start
-    xx[13]= sankranthi%12; // snakranthi number
+    xx[13]= sankranthi%12; // lunar month
     xx[12]  = get_thithi_amantha(jdn); // immdetiate amavasya after jdn.
     //__android_log_print(ANDROID_LOG_DEBUG, "DATEC", "jdn_aman=%f\n",xx[12]);
     // no sankranthi between pradham and amavasya, it is adhikamasa
@@ -571,6 +572,7 @@ Java_com_pdmurty_mycalender_Swlib_WritePanchang(JNIEnv *env, jclass clazz, jint 
     if(jdn_sank > xx[12]+jdn) xx[13]-=0.5;
 
     jdn_sank = get_sankranthi_day( jdn, &sankranthi);
+   // xx[13]= sankranthi%12; // snakranthi number
     xx[12] = sankranthi-1;
     xx[12]*=100;
     jdn_sank+=timezone/24;

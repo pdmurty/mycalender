@@ -13,7 +13,7 @@
         <item name="windowNoTitle">true</item>
     </style>
     <style name="eph_textview" parent="Widget.AppCompat.TextView">
-        <item name="android:layout_width">80dp</item>
+        <item name="android:layout_width">90dp</item>
         <item name="android:layout_height">40dp</item>
         <item name="android:padding">3dp</item>
         <item name="android:textSize">15dp</item>
@@ -22,7 +22,7 @@
         <item name="android:background">@color/white</item>
     </style>
     <style name="eph_textview_hdr" parent="Widget.AppCompat.TextView">
-        <item name="android:layout_width">80dp</item>
+        <item name="android:layout_width">90dp</item>
         <item name="android:layout_height">40dp</item>
         <item name="android:padding">3dp</item>
         <item name="android:textSize">20dp</item>

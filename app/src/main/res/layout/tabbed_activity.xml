@@ -28,6 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toLeftOf="@+id/year"
                 android:text="@string/eph_header"
+                android:textSize="15dp"
                 android:padding="6dp"
                 android:layout_marginLeft="6dp"
                 />

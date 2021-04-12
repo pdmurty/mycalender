@@ -387,7 +387,7 @@
         and a few arc seconds with the moon. This may be sufficient accuracy for most purposes,
         since the moon moves 1 arc second in 2 time seconds and the sun 2.5 arc seconds in one minute.
         All panchang elements are computed using the planetary positions as obtained above. Hindhu festival
-        events are determined using rules as stated in Dharama Sindhu. The author has taken utmost care to give all the
+        events are determined using rules as stated in Dharama Sindhu / Nirnaya Sindhu. The author has taken utmost care to give all the
         details as accurately as possible. This softaware comes with ABSOLUTELY NO WARRANTY OF ANY KIND. The author of the
         software is not responsible for consequences direct or indirect that may arise by use of this software.
         We welcome all suggestions for improvements and make it more user friendly.
@@ -397,13 +397,13 @@
 This program will give you panchangam elements, year, month, thithi, nakshatra, yoga,
 sunrise/sunset, Durmuhurtha, varjyam/vishaghati, Rahukalam,yamagandam and udaya lagnam.
 \nThe application will find out your current location and use it to calculate sunrise/sunset.
-Sunsrise and sunset depend on location. \nIt can also give all the above details for any location
-other than your current location. Cities in five countries India, US, UK, Austalia and Canada are
+Sunrise and sunset depend on location. \nIt can also give all the above details for any location
+other than your current location. Cities in five countries India, US, UK, Australia and Canada are
 supported. \nIt will also  give positions of all nine planets Sun, moon, budha, sukra, kuja, guru,
 sani ad rahu. Ketu is always opposite of rahu and need not be specified.\n It will give all Hindhu
 festivals/sacred days, 12 sankranthis and 27 kartharis and National festivals.
 
-\nAll the above details are avilable for any year from 1900 AD to 2100 AD.
+\nAll the above details are available for any year from 1900 AD to 2100 AD.
 \nOn start of the app, the current location is shown at the top and Calender
 view.\nBelow the Calender you will see the panchang for the selected day.
 Click on any day it will show the panchang. You can set the voice enabled and it
@@ -416,21 +416,25 @@ will read the panchang for you.
     current location.
  \n4. Click on month/year at the top of the calender view. Year dialog appears.
     Select desired year and the Panchangam is set to the selected year. To get
-    back to the current year press rest buttion at the top. It is back to current year.
+    back to the current year press rest button at the top. It is back to current year.
         If you click, when the panchagam is being read, it will stop further reading.
- \n5. From the settings menu, you can set the alaram time and it will read the panchangam
-    at the selected time. You can set it as a morning wakeup alaram. Once set it will
+ \n5. From the settings menu, you can set the alarm time and it will read the panchangam
+    at the selected time. You can set it as a morning wakeup alarm. Once set it will
     repeat dialy at the selected time. It will read the current panchangam 8 times.
         To stop shake the phone
  \n6. You can select the languages from the settings menu, currently telugu, hindhi and
     english are supported.
  \n7. You can set the lunar month as Krishnadhi or sukladhi. In south India, lunar month
-    starts with bright half and is know as sukladhi or manatha. In norhtern India it starts
+    starts with bright half and is know as sukladhi or amanatha. In northern India it starts
     with dark half and ends with Purnima and known as Krishandhi or Purnantha.
- \n8. Please set your name in your prefered language and the wake up alram will address you
+ \n8. Please set your name in your preferred language and the wake up alram will address you
     with your name.
  \n9. Please give your suggestions and feedback by email or whatsapp. Click on the floating
     button which looks like an envelope, you will see the contact details.
+  \n10. Make sure that the preferred TextToSpeech is set to Google Text-to-speech Engine and voice
+        data for your preferred language is installed. Google engine supports most of the languages.
+        Set the speech rate and the pitch rate appropriately for a clear speech of the panchagam.
+        You can find this setting under general management or language and input depending on your device.
     </string>
 </resources>
 
