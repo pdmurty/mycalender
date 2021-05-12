@@ -2,6 +2,7 @@ package com.pdmurty.mycalender;
 
 import android.os.Bundle;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.View;
 import android.widget.TimePicker;
 
@@ -76,7 +77,10 @@ public class  TimePreferenceDialogFragmentCompat
 
            mTimePicker.setIs24HourView(is24hour);
            mTimePicker.setCurrentHour(hours);
+
+
            mTimePicker.setCurrentMinute(minutes);
+
        }
    }
 

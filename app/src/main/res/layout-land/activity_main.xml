@@ -9,28 +9,37 @@
     <TextView
         android:id="@+id/locTxt"
         android:layout_width="300dp"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:onClick="locClick"
         android:textAlignment="center"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/myTxt"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toTopOf="@+id/scrtxt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/calendarView"
         app:layout_constraintTop_toTopOf="parent"
-        android:gravity="center_horizontal" />
-
-    <TextView
-        android:id="@+id/myTxt"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="20dp"/>
+    <ScrollView
+        android:id="@+id/scrtxt"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:paddingLeft="5dp"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/calendarView"
-        app:layout_constraintTop_toBottomOf="@+id/locTxt" />
+        app:layout_constraintTop_toBottomOf="@+id/locTxt"
+        android:paddingBottom="25dp"
+        >
+        <TextView
+            android:id="@+id/myTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:paddingLeft="5dp"
+            />
+    </ScrollView>
 
     <CalendarView
         android:id="@+id/calendarView"

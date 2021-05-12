@@ -12,27 +12,6 @@
 
 static float  mloc_lon=78.45;  // default location set to HYD, INDIA
 static float   mloc_lat=17.4333;
-JNIEXPORT jdouble JNICALL
-Java_com_example_mycalender_Swlib_GetJulDay(JNIEnv *env, jobject thiz, jint year, jint month,
-                                            jint day, jdouble hours) {
-
-}
-
-JNIEXPORT jstring JNICALL
-Java_com_example_mycalender_Swlib_SWeCalUT(JNIEnv *env, jclass clazz, jdouble tjd, jint ipl,
-                                           jint iflag, jdoubleArray xx, jint err) {
-    // TODO: implement SWeCalUT()
-
-
-   // (*env)->GetStringRegion(env, err, 0, 255, (jchar *) error);
-}
-
-JNIEXPORT void JNICALL
-Java_com_example_mycalender_Swlib_SWSetSidmode(JNIEnv *env, jclass clazz, jint sidmode, jdouble t,
-                                               jdouble ayana_t) {
-    // TODO: implement SWSetSidmode()
-
-}
 double get_nak_tgt( double jd, int target_nak)
 {
 
@@ -493,16 +472,20 @@ Java_com_pdmurty_mycalender_Swlib_SetLocation(JNIEnv *env, jclass clazz, jfloat 
 JNIEXPORT jdoubleArray JNICALL
 Java_com_pdmurty_mycalender_Swlib_WritePanchang(JNIEnv *env, jclass clazz, jint year, jint month,
                                                 jint day, jdouble timezone) {
-    double jdn,jdn_prathama,jdn_amantha, jdn_sank=0, retjdn[1], xx[14], slon,mlon,dif;
+    double jdn,jdn_prathama,jdn_prathama_start,jdn_amantha, jdn_sank=0, retjdn[1], xx[15], slon,mlon,dif;
     double geopos[3];
     double tmp;
+    int wkday;
     int thithi=0 , yog;
     int sankranthi =0;
     char err[255];
     char starname[30];
     double nkStart, nextLength, thithiEnd, thithiNext;
     double sunrise, nextsunrise, sunset;
+    int syear,smonth,sday;
+    double shour;
     int prev_thithi =0;
+    int errcode;
     //__android_log_print(ANDROID_LOG_DEBUG, "DATEC", "yr=%d:m=%d:d=%d:tz=%4.2f\n",year,month,day,timezone);
 
     swe_set_ephe_path("");
@@ -521,21 +504,20 @@ Java_com_pdmurty_mycalender_Swlib_WritePanchang(JNIEnv *env, jclass clazz, jint 
     geopos[0] = mloc_lon; //78.45; // hard coded to be used from geoloc.
     geopos[1] = mloc_lat; //17.4333;
     geopos[2] = 0;
-    swe_rise_trans(jdn, SE_SUN , starname,0,  SE_CALC_RISE, geopos, 0, 0, retjdn, err);
 
+    double tjd = jdn - timezone/24;
+
+    swe_rise_trans(tjd, SE_SUN , starname,0,  SE_CALC_RISE|SE_BIT_HINDU_RISING, geopos, 0, 0, retjdn, err);
     sunrise= xx[7]=(retjdn[0] - jdn )*24.0 + timezone;
 
-    swe_rise_trans(jdn+1, SE_SUN , starname,0,  SE_CALC_RISE, geopos, 0, 0, retjdn, err);
-
-    nextsunrise =(retjdn[0] - jdn-1 )*24.0 + timezone;;
-
+    swe_rise_trans(tjd+1, SE_SUN , starname,0,  SE_CALC_RISE|SE_BIT_HINDU_RISING, geopos, 0, 0, retjdn, err);
+    nextsunrise =(retjdn[0] - jdn-1 )*24.0 + timezone;
     //sunset
-
-    swe_rise_trans(jdn, SE_SUN , starname,0,  SE_CALC_SET|SE_BIT_HINDU_RISING, geopos, 0, 0, retjdn, err);
+    swe_rise_trans(tjd, SE_SUN , starname,0,  SE_CALC_SET|SE_BIT_HINDU_RISING, geopos, 0, 0, retjdn, err);
     xx[8]= (retjdn[0] - jdn )*24.0 + timezone;  // sunset
     //double d = (xx[8]-xx[7])/15;
-    thithi = (int) (jdn+1)%7;  //weekday mon=0
-    xx[9] = (double) thithi;  // weekday
+    wkday = (int) (jdn+1)%7;  //weekday mon=0
+    xx[9] = (double) wkday;  // weekday
     dif = (mlon-slon);
     //do thithi
     if (dif < 0) {
@@ -544,6 +526,8 @@ Java_com_pdmurty_mycalender_Swlib_WritePanchang(JNIEnv *env, jclass clazz, jint 
     prev_thithi=thithi;
     thithiEnd = get_thithi_tgt(jdn, thithi)+timezone;
     thithiNext = get_thithi_tgt(jdn, prev_thithi+1)+timezone;
+//    __android_log_print(ANDROID_LOG_DEBUG, "LUN", "thithi=%d;thithiend=%f;thithinxt=%f;SR=%f;NSR=%f\n",
+    //        thithi,thithiEnd,thithiNext,sunrise,nextsunrise);
     if (thithiEnd > sunrise) { //thithi normal
         xx[0] = thithi; xx[1] = thithiEnd ;
     }else {xx[0] = thithi+1; xx[1] = thithiNext ;} // there is thithikshaya
@@ -556,10 +540,9 @@ Java_com_pdmurty_mycalender_Swlib_WritePanchang(JNIEnv *env, jclass clazz, jint 
     jdn_prathama = get_thithi_pradhama(jdn);  // end of pratham
      //__android_log_print(ANDROID_LOG_DEBUG, "LUN", "jdn=%f:jdn_pra=%f\n",jdn,jdn_prathama);
 
-    jdn_sank     = get_thithi_amantha(jdn +jdn_prathama-2); // get start of pradhama,
-    // jdn_sank used as temp used as temp holder not to be confused.
+    jdn_prathama_start     = get_thithi_amantha(jdn +jdn_prathama-2); // get start of pradhama,
 
-    jdn_prathama = jdn +jdn_prathama-2 + jdn_sank;  // start of pradhama
+    jdn_prathama = jdn +jdn_prathama-2 + jdn_prathama_start;  // start of pradhama
     //__android_log_print(ANDROID_LOG_DEBUG, "LUN", "jdn_prastrt=%f\n",jdn_prathama);
     jdn_sank = get_sankranthi_day( jdn_prathama, &sankranthi) + (jdn_prathama);
     // __android_log_print(ANDROID_LOG_DEBUG, "DATEC", "jdn_sank=%f: snk= %d\n",jdn_sank,sankranthi);
@@ -578,9 +561,6 @@ Java_com_pdmurty_mycalender_Swlib_WritePanchang(JNIEnv *env, jclass clazz, jint 
     jdn_sank+=timezone/24;
     //if( jdn_sank <=1.0 )
     xx[12]+= jdn_sank;
-
-
-
     // do nakshatra
     int nkCount = (int) (mlon) * 3 / 40;
 
@@ -599,15 +579,13 @@ Java_com_pdmurty_mycalender_Swlib_WritePanchang(JNIEnv *env, jclass clazz, jint 
     dif = get_yoga_end(jdn,yog);
     xx[4]= yog;
     xx[5]= dif+timezone;
-
-
-
-
-    jdoubleArray jdbl = (*env)->NewDoubleArray(env,14);
-    (*env)->SetDoubleArrayRegion(env,jdbl,0,14,xx);
-
-
-
+    xx[14]=jdn;
+    jdoubleArray jdbl = (*env)->NewDoubleArray(env,15);
+    (*env)->SetDoubleArrayRegion(env,jdbl,0,15,xx);
+// xx[]0-thithicount,1-thith-end-time,6-nxt-thithi-end or -1.1111,
+// 2-nakcount,3-nak-end-time,10-nak-start,11-next-nak-length
+// 4-yoga-count,5-yoga-end-time,
+// 7-sunrise,8-sunset, 9-weekday,12-sankranthi-count+time,13-lunarmonth
     return jdbl;
 
 }
@@ -641,8 +619,9 @@ JNIEXPORT jdouble JNICALL
 Java_com_pdmurty_mycalender_Swlib_GetJulDay(JNIEnv *env, jclass clazz, jint year, jint month,
                                             jint day, jdouble hours) {
     // TODO: implement GetJulDay()
-    int m_day[] = {0/*J*/,31/*F*/,59/*Mr*/,90/*Ap*/,120/*My*/,
-                   151/*Jn*/,181/*Jl*/,212/*au*/,243/*se*/,273/*oc*/,304/*N*/,334/*D*/};
+    //int m_day[] = {0/*J*/,31/*F*/,59/*Mr*/,90/*Ap*/,120/*My*/,
+      //             151/*Jn*/,181/*Jl*/,212/*au*/,243/*se*/,273/*oc*/,304/*N*/,334/*D*/};
+    /*
     jboolean leapyear = JNI_FALSE;
     double jn= 2451545;  // JDN = 2451545 for year 2000AD
     jn += (year-2000)*365;
@@ -659,5 +638,6 @@ Java_com_pdmurty_mycalender_Swlib_GetJulDay(JNIEnv *env, jclass clazz, jint year
     if( month >2 && leapyear) ++jn; // leap year <2000
     else if (!leapyear && year >2000) ++jn;  // non-leapyears >2000
     // return jn;
+     */
     return swe_julday(year,month,day,hours,1);
 }

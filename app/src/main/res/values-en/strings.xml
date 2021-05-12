@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Mythreya</string>
+    <string name="app_name">Mythreya-1.1</string>
 
     <string name="thithi">     thithi        </string>
 
@@ -23,6 +23,7 @@
     <string name="kshaya">      (kshaya)      </string>
     <string name="udaya_lgna">  lagna :  </string>
     <string name="sankranthi">" ingress "</string>
+    <string name="karthari">" karthe "</string>
     <string-array name="months">
         <item>Jan</item>
         <item>Feb</item>
@@ -36,15 +37,6 @@
         <item>Oct</item>
         <item>Nov</item>
         <item>Dec</item>
-    </string-array>
-    <string-array name="wkdays">
-        <item>Mon</item>
-        <item>Tue</item>
-        <item>Wed</item>
-        <item>Thu</item>
-        <item>Fri</item>
-        <item>Sat</item>
-        <item>Sun</item>
     </string-array>
     <string-array name="lunar_months">
         <item>chithra</item>
@@ -60,6 +52,16 @@
         <item>maagha</item>
         <item>phalguna</item>
     </string-array>
+    <string-array name="wkdays">
+        <item>Mon</item>
+        <item>Tue</item>
+        <item>Wed</item>
+        <item>Thu</item>
+        <item>Fri</item>
+        <item>Sat</item>
+        <item>Sun</item>
+    </string-array>
+
     <string-array name="solar_months">
         <item>Mesha</item>
         <item>vrishabh</item>
@@ -217,99 +219,99 @@
 
     </string-array>
     <string-array name="lunarEvents">
-        <item>1Sambadhasami     </item>
-        <item>2nandha ekadhasi    </item>
-        <item>3Sankashta chathurdhi       </item>
-        <item>4Saphala ekadhasi       </item>
-        <item>5Meru thryodhasu       </item>
-        <item>6Mouni amavasya       </item>
-        <item>7Thila chathurdhi     </item>
-        <item>8Vasantha panchami       </item>
-        <item>9Rathasapthami   </item>
-        <item>10Bhisma ashtami.     </item>
-        <item>11Bheeshama ekadhasi       </item>
-        <item>12Magha purnima       </item>
-        <item>13Vijaya ekadhasi        </item>
-        <item>14Maha sivarathri     </item>
-        <item>15Amalaka ekadhasi       </item>
-        <item>16Holika purnima       </item>
-        <item>17Ranga panchami       </item>
-        <item>18Seethalashtami       </item>
-        <item>19Papavimochana ekadhasi </item>
-        <item>20Madhikrishana thryodhasi       </item>
-        <item>21Ugadhi          </item>
-        <item> 22Guari thrithiya      </item>
-        <item>23Lakshmi panchami       </item>
-        <item>24Skanda shashti       </item>
-        <item>25Ashokasthami, Annapurna pooja       </item>
-        <item>26Sriramanavami          </item>
-        <item>27Kamadha ekadhasi   </item>
-        <item>28Ananga thryodhasi       </item>
-        <item>29Hanuman jayanthi        </item>
-        <item>30Varudhini ekadhasi          </item>
-        <item>31Prasurma jayanthi       </item>
-        <item>32Akshaya thrithiya         </item>
-        <item>33Sankara jayanthi       </item>
-        <item>34Ramanuja jayanthi       </item>
-        <item>35Gangothpaththi       </item>
-        <item>36Mohini ekadhasi    </item>
-        <item>37Nrisimha jayanthi       </item>
-        <item>38Bhadhrakali ekadasi         </item>
-        <item>39Rambha thrithiya       </item>
-        <item>40Nirjala ekadhasi           </item>
-        <item>41Champa ekadhasi       </item>
-        <item>42vata savithri vratham       </item>
-        <item>43Yogini ekadhasi             </item>
-        <item>44Ratha yathra          </item>
-        <item>45Kumara shashthi         </item>
-        <item>46harithasayana ekadhasi              </item>
-        <item>47Guru(vyasa) purnima            </item>
-        <item>48kamika ekadhasi           </item>
-        <item>49Naga panchami            </item>
-        <item>50Vara mahalakshmi vratham        </item>
-        <item>51Puthrdhaa ekadhasi       </item>
-        <item>52Varaaha jayanthi       </item>
-        <item>53Rakhi purnima    </item>
+        <item>Sambadhasami     </item>
+        <item>nandha ekadhasi    </item>
+        <item>Sankashta chathurdhi       </item>
+        <item>Saphala ekadhasi       </item>
+        <item>Meru thryodhasu       </item>
+        <item>Mouni amavasya       </item>
+        <item>Thila chathurdhi     </item>
+        <item>Vasantha panchami       </item>
+        <item>Rathasapthami   </item>
+        <item>Bhisma ashtami.     </item>
+        <item>Bheeshama ekadhasi       </item>
+        <item>Magha purnima       </item>
+        <item>Vijaya ekadhasi        </item>
+        <item>Maha sivarathri     </item>
+        <item>Amalaka ekadhasi       </item>
+        <item>Holika purnima       </item>
+        <item>Ranga panchami       </item>
+        <item>Seethalashtami       </item>
+        <item>Papavimochana ekadhasi </item>
+        <item>Madhikrishana thryodhasi       </item>
+        <item>Ugadhi          </item>
+        <item>Guari thrithiya      </item>
+        <item>Lakshmi panchami       </item>
+        <item>Skanda shashti       </item>
+        <item>Ashokasthami, Annapurna pooja       </item>
+        <item>Sriramanavami          </item>
+        <item>Kamadha ekadhasi   </item>
+        <item>Ananga thryodhasi       </item>
+        <item>Hanuman jayanthi        </item>
+        <item>Varudhini ekadhasi          </item>
+        <item>Prasurma jayanthi       </item>
+        <item>Akshaya thrithiya         </item>
+        <item>Sankara jayanthi       </item>
+        <item>Ramanuja jayanthi       </item>
+        <item>Gangothpaththi       </item>
+        <item>Mohini ekadhasi    </item>
+        <item>Nrisimha jayanthi       </item>
+        <item>Bhadhrakali ekadasi         </item>
+        <item>Rambha thrithiya       </item>
+        <item>Nirjala ekadhasi           </item>
+        <item>Champa ekadhasi       </item>
+        <item>vata savithri vratham       </item>
+        <item>Yogini ekadhasi             </item>
+        <item>Ratha yathra          </item>
+        <item>Kumara shashthi         </item>
+        <item>harithasayana ekadhasi              </item>
+        <item>Guru(vyasa) purnima            </item>
+        <item>kamika ekadhasi           </item>
+        <item>Naga panchami            </item>
+        <item>Vara mahalakshmi vratham        </item>
+        <item>Puthrdhaa ekadhasi       </item>
+        <item>Varaaha jayanthi       </item>
+        <item>Rakhi purnima    </item>
 
-        <item>54Sankhashta chathurdhi    </item>
-        <item>55Krishnashthami    </item>
-        <item>56Aaja ekadhasi     </item>
-        <item>57Vinayaka chathirdhi   </item>
-        <item>58Rishi panchami    </item>
-        <item>59Surya shashti       </item>
-        <item>60Radhaashtami, kedhara vratham       </item>
-        <item>61Parsva parivathani ekadhasi    </item>
-        <item>62Aanantha chathurdhasi    </item>
-        <item>63Pithrupaksha tharpanarambha    </item>
-        <item>64Padhmini ekadhasi    </item>
-        <item>65Mahalaya amavasya    </item>
-        <item>66Navarathra arambha    </item>
-        <item>67Lalitha panchami    </item>
-        <item>68Sarsvathi aavahana   </item>
-        <item>69Aayudha pooja    </item>
-        <item>70Dhashahara     </item>
-        <item>71Papankusha ekadhasi    </item>
-        <item>72Atla thaddhi      </item>
-        <item>73Rama ekadhasi   </item>
-        <item>74Govthsa dhvadhasi </item>
-        <item>75Dhana Thrayodhasi       </item>
-        <item>76Naraka chathirdhasi   </item>
-        <item>77Deepavali    </item>
-        <item>78Bhathru dhvutheeya   </item>
-        <item>79Nagula chavithi   </item>
-        <item>80Gopasthami       </item>
-        <item>81Dheva prabhodhini ekadhasi    </item>
-        <item>82Ksheerabdhi dhavadhasi       </item>
-        <item>83Kartheeka purnima   </item>
-        <item>84Kalabhirva ashtami       </item>
-        <item>85Uthpanna ekadhasi   </item>
-        <item>86Subrhamanya shashti   </item>
-        <item>87Moukshika ekadhasi   </item>
-        <item>88Dhaththa jayanthi       </item>
-        <item>89Vimala ekadhasi   </item>
-        <item>90Vykuntha ekadhasi       </item>
-        <item>91Solar eclipse       </item>
-        <item>92Lunar eclipse       </item>
+        <item>Sankhashta chathurdhi    </item>
+        <item>Krishnashthami    </item>
+        <item>Aaja ekadhasi     </item>
+        <item>Vinayaka chathirdhi   </item>
+        <item>Rishi panchami    </item>
+        <item>Surya shashti       </item>
+        <item>Radhaashtami, kedhara vratham       </item>
+        <item>Parsva parivathani ekadhasi    </item>
+        <item>Aanantha chathurdhasi    </item>
+        <item>Pithrupaksha tharpanarambha    </item>
+        <item>Padhmini ekadhasi    </item>
+        <item>Mahalaya amavasya    </item>
+        <item>Navarathra arambha    </item>
+        <item>Lalitha panchami    </item>
+        <item>Sarsvathi aavahana   </item>
+        <item>Aayudha pooja    </item>
+        <item>Dhashahara     </item>
+        <item>Papankusha ekadhasi    </item>
+        <item>Atla thaddhi      </item>
+        <item>Rama ekadhasi   </item>
+        <item>Govthsa dhvadhasi </item>
+        <item>Dhana Thrayodhasi       </item>
+        <item>Naraka chathirdhasi   </item>
+        <item>Deepavali    </item>
+        <item>Bhathru dhvutheeya   </item>
+        <item>Nagula chavithi   </item>
+        <item>Gopasthami       </item>
+        <item>Dheva prabhodhini ekadhasi    </item>
+        <item>Ksheerabdhi dhavadhasi       </item>
+        <item>Kartheeka purnima   </item>
+        <item>Kalabhirva ashtami       </item>
+        <item>Uthpanna ekadhasi   </item>
+        <item>Subrhamanya shashti   </item>
+        <item>Moukshika ekadhasi   </item>
+        <item>Dhaththa jayanthi       </item>
+        <item>Vimala ekadhasi   </item>
+        <item>Vykuntha ekadhasi       </item>
+        <item>Solar eclipse       </item>
+        <item>Lunar eclipse       </item>
     </string-array>
     <string-array name="gregevents">
         <item> New year day    </item>
@@ -328,4 +330,63 @@
     <string name="krishna">" krishnadhi "</string>
     <string name="sukladi">" sukladhi "</string>
     <string name="chandra">" chandraman "</string>
+    <string name="soura">" souramana "</string>
+    <string name="helptxt">
+        This program will give you panchangam elements, year, month, thithi, nakshatra, yoga,
+sunrise/sunset, Durmuhurtha, varjyam/vishaghati, Rahukalam,yamagandam and udaya lagnam.
+The application will find out your current location and use it to calculate sunrise/sunset.
+Sunrise and sunset depend on location. It can also give all the above details for any location
+other than your current location. Cities in five countries India, US, UK, Australia and Canada are
+supported. It will also give positions of all nine planets Sun, moon, budha, sukra, kuja, guru,
+sani and rahu. Ketu is always opposite of rahu and need not be specified. It will give all Hindhu
+festivals/sacred days, 12-sankranthis and 27-kartharis and National festivals.
+
+\nRahukalam: During this period some important things may not be started.
+        But activities started before can continue. The day duration from sunrise to sunset is divided into 8 parts.
+        Rahukalam happens during one part on each day.
+        It is 1 1/2 hours for 12 hrs day time. Mon(2), Tue(7), Wed(5), Thu(6), Fri(4), Sat(3), Sun(8).
+        It is mostly followed in southern states Tamilnadu and Kerala. Some regions of telugu speaking states also follow.
+        North India it is not followed generally.
+
+\nDurmuhurtha: Muhurtha is generally of 48 min duration. Sunrise to sunset 15 and again sunset to next sunrise 15 muhurthas.
+        The actual duration of each muhurtha on any day can vary. Durmuhurthas for each day of the week are different.
+        Mon(9,12), Tue(4,22), Wed(8), Thu(6,12), Fri(4,9), Sat(1,2), Sun(14).
+
+\nRahukalam and Durmuhurtha are dependent on sunrise and different from place to place and season to season.
+        However most panchangams show them as fixed for each weekday, which is not correct.
+
+\nAll the above details are available for any year from 1900 AD to 2100 AD.
+On start of the app, the current location is shown at the top and Calender
+view. Below the Calender you will see the panchang for the selected day.
+Click on any day it will show the panchang. You can set the voice enabled and it
+will read the panchang for you.
+\n 1. Click on the location, you will get a location dialog, It has two options
+    current location  and location DB.
+\n 2. Select location DB and you can select any location from the five countries
+    stated above. Panchangam is set to the selected city.
+\n 3. To get back to your current location click on the location name and select
+    current location.
+\n 4. Click on month/year at the top of the calender view. Year dialog appears.
+    Select desired year and the Panchangam is set to the selected year. To get
+    back to the current year press reset button at the top. It is back to current year.
+        If you click, when the panchagam is being read, it will stop further reading.
+\n 5. From the settings menu, you can set the alarm time and it will read the panchangam
+    at the selected time. You can set it as a morning wakeup alarm. Once set it will
+    repeat daily at the selected time. It will read the current panchangam 3 times.
+
+\n 6. You can select the languages from the settings menu, currently telugu, hindhi and
+    english are supported.
+\n 7. You can set the lunar month as Krishnadhi or sukladhi. In south India, lunar month
+    starts with bright half and is known as sukladhi or amanatha. In northern India it starts
+    with dark half and ends with Purnima and known as Krishandhi or Purnantha.
+\n 8. Please set your name in your preferred language and the wake up alarm will address you
+    with your name.
+\n 9. Please give your suggestions and feedback by email or whatsapp. Click on the floating
+    button which looks like an envelope, you will see the contact details.
+\n 10. Make sure that the preferred TextToSpeech is set to Google Text-to-speech Engine and voice
+        data for your preferred language is installed. Google engine supports most of the languages.
+        Set the speech rate and the pitch rate appropriately for a clear speech of the panchagam.
+        You can find this setting under general management or language and input depending on your device.
+
+    </string>
 </resources>

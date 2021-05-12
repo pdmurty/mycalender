@@ -2,7 +2,9 @@ package com.pdmurty.mycalender.ui.main;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.pdmurty.mycalender.Eventdays;
 import com.pdmurty.mycalender.EventsVwModel;
 import com.pdmurty.mycalender.LocalManager;
 import com.pdmurty.mycalender.R;
@@ -105,7 +108,8 @@ public class ephFragment extends Fragment {
     class PlanetPositions{
         double sun,moon,mercury,venus,mars,jupiter,saturn,rahu;
         double sunspeed, moonspeed;
-
+        boolean isjupCombust=false;
+        boolean isvenusCombust=false;
         public String strWeek,strSun, strMoon, strMercury, strVenus, strMars,strJupiter,strSaturn,strRahu;
         public String strSunSpeed, strMoonSpeed;
         String[] weekday = {"Mn","Tu","We","Th","Fr","Sa","Su"};
@@ -132,6 +136,18 @@ public class ephFragment extends Fragment {
             strRahu= FormatPlanetPos(rahu);
             strSunSpeed= FormatPlanetPos(sunspeed);
             strMoonSpeed= FormatPlanetPos(moonspeed);
+            double dif =sun-jupiter;
+
+            if (dif<0) dif= -dif;
+            if(dif>180) dif= 360-dif;
+
+            if(dif < 11.0  ) {
+                isjupCombust = true;
+                }
+            dif =sun-venus;
+            if (dif<0) dif = -dif;
+            if(dif>180) dif= 360-dif;
+            if(dif <10  ) isvenusCombust =true;
         }
         String FormatPlanetPos(double lon){
             double totalsecs = lon*3600;
@@ -140,9 +156,10 @@ public class ephFragment extends Fragment {
             double dmin = (lon-sgn*30-deg)*60;
             int imin = (int)dmin;
             double sec = (dmin-imin)*60;
-            return   strSolarMonths[sgn]+ String.format("\n%2d:%2d",deg,imin);
+            return   strSolarMonths[sgn]+ String.format("\n%2d:%02d",deg,imin);
 
         }
+
     }
     private class EphimerisAdapter extends RecyclerView.Adapter{
         List<ephFragment.PlanetPositions> mPlanetList;
@@ -160,24 +177,7 @@ public class ephFragment extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
-            String strPlanet = mPlanetList.get(position).strSun;
-            ((EphViewHolder)holder).mTxtVw0.setText(strPlanet);
-            strPlanet = mPlanetList.get(position).strWeek;
-            ((EphViewHolder)holder).mTxtWeek.setText(strPlanet);
-            strPlanet = mPlanetList.get(position).strMoon;
-            ((EphViewHolder)holder).mTxtVw1.setText(strPlanet);
-            strPlanet = mPlanetList.get(position).strMercury;
-            ((EphViewHolder)holder).mTxtVw2.setText(strPlanet);
-            strPlanet = mPlanetList.get(position).strVenus;
-            ((EphViewHolder)holder).mTxtVw3.setText(strPlanet);
-            strPlanet = mPlanetList.get(position).strMars;
-            ((EphViewHolder)holder).mTxtVw4.setText(strPlanet);
-            strPlanet = mPlanetList.get(position).strJupiter;
-            ((EphViewHolder)holder).mTxtVw5.setText(strPlanet);
-            strPlanet = mPlanetList.get(position).strSaturn;
-            ((EphViewHolder)holder).mTxtVw6.setText(strPlanet);
-            strPlanet = mPlanetList.get(position).strRahu;
-            ((EphViewHolder)holder).mTxtVw7.setText(strPlanet);
+            ((EphViewHolder)holder).bind( mPlanetList.get(position));
 
 
         }
@@ -216,7 +216,45 @@ public class ephFragment extends Fragment {
                 mTxtVw5 = itemView.findViewById(R.id.text5);
                 mTxtVw6 = itemView.findViewById(R.id.text6);
                 mTxtVw7 = itemView.findViewById(R.id.text7);
+            }
+            public void bind(PlanetPositions evt) {
+//////////////////////////////////
+                String strPlanet = evt.strSun;
+                mTxtVw0.setText(strPlanet);
+                strPlanet = evt.strWeek;
+                mTxtWeek.setText(strPlanet);
+                strPlanet = evt.strMoon;
+                mTxtVw1.setText(strPlanet);
+                strPlanet = evt.strMercury;
+                mTxtVw2.setText(strPlanet);
+                strPlanet = evt.strVenus;
+                mTxtVw3.setText(strPlanet);
+                if(evt.isvenusCombust){
+                    mTxtVw3.setTextColor(resource.getColor(R.color.white));
+                    mTxtVw3.setBackgroundColor(resource.getColor(R.color.black));
+                }
+                else {
+                    mTxtVw3.setTextColor(resource.getColor(R.color.blackT50));
+                    mTxtVw3.setBackgroundColor(resource.getColor(R.color.white));
+                }
+                strPlanet = evt.strMars;
+                mTxtVw4.setText(strPlanet);
+                strPlanet = evt.strJupiter;
+                mTxtVw5.setText(strPlanet);
+                if(evt.isjupCombust){
+                    mTxtVw5.setTextColor(resource.getColor(R.color.white));
+                    mTxtVw5.setBackgroundColor(resource.getColor(R.color.black));
+                }
+                 else {
+                    mTxtVw5.setTextColor(resource.getColor(R.color.blackT50));
+                    mTxtVw5.setBackgroundColor(resource.getColor(R.color.white));
+                }
 
+                strPlanet = evt.strSaturn;
+                mTxtVw6.setText(strPlanet);
+                strPlanet = evt.strRahu;
+                mTxtVw7.setText(strPlanet);
+                ////////////////////////
 
             }
         }

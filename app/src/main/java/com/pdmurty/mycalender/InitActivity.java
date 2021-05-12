@@ -7,7 +7,10 @@ import androidx.preference.PreferenceManager;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -30,6 +33,20 @@ public class InitActivity extends AppCompatActivity {
                 PreferenceManager.getDefaultSharedPreferences(this).edit();
         edit.putBoolean("KEY_INIT",true);
         edit.commit();
+
+       // Intent intent = new Intent();
+       // intent.setAction( Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
+       // Uri uri = Uri.fromParts("package",
+         //     BuildConfig.APPLICATION_ID, null);
+        //intent.setData(uri);
+       // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        //startActivity(intent);
+
+
+                        // Build intent that displays the App settings screen.
+
+
+        ///////////////loc permisions///////////
         Intent locintent = new Intent(this, LocationActivity.class);
         startActivityForResult(locintent,REQUESTCODE);
 
@@ -40,6 +57,13 @@ public class InitActivity extends AppCompatActivity {
         TextView tv = findViewById(R.id.welcome);
         tv.setTextSize(12);
         tv.setText(" Select your preferences and set your name in your prefered language, you can change the preference anytime later ");
+    }
+    private void showSnackbar(final int mainTextStringId, final int actionStringId,
+                              View.OnClickListener listener) {
+        Snackbar.make(findViewById(android.R.id.content),
+                getString(mainTextStringId),
+                Snackbar.LENGTH_INDEFINITE)
+                .setAction(getString(actionStringId), listener).show();
     }
 
     public void onClickdisagree(View view) {

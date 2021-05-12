@@ -26,6 +26,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.resources.TextAppearance;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.Calendar;
+
 public class launcher extends AppCompatActivity {
     SharedPreferences mPreferences;
     static FusedLocationProviderClient mLocationProvider;
@@ -40,6 +42,13 @@ public class launcher extends AppCompatActivity {
             startActivity(mainintent);
         }
         else {
+            Calendar c = Calendar.getInstance();
+            int day = c.get(Calendar.DAY_OF_MONTH);
+            int month = c.get(Calendar.MONTH);
+            SharedPreferences.Editor editor = mPreferences.edit();
+            editor.putInt("KEY_INSTALL_DAY",day);
+            editor.putInt("KEY_INSTALL_MONTH",month);
+            editor.commit();
             Intent mainintent = new Intent(this, InitActivity.class);
             startActivity(mainintent);
         }

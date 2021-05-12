@@ -1,22 +1,16 @@
 package com.pdmurty.mycalender;
 
-import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.content.Context;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.location.Geocoder;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.ResultReceiver;
 import android.provider.Settings;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
@@ -31,30 +25,27 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.PreferenceManager;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
 
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.play.core.appupdate.AppUpdateInfo;
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
+import com.google.android.play.core.install.model.AppUpdateType;
+import com.google.android.play.core.install.model.UpdateAvailability;
+import com.google.android.play.core.review.ReviewInfo;
+import com.google.android.play.core.review.ReviewManager;
+import com.google.android.play.core.appupdate.AppUpdateManager;
+import com.google.android.play.core.review.ReviewManagerFactory;
+import com.google.android.play.core.tasks.OnCompleteListener;
+import com.google.android.play.core.tasks.OnSuccessListener;
+import com.google.android.play.core.tasks.Task;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.Reader;
-import java.io.Writer;
-import java.time.Instant;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
@@ -64,6 +55,7 @@ public class MainActivity extends AppCompatActivity
         SharedPreferences.OnSharedPreferenceChangeListener{
     private static final int REQUESTCURRENTLOC = 1;
     private static final int REQUESTDBLOC = 2;
+    private static final int UPDATE_REQUEST =10;
     private static final String PRIMARY_CHANNEL_ID = "panchang_notification_channel";
     private static final String NOTIFY_CHANNEL_ID = "panchang_notification";
     private NotificationManager mNotificationManager;
@@ -81,6 +73,7 @@ public class MainActivity extends AppCompatActivity
     public static SharedPreferences mPreferences;
     private int locselected=0;
     int curDay;
+    AppUpdateInfo resultinfo;
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,17 +126,106 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        CheckForUpdates();
+       // Poweroptimise();
+
     }
+
+    void Poweroptimise()
+    {
+        Intent intent = new Intent();
+        intent.setAction(
+                Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
+        Uri uri = Uri.fromParts("package",
+                BuildConfig.APPLICATION_ID, null);
+       // Log.d("URI",uri.toString());
+       // intent.setData( uri);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        try {
+            startActivity(intent);
+        }
+        catch (Exception e){
+            showSnackbar(e.getMessage());
+        }
+
+    }
+   void CheckForUpdates(){
+
+       final AppUpdateManager appUpdateManager = AppUpdateManagerFactory.create(this);
+
+// Returns an intent object that you use to check for an update.
+       Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
+
+// Checks that the platform will allow the specified type of update.
+       appUpdateInfoTask.addOnSuccessListener(new OnSuccessListener<AppUpdateInfo>() {
+           @Override
+           public void onSuccess(AppUpdateInfo result) {
+
+               if (result.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+                       // This example applies an immediate update. To apply a flexible update
+                       // instead, pass in AppUpdateType.FLEXIBLE
+                       && result.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
+                   // Request the update.
+                    resultinfo = result;
+                   try {
+                       appUpdateManager.startUpdateFlowForResult(resultinfo,AppUpdateType.IMMEDIATE,MainActivity.this,UPDATE_REQUEST);
+                   } catch (IntentSender.SendIntentException e) {
+                       e.printStackTrace();
+                   }
+
+               }
+       }
+       });
+
+   }
+    void showReview() {
+
+        final ReviewManager reviewManager = ReviewManagerFactory.create(this);
+        Task<ReviewInfo> request = reviewManager.requestReviewFlow();
+
+        int installday = mPreferences.getInt("KEY_INSTALL_DAY",0);
+        int installmonth = mPreferences.getInt("KEY_INSTALL_MONTH",0);
+        Calendar c = Calendar.getInstance();
+        final int day = c.get(Calendar.DAY_OF_MONTH);
+        final int month = c.get(Calendar.MONTH);
+        if(installday!=0 && installmonth!=0){
+            int dayslast = (month-installmonth)*30 + (day-installday);
+            if (dayslast<10) return;
+        }
+
+        request.addOnCompleteListener(new OnCompleteListener<ReviewInfo>() {
+        @Override
+        public void onComplete(@NonNull Task<ReviewInfo> task) {
+            if (task.isSuccessful()) {
+                // Getting the ReviewInfo object
+                ReviewInfo reviewInfo = task.getResult();
+                Task <Void> flow = reviewManager.launchReviewFlow(MainActivity.this, reviewInfo);
+                flow.addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                        SharedPreferences.Editor editor = mPreferences.edit();
+                        editor.putInt("KEY_INSTALL_DAY",day);
+                        editor.putInt("KEY_INSTALL_MONTH",month);
+                        editor.commit();
+                    }
+                });
+            }
+            else{
+
+            }
+
+        }
+    });
+  }
 
     private void hookCalender(Bundle savedInstanceState) {
 
         if (cv == null) cv = findViewById(R.id.calendarView);
         if (savedInstanceState != null) {
-            Calendar c = Calendar.getInstance();
-
-
+           // Calendar c = Calendar.getInstance();
             long date = savedInstanceState.getLong("SavedDate");
-            cv.setDate(c.getTimeInMillis());
+            cv.setDate(date /*c.getTimeInMillis()*/);
             String thithi = savedInstanceState.getString("Thithi");
             WriteText(thithi);
 
@@ -184,10 +266,15 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-          if(resultCode == Activity.RESULT_CANCELED)
-          showSnackbar("Unable get current location, Set to default location");
-              UpdateUI();
+        if(requestCode==REQUESTCURRENTLOC) {
+            if (resultCode == Activity.RESULT_CANCELED)
+                showSnackbar("Unable get current location, Set to default location");
+            UpdateUI();
+        }
+        if(requestCode==UPDATE_REQUEST){
+            if (resultCode!= RESULT_OK)
+                showSnackbar("Failed to update, Try again later !");
+        }
  }
 
     @Override
@@ -294,6 +381,7 @@ public class MainActivity extends AppCompatActivity
             tts.speak(str, TextToSpeech.QUEUE_FLUSH, null);
             curDay=dayOfMonth;
         }
+        showReview();
         return str;
     }
 
@@ -301,9 +389,7 @@ public class MainActivity extends AppCompatActivity
     void WriteText(String str) {
 
         TextView tv = findViewById(R.id.myTxt);
-       // tv.setFontVariationSettings("'wdth' 150");
         tv.setTextColor(Color.BLUE);
-       // tv.setTextSize(8);
         tv.setText(str);
 
     }

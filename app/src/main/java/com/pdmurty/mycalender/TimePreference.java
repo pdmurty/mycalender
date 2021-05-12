@@ -40,11 +40,13 @@ public class TimePreference extends DialogPreference {
     }
     public void setTime(int persisttime) {
         mTime = persisttime;
+        int tmptime=mTime;
         String strampm = " AM";
         // Save to Shared Preferences
         persistInt(mTime);
-        if(mTime>720){ mTime-=720; strampm= " PM";}
-        setSummary(String.format("%2d:%02d %s",(int)mTime/60,(int)mTime%60,strampm));
+        if(tmptime>720){ tmptime-=720; strampm= " PM";}
+
+        setSummary(String.format("%2d:%02d %s",(int)tmptime/60,(int)tmptime%60,strampm));
     }
 
     protected Object onGetDefaultValue(TypedArray a, int index) {

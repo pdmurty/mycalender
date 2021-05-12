@@ -432,8 +432,12 @@ public class ShowEvents extends AppCompatActivity
                         found = doLunar(cevt, dbl);
                         break;
                     case 1:
-                        found = donakshatra(cevt, dbl);
-                        break;
+                        if(! donakshatra(cevt, dbl)){
+                            pendingEvents.add(cevt);
+                            newpendingevent = true;
+                        }
+                        //break;
+                        return true;
                     case 2:
                         if(! doWeek(cevt, dbl)) {
                             pendingEvents.add(cevt);

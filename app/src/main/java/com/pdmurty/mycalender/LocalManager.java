@@ -8,25 +8,11 @@ import android.os.Build;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import androidx.annotation.StringDef;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.util.Locale;
-
-import static android.util.Log.d;
 
 public class LocalManager {
 
-    @Retention(RetentionPolicy.SOURCE)
-    @StringDef({ ENGLISH, HINDI, TELUGU })
-    public @interface LocaleDef {
-        String[] SUPPORTED_LOCALES = { ENGLISH, HINDI, TELUGU };
-    }
-
-    static final String ENGLISH = "en";
-    static final String HINDI = "hi";
     static final String TELUGU = "te";
-
     /**
      * SharedPreferences Key
      */
@@ -35,8 +21,8 @@ public class LocalManager {
     /**
      * set current pref locale
      */
-    public static Context setLocale(Context mContext) {
-        return updateResources(mContext, getLanguagePref(mContext));
+    public static void setLocale(Context mContext) {
+        updateResources(mContext, getLanguagePref(mContext));
     }
 
     /**
@@ -72,16 +58,16 @@ public class LocalManager {
     public static Context updateResources(Context context, String language) {
 
        // String lang = Locale.getDefault().getLanguage();
-        Log.d("LM", "RES-lan="+language);
+
         Locale locale = new Locale(language);
         Locale.setDefault(locale);
        // lang = Locale.getDefault().getLanguage();
-
+        Context appctxt = context.getApplicationContext();
         Resources res = context.getResources();
         Configuration config = new Configuration(res.getConfiguration());
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N /* 17*/) {
             config.setLocale(locale);
-            context = context.createConfigurationContext(config);
+            context = appctxt.createConfigurationContext(config);
 
         } else {
 

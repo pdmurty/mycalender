@@ -40,6 +40,7 @@ import java.util.TimeZone;
 import static android.content.Context.ALARM_SERVICE;
 import static android.content.Context.NOTIFICATION_SERVICE;
 import static android.content.Context.POWER_SERVICE;
+import static android.content.Context.SENSOR_SERVICE;
 
 public class AlaramReciever extends BroadcastReceiver
 {
@@ -52,14 +53,23 @@ public class AlaramReciever extends BroadcastReceiver
     String str;
     SharedPreferences mPreferences;
     PowerManager.WakeLock wakeLock;
+    private SensorManager mSensorManager;
+    private Sensor mRotationVectorSensor;
+    private final float[] mRotationMatrix = new float[9];
+    private final float[] pRotationMatrix = new float[9];
+    private int mtrace=0;
+    private int sensorcounter=0;
+    private boolean bsavePrevtrace=false;
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void onReceive(Context context, Intent notifyintent) {
         // TODO: This method is called when the BroadcastReceiver is receiving
+
         PowerManager mgr=(PowerManager)context.getSystemService(POWER_SERVICE);
         wakeLock=mgr.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
                 getClass().getSimpleName());
         wakeLock.acquire(180000);
+
         mNotificationManager = (NotificationManager)context.getSystemService(NOTIFICATION_SERVICE);
         mPreferences = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
         Calendar c = Calendar.getInstance(TimeZone.getDefault());
@@ -91,9 +101,12 @@ public class AlaramReciever extends BroadcastReceiver
             @Override
             public void onInit(int i) {
                 if (i != TextToSpeech.ERROR) {
+
                     tts.setLanguage(new Locale(mPreferences.getString("lan_style", "te")));
                     tts.speak(str, TextToSpeech.QUEUE_FLUSH, null);
                     tts.speak(str, TextToSpeech.QUEUE_ADD, null);
+                    tts.speak(str, TextToSpeech.QUEUE_ADD, null);
+
                 }
                 else {
                     str = "tts-error";
@@ -102,6 +115,7 @@ public class AlaramReciever extends BroadcastReceiver
 
             }
         });
+
 
     Intent contentIntent = new Intent(context, MainActivity.class);
 
@@ -174,6 +188,7 @@ public class AlaramReciever extends BroadcastReceiver
             }
 
     }
+
 
 
 }

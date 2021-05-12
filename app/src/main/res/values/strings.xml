@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">మైత్రేయ</string>
+    <string name="app_name">మైత్రేయ-1.1</string>
     <string name="action_year" translatable="false">Set Year</string>
     <string name="action_status" translatable="false">Location</string>
     <string name="thithi">      తిథి :        </string>
@@ -23,6 +23,7 @@
     <string name="kshaya">      (క్షయ)      </string>
     <string name="udaya_lgna">  ఉదయ లగ్నం :  </string>
     <string name="sankranthi">" సంక్రాంతి "</string>
+    <string name="karthari">" కార్తె "</string>
     <string-array name="months">
         <item>జనవరి</item>
         <item>ఫిబ్రవరి</item>
@@ -74,8 +75,8 @@
         <item>మకర</item>
         <item>కుంభ</item>
         <item>మీన</item>
-        <item>భోగీ</item>
-        <item>కనుమ</item>
+        <item>భోగీ   </item>
+        <item>కనుమ </item>
     </string-array>
     <string-array name="Nakshatras">
         <item>అశ్వని. </item>
@@ -218,106 +219,105 @@
 
     </string-array>
     <string-array name="lunarEvents">
-        <item>1సాంబ దశమి     </item>
-        <item>2నంద ఏకాదశి    </item>
-        <item>3సంకష్ఠ చతుర్ధి       </item>
-        <item>4సఫల ఏకాదశి       </item>
-        <item>5మేరు త్రయోదశి       </item>
-        <item>6మౌనీ అమావశ్య       </item>
-        <item>7తిల చతుర్ధి       </item>
-        <item>8వసంత పంచమి       </item>
-        <item>9రథసప్తమి   </item>
-        <item>10భీష్మ అష్టమి     </item>
-        <item>11భీష్మ ఏకాదశి       </item>
-        <item>12మాఘ పూర్ణిమ       </item>
-        <item>13విజయ ఏకాదశి      </item>
-        <item>14మహా శివరాత్రి      </item>
-        <item>15అమలక ఏకాదశి       </item>
-        <item>16హోళికా పౌర్ణమి       </item>
-        <item>17రంగ పంచమి       </item>
-        <item>18సీతలాష్టమి       </item>
-        <item>19పాప వ్మోచన ఏకాదశి </item>
-        <item>20మధుకృష్ణ త్రయోదశి       </item>
-        <item>21ఉగాది          </item>
-        <item>22గౌరీ తృతీయ      </item>
-        <item>23లక్ష్మీ పంచమి       </item>
-        <item>24స్కంద షష్ఠి       </item>
-        <item>25అసోకాష్టమి అన్నపూర్ణపూజ       </item>
-        <item>26శ్రీరామనవమి          </item>
-        <item>27కామదా ఏకాదశి   </item>
-        <item>28అనంగ త్రయోదశి       </item>
-        <item>29హనుమజ్జయంతి        </item>
-        <item>30వరూధిని ఏకాదశి          </item>
-        <item>31పరశురామ జయంతి     </item>
-        <item>32అక్షయ తృతీయ         </item>
-        <item>33శంకర జయంతి       </item>
-        <item>34రామానుజ జయంతి       </item>
-        <item>35గంగోత్పత్తి       </item>
-        <item>36మోహిని ఏకాదశి    </item>
-        <item>37నృసింహ జయంతి       </item>
-        <item>38భద్రకాళీ ఏకాదశి         </item>
-        <item>39రంభా తృతీయ       </item>
-        <item>40నిర్జల ఏకాదశి           </item>
-        <item>41చంపా ద్వాదశి       </item>
-        <item>42వట సావిత్రీ వ్రతం       </item>
-        <item>43యోగినీ ఏకాదశి             </item>
-        <item>44రధ యాత్ర          </item>
-        <item>45కుమార షష్ఠి         </item>
-        <item>46తొలి(హరితశయన) ఏకాదశి              </item>
-        <item>47గురు(వ్యాస) పూర్ణిమ            </item>
-        <item>48కామిక ఏకాదశి           </item>
-        <item>49నాగ పంచమి            </item>
-        <item>50వరమహాలక్షిమీ వ్రతం        </item>
-        <item>51పుత్రదా ఏకాదశి       </item>
-        <item>52వరాహ జయంతి       </item>
-        <item>53రాఖీ పూర్ణిమ    </item>
-
-        <item>54సంకష్ట చతుర్ధి    </item>
-        <item>55క్రిష్మాష్టమి    </item>
-        <item>56అజ ఏకాదశి    </item>
-        <item>57వినాయక చవితి   </item>
-        <item>58ఋషి పంచమి    </item>
-        <item>59సూర్య షష్ఠి       </item>
-        <item>60రాధాష్టమి, కేదారవ్రతం       </item>
-        <item>61పార్శ పరివర్తనీ ఏకాదశి    </item>
-        <item>62అనంత చతుర్దశి    </item>
-        <item>63పితృపక్ష తర్పణారంభం    </item>
-        <item>64పద్మిని ఏకాదశి    </item>
-        <item>65మహాలయ అమావశ్య    </item>
-        <item>66నవరాత్ర ఆరంభం    </item>
-        <item>67లలితా పంచమి    </item>
-        <item>68సరస్వతీ ఆవాహన   </item>
-        <item>69ఆయుధ పూజ    </item>
-        <item>70దసరా     </item>
-        <item>71పాపాంపకుశ ఏకాదశి    </item>
-        <item>72అట్ల తద్దె      </item>
-        <item>73 రమా ఏకాదశి   </item>
-        <item>74గోవత్స ద్వాదశి </item>
-        <item>75ధన త్రయోదశ్       </item>
-        <item>76 నరక చతుర్దశి   </item>
-        <item>77 దీపావళి    </item>
-        <item>78 భ్రాతృ ద్వితీయ   </item>
-        <item>79 నాగుల చవితి   </item>
-        <item>80గోపాష్టమి       </item>
-        <item>81 దేవప్రభోదినీ ఏకాదశి    </item>
-        <item>82క్షీరాబ్ధి ద్వాదశి       </item>
-        <item>83 కార్తీక పూర్ణిమ   </item>
-        <item>84కాలభైరవాష్టమి       </item>
-        <item>85 ఉత్పన్న ఏకాదశి   </item>
-        <item>86 సుబ్రమణ్య షష్ఠి   </item>
-        <item>87 మౌక్షిక ఏకాదశి   </item>
-        <item>88దత్త జయంతి       </item>
-        <item>89 విమల ఏకాదశి   </item>
-        <item>90వైకుంఠ ఏకాదశి       </item>
-        <item>91సూర్య గ్రహణం       </item>
-        <item>92చంద్ర గ్రహణం       </item>
-    </string-array>
-    <string-array name="gregevents">
-        <item> ఆంగ్ల నూతన సంవత్సరం    </item>
-        <item> గణతంత్ర దినం       </item>
-        <item> స్వాతంత్ర దినం   </item>
-        <item> గాంధీ జయంతి       </item>
-        <item> క్రిస్టమస్   </item>
+        <item>సాంబ దశమి        </item><!--1-->
+        <item>నంద ఏకాదశి        </item><!--2-->
+        <item>సంకష్ఠ చతుర్ధి        </item><!--3-->
+        <item>సఫల ఏకాదశి        </item><!--4-->
+        <item>మేరు త్రయోదశి       </item><!--5-->
+        <item>మౌనీ అమావశ్య       </item><!--6-->
+        <item>తిల చతుర్ధి           </item><!--7-->
+        <item>వసంత పంచమి        </item><!--8-->
+        <item>రథసప్తమి            </item><!--9-->
+        <item>భీష్మ అష్టమి          </item><!--10-->
+        <item>భీష్మ ఏకాదశి          </item><!--11-->
+        <item>మాఘ పూర్ణిమ         </item><!--12-->
+        <item>విజయ ఏకాదశి         </item><!--13-->
+        <item>మహా శివరాత్రి          </item><!--14-->
+        <item>అమలక ఏకాదశి         </item><!--15-->
+        <item>హోళికా పౌర్ణమి          </item><!--16-->
+        <item>రంగ పంచమి            </item><!--17-->
+        <item>సీతలాష్టమి             </item><!--18-->
+        <item>పాప విమోచన ఏకాదశి    </item><!--19-->
+        <item>మధుకృష్ణ త్రయోదశి       </item><!--20-->
+        <item>ఉగాది                 </item><!--21-->
+        <item>గౌరీ తృతీయ            </item><!--22-->
+        <item>లక్ష్మీ పంచమి           </item><!--23-->
+        <item>స్కంద షష్ఠి             </item>  <!--24-->
+        <item>అసోకాష్టమి,అన్నపూర్ణపూజ </item><!--25-->
+        <item>శ్రీరామనవమి            </item><!--26-->
+        <item>కామదా ఏకాదశి          </item><!--27-->
+        <item>అనంగ త్రయోదశి          </item><!--28-->
+        <item>హనుమజ్జయంతి           </item> <!--29-->
+        <item>వరూధిని ఏకాదశి          </item><!--30-->
+        <item>పరశురామ జయంతి        </item><!--31-->
+        <item>అక్షయ తృతీయ           </item><!--32-->
+        <item>శంకర జయంతి            </item><!--33-->
+        <item>రామానుజ జయంతి         </item><!--34-->
+        <item>గంగోత్పత్తి                 </item><!--35-->
+        <item>మోహిని ఏకాదశి            </item><!--36-->
+        <item>నృసింహ జయంతి           </item><!--37-->
+        <item>భద్రకాళీ ఏకాదశి             </item><!--38-->
+        <item>రంభా తృతీయ              </item><!--39-->
+        <item>నిర్జల ఏకాదశి               </item><!--40-->
+        <item>చంపా ద్వాదశి               </item><!--41-->
+        <item>వట సావిత్రీ వ్రతం             </item><!--42-->
+        <item>యోగినీ ఏకాదశి              </item><!--43-->
+        <item>రధ యాత్ర                 </item><!--44-->
+        <item>కుమార షష్ఠి                </item><!--45-->
+        <item>తొలి(హరితశయన) ఏకాదశి     </item><!--46-->
+        <item>గురు(వ్యాస) పూర్ణిమ          </item><!--47-->
+        <item>కామిక ఏకాదశి               </item><!--48-->
+        <item>నాగ పంచమి                 </item><!--49-->
+        <item>వరమహాలక్షిమీ వ్రతం           </item><!--50-->
+        <item>పుత్రదా ఏకాదశి               </item><!--51-->
+        <item>వరాహ జయంతి               </item><!--52-->
+        <item>రాఖీ పూర్ణిమ                 </item><!--53-->
+        <item>సంకష్ట చతుర్ధి                </item><!--54-->
+        <item>క్రిష్మాష్టమి                   </item><!--55-->
+        <item>అజ ఏకాదశి                 </item><!--56-->
+        <item>వినాయక చవితి              </item><!--57-->
+        <item>ఋషి పంచమి                 </item><!--58-->
+        <item>సూర్య షష్ఠి                  </item><!--59-->
+        <item>రాధాష్టమి, కేదారవ్రతం       </item><!--60-->
+        <item>పార్శ పరివర్తనీ ఏకాదశి       </item><!--61-->
+        <item>అనంత చతుర్దశి             </item><!--62-->
+        <item>పితృపక్ష తర్పణారంభం        </item><!--63-->
+        <item>పద్మిని ఏకాదశి             </item><!--64-->
+        <item>మహాలయ అమావశ్య          </item><!--65-->
+        <item>నవరాత్ర ఆరంభం             </item><!--66-->
+        <item>లలితా పంచమి              </item><!--67-->
+        <item>సరస్వతీ ఆవాహన   </item><!--68-->
+        <item>ఆయుధ పూజ    </item><!--69-->
+        <item>దసరా           </item><!--70-->
+        <item>పాపాంపకుశ ఏకాదశి </item><!--71-->
+        <item>అట్ల తద్దె      </item><!--72-->
+        <item> రమా ఏకాదశి   </item><!--73-->
+        <item>గోవత్స ద్వాదశి </item><!--74-->
+        <item>ధన త్రయోదశ్       </item><!--75-->
+        <item> నరక చతుర్దశి   </item><!--76-->
+        <item> దీపావళి    </item><!--77-->
+        <item> భ్రాతృ ద్వితీయ   </item><!--78-->
+        <item> నాగుల చవితి   </item><!--79-->
+        <item>గోపాష్టమి       </item><!--80-->
+        <item> దేవప్రభోదినీ ఏకాదశి    </item><!--81-->
+        <item>క్షీరాబ్ధి ద్వాదశి       </item><!--82-->
+        <item> కార్తీక పూర్ణిమ   </item><!--83-->
+        <item>కాలభైరవాష్టమి       </item><!--84-->
+        <item> ఉత్పన్న ఏకాదశి   </item><!--85-->
+        <item> సుబ్రమణ్య షష్ఠి   </item><!--86-->
+        <item> మౌక్షిక ఏకాదశి   </item><!--87-->
+        <item>దత్త జయంతి       </item><!--88-->
+        <item> విమల ఏకాదశి   </item><!--89-->
+        <item>వైకుంఠ ఏకాదశి       </item><!--90-->
+        <item>సూర్య గ్రహణం       </item><!--91-->
+        <item>చంద్ర గ్రహణం       </item><!--92-->
+    </string-array><!--1-->
+    <string-array name="gregevents"><!--1-->
+        <item> ఆంగ్ల నూతన సంవత్సరం    </item><!--1-->
+        <item> గణతంత్ర దినం       </item><!--1-->
+        <item> స్వాతంత్ర దినం   </item><!--1-->
+        <item> గాంధీ జయంతి       </item><!--1-->
+        <item> క్రిస్టమస్   </item><!--1-->
 
     </string-array>
     <string name="samvtsara">" సంవత్సరం "</string>
@@ -325,10 +325,11 @@
     <string name="wakeup"> " మేలు కోండి "</string>
     <string name="mahanubhava"> " మహానుభావ " </string>
     <string name="garu"> "గారు" </string>
-    <string name="supra">" మీకు శుప్రభాతం "</string>
+    <string name="supra">" మీకు సుప్రభాతం "</string>
     <string name="krishna">" క్రిష్ణాది "</string>
     <string name="sukladi">" శుక్లాది "</string>
     <string name="chandra">" చాంద్రమాన "</string>
+    <string name="soura">" సౌరమాన "</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <!-- Preference Titles -->
@@ -377,7 +378,7 @@
     <string name="title_activity_tab_demo" translatable="false">TabDemo</string>
     <string name="tab_text_1" translatable="false">Tab 1</string>
     <string name="tab_text_2" translatable="false">Tab 2</string>
-    <string name="eph_header" translatable="false">"Ephemeris Tables at 0:0 UT or 5:30 AM IST, click on YEAR to change: "</string>
+    <string name="eph_header" translatable="false">"Ephemeris Tables at 0:0 UT or 5:30 AM IST. Venus,Jupiter in moudhyam shown inversed, click on YEAR to change: "</string>
     <string name="events_header" translatable="false">"Showing Events of the YEAR,\n   click on YEAR to change: "</string>
     <string name="prog_header" translatable="false">"getting events of the year please wait. "</string>
     <string name="eulatxt" translatable="false">This application has used Swiss Ephemeris package as per
@@ -393,49 +394,56 @@
         We welcome all suggestions for improvements and make it more user friendly.
 
     </string>
-    <string name="helptxt" translatable="false">
-This program will give you panchangam elements, year, month, thithi, nakshatra, yoga,
-sunrise/sunset, Durmuhurtha, varjyam/vishaghati, Rahukalam,yamagandam and udaya lagnam.
-\nThe application will find out your current location and use it to calculate sunrise/sunset.
-Sunrise and sunset depend on location. \nIt can also give all the above details for any location
-other than your current location. Cities in five countries India, US, UK, Australia and Canada are
-supported. \nIt will also  give positions of all nine planets Sun, moon, budha, sukra, kuja, guru,
-sani ad rahu. Ketu is always opposite of rahu and need not be specified.\n It will give all Hindhu
-festivals/sacred days, 12 sankranthis and 27 kartharis and National festivals.
+    <string name="helptxt">
+ఈ కార్యక్రమం మీకు పంచాంగం అంశాలు, సంవత్సరం, నెల, తిథి, నక్షత్రం, యోగా,
+సూర్యోదయం/సూర్యాస్తమయం, దుర్ముహూర్త, వర్జ్యం/విషఘటి, రాహుకాలం మరియు ఉదయ లగ్నము చూపిస్తుంది.
+\nఅప్లికేషన్ మీ ప్రస్తుత స్థానాన్ని కనుగొంటుంది మరియు సూర్యోదయం/సూర్యాస్తమయాన్ని లెక్కించడానికి ఉపయోగిస్తుంది.
+సూర్యోదయం మరియు సూర్యాస్తమయం స్థానం మీద ఆధారపడి ఉంటాయి. \nఈ యప్ పైన పేర్కొన్న అన్ని వివరాలను ఏ ప్రదేశానికైనా ఇవ్వగలదు
+\nమీ ప్రస్తుత స్థానం కాకుండా. భారతదేశం, యుఎస్, యుకె, ఆస్ట్రేలియా మరియు కెనడా ఐదు దేశాలలో నగరాలను ఎన్నుకోవచ్చు.
+        \n సూర్యుడు, చంద్రుడు, బుధ, శుక్ర, కుజ, గురు,
+శని మరియు రాహు మొత్తం తొమ్మిది గ్రహాల స్థానాలను ఇస్తుంది. కేతువు ఎప్పుడూ రాహుకు వ్యతిరేకం స్థానం.
+        \nఅన్ని హిందూ
+పండుగలు/పవిత్రమైన రోజులు, 12-సంక్రాంతులు, 27-కార్తెలు మరియు జాతీయ పండుగలు చూపిస్తుంది.
+\nరాహుకాలం: ఈ సమయం లో కొన్ని ముఖ్యమైన పనులు ప్రారంభించరాదు, కానీ ప్రారంభించిన పనులు కొనసాగించవచ్చు.
+        సూర్యోదయం నుండి సూర్యాస్తమయం వరకు రోజు వ్యవధిని 8 భాగాలుగా విభజించాలి.
+        ప్రతి రోజు ఒక భాగంలో రాహుకాలం అవుతుంది. ఇది 12 గంటలు రోజు సమయానికి 1 1/2 గంటలు ఉంటుంది.
+        సోమ(2), మంగళ(7), బుధ(5), గురు(6), శుక్ర(4), శని(3), ఆది(8) భాగం రాహుకాలం అవుతుంది.
+        ఇది ఎక్కువగా దక్షిణ రాష్ట్రాలు తమిళనాడు మరియు కేరళలో ఆచరిస్తారు. తెలుగు రాష్ట్రాలలో కొన్ని ప్రాంతాలలో ఆచరిస్తారు.
+        ఉత్తర భారతదేశం లో సాధారణంగా పాటించరు.
 
-\nAll the above details are available for any year from 1900 AD to 2100 AD.
-\nOn start of the app, the current location is shown at the top and Calender
-view.\nBelow the Calender you will see the panchang for the selected day.
-Click on any day it will show the panchang. You can set the voice enabled and it
-will read the panchang for you.
-\n 1. Click on the location, you will get a location dialog, It has two options
-    current location  and location DB.
- \n2. Select location DB and you can select any location from the five countries
-    stated above. Panchangam is set to the selected city.
- \n3. To get back to your current location click on the location name and select
-    current location.
- \n4. Click on month/year at the top of the calender view. Year dialog appears.
-    Select desired year and the Panchangam is set to the selected year. To get
-    back to the current year press rest button at the top. It is back to current year.
-        If you click, when the panchagam is being read, it will stop further reading.
- \n5. From the settings menu, you can set the alarm time and it will read the panchangam
-    at the selected time. You can set it as a morning wakeup alarm. Once set it will
-    repeat dialy at the selected time. It will read the current panchangam 8 times.
-        To stop shake the phone
- \n6. You can select the languages from the settings menu, currently telugu, hindhi and
-    english are supported.
- \n7. You can set the lunar month as Krishnadhi or sukladhi. In south India, lunar month
-    starts with bright half and is know as sukladhi or amanatha. In northern India it starts
-    with dark half and ends with Purnima and known as Krishandhi or Purnantha.
- \n8. Please set your name in your preferred language and the wake up alram will address you
-    with your name.
- \n9. Please give your suggestions and feedback by email or whatsapp. Click on the floating
-    button which looks like an envelope, you will see the contact details.
-  \n10. Make sure that the preferred TextToSpeech is set to Google Text-to-speech Engine and voice
-        data for your preferred language is installed. Google engine supports most of the languages.
-        Set the speech rate and the pitch rate appropriately for a clear speech of the panchagam.
-        You can find this setting under general management or language and input depending on your device.
-    </string>
+\n దుర్ముహూర్త: ముహూర్తం సాధారణంగా 48 నిమిషాల వ్యవధి ఉంటుంది. సూర్యోదయం నుండి సూర్యాస్తమయం వరకు పగలు 15 మరియు మళ్ళీ
+        సూర్యోదయం వరకు రాత్రి 15 ముహూర్తాలు ఉంటాయి.
+        ఏ రోజునైన ముహూర్తం వాస్తవ వ్యవధి మారవచ్చు. వారంలోని ప్రతి రోజు దుర్ముహూర్తులు భిన్నంగా ఉంటాయి.
+        సోమ(9,12), మంగళ(4,22), బుధ(8), గురు(6,12), శుక్ర(4,9), శని(1,2), ఆది(14) దుర్ముహూర్తాలు అవుతాయి
+
+\n రాహుకాలం మరియు దుర్ముహూర్తం సూర్యోదయం మీద ఆధారపడి ఉంటాయి మరియు ప్రాంతం, కాలం బట్టి భిన్నంగా ఉంటాయి.
+        చాలా పంచంగాలు ప్రతి వారానికి స్థిరంగా ఉన్నట్లు చూపుతాయి, ఇది సరైనది కాదు.
+\n మీ యాప్ పైన పేర్కొన్న అన్ని వివరాలు క్రీ.శ 1900 నుండి క్రీ.శ 2100 వరకు ఏ సంవత్సరానికి అయినా ఇవ్వగలదు.
+\nయాప్ తెరవగానే మీ ప్రస్తుత స్థానం క్యాలెండర్‌ పై భాగం లో చూపబడుతుంది\n క్యాలెండర్ క్రింద మీరు ఎంచుకున్న రోజుకు పంచాంగ్ చూస్తారు.
+ఏ రోజుపై నైనా క్లిక్ చేస్తే అరోజు పంచాంగం చూపిస్తుంది. మీరు వాయిస్ ఎనేబుల్ చెయ్యవచ్చు, పంచాంగ్ చదువుతుంది.
+        \n1. లొకేషన్ భాగం పై క్లిక్ చేయండి, మీకు లొకేషన్ డైలాగ్ వస్తుంది, దీనికి రెండు ఎంపికలు ఉన్నాయి
+    కరంట్ లొకేషన్ మరియు లొకేషన్ DB.
+ \n2. లొకేషన్ DB ని ఎంచుకోండి, ఐదు దేశాల నుండి ఏదైనా స్థానాన్ని ఎంచుకోవచ్చు. ఎంచుకున్న నగరానికి పంచంగం సెట్ చేయబడుతుంది.
+ \n3. మీ ప్రస్తుత స్థానానికి తిరిగి రావడానికి స్థానం పేరుపై క్లిక్ చేసి కరంట్ లొకేషన్ ఎంచుకోండి.
+ \n4. క్యాలెండర్ పై భాగం లో నెల-సంవత్సరంపై క్లిక్ చేయండి. సంవత్సరం డైలాగ్ కనిపిస్తుంది.
+    కావలసిన సంవత్సరాన్ని ఎంచుకోండి పంచాంగం ఎంచుకున్న సంవత్సరానికి సెట్ చేయబడుతుంది. పైన రిసెట్ బటన్ నొక్కండి, ప్రస్తుత సంవత్సరానికి తిరిగి వస్తుంది.
+        పంచాంగం చదివేటప్పుడు నెల-సంవత్సరం పై క్లిక్ చేస్తే చదవడం ఆగిపోతుంది.
+ \n5. సెట్టింగుల మెను నుండి, మీరు అలారం సమయాన్ని సెట్ చేయవచ్చు. మీరు దీన్ని ఉదయం మేల్కొలుపు అలారంగా సెట్ చేయవచ్చు.
+        ఎంచుకున్న సమయంలో పంచాంగం చదువుతుంది. ప్రతిదినం పునరావృతం అవుతుంది. ప్రస్తుత పంచాంగం ను 3 సార్లు చదువుతుంది.
+
+ \n6. మీరు సెట్టింగుల మెను నుండి భాషను ఎంచుకోవచ్చు.
+
+ \n7. మీరు చాంద్ర మాసాన్ని కృష్ణాది లేదా సుక్లాదిగా సెట్ చేయవచ్చు. దక్షిణ భారతదేశంలో, నెల
+     శుక్ల పక్షం తో మొదలవుతుంది దీనిని సుక్లాది లేదా అమాంత  అంటారు. ఉత్తర భారతదేశంలో కృష్ణ పక్షం తో మొదలవుతుంది
+     దీనిని క్రిష్ణాది లేదా పూర్ణంత అంటారు.
+  \n8. దయచేసి మీ పేరును మీకు ఇష్టమైన భాషలో సెట్ చేయండి, మేల్కొలుపు అల్రామ్ మిమ్మల్ని
+     మీ పేరుతో సంభోధిస్తుంది.
+  \n9. దయచేసి మీ సూచనలు మరియు అభిప్రాయాన్ని ఇమెయిల్ లేదా వాట్సాప్ ద్వారా ఇవ్వండి. ఎన్వలప్ వలె కనిపించే ఫ్లోటింగ్ బటన్ పై క్లిక్ చేయండి
+      మీరు సంప్రదింపు వివరాలను చూస్తారు.
+   \n10. మీ డివైస్ సెట్టింగ్సు లో గూగుల్ టెక్స్ట్-టు-స్పీచ్ ఇంజిన్ సెలెక్టు అయివుందని నిర్ధారించుకోండి.
+         మీకు ఇష్టమైన భాష డేటా ఇన్‌స్టాల్ చేయండి. గూగుల్ ఇంజిన్ చాలా భాషలకు మద్దతు ఇస్తుంది.
+         పంచాంగం యొక్క స్పష్టమైన ప్రసంగం కోసం తగిన విధంగా స్పీచ్ రేటు మరియు పిచ్ రేటును సెట్ చేయండి.
+         మీ పరికరాన్ని బట్టి మీరు ఈ సెట్టింగ్‌ను జనరల్ లేదా లేంగ్వేజ్ అండ్ ఇన్‌పుట్ సెట్టింగ్స్ లో కనుగొనవచ్చు.    </string>
 </resources>
 
 

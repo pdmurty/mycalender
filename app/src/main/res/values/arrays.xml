@@ -12,12 +12,15 @@
     <string-array name="lan_entries">
         <item>తెలుగు</item>
         <item>हिंदि</item>
+        <item>മളയാളം</item>
         <item>English</item>
     </string-array>
+
 
     <string-array name="lan_values">
         <item>"te"</item>
         <item>"hi"</item>
+        <item>"ml"</item>
         <item>"en"</item>
     </string-array>
     <!-- Font -->

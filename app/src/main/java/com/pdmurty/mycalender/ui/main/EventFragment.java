@@ -46,6 +46,8 @@ public class EventFragment extends Fragment {
     String rathri;
     String full;
     String udaya;
+    String karthari;
+    String sankranthi;
     static EventsRoomDb db;
     static EventsDao dao;
     public int myear;
@@ -75,6 +77,7 @@ public class EventFragment extends Fragment {
         Resources resource =getResources();
         colorPrimaryDark = resource.getColor(R.color.colorPrimaryDark);
         colorPrimary = resource.getColor(R.color.colorPrimary);
+
         levents= resource.getStringArray(R.array.lunarEvents);
         sankrathis= resource.getStringArray(R.array.solar_months);
         kartharis= resource.getStringArray(R.array.Nakshatras);
@@ -86,6 +89,9 @@ public class EventFragment extends Fragment {
         rathri       = resource.getString(R.string.rathri);
         full         = resource.getString(R.string.full);
         udaya        = resource.getString(R.string.udayam);
+        karthari = resource.getString(R.string.karthari);
+        sankranthi =  resource.getString(R.string.sankranthi);
+
     }
     @Override
     public View onCreateView(
@@ -192,12 +198,12 @@ public class EventFragment extends Fragment {
                 }
                 else if(evt.eventid < 200) {
                     if (evt.time != null)
-                        mTxtVw.setText(sankrathis[evt.eventid - 100] + " సంక్రాంతి " + HourToString(evt.time, 6.0));
+                        mTxtVw.setText(sankrathis[evt.eventid - 100] + sankranthi + HourToString(evt.time, 6.0));
                     else
                         mTxtVw.setText(sankrathis[evt.eventid - 100]);
                 }
                 else if(evt.eventid < 300)
-                    mTxtVw.setText(kartharis[evt.eventid - 200]+" కార్తె " +HourToString( evt.time,  6.0));
+                    mTxtVw.setText(kartharis[evt.eventid - 200]+karthari +HourToString( evt.time,  6.0));
                 else {
                     mTxtVw.setTextColor(colorPrimaryDark);
                     mTxtVw.setText(gregevents[evt.eventid - 400]);

@@ -53,7 +53,9 @@ public class CalcPanchang {
     private static Context mapp;
     private static CalcPanchang instance = null;
     SharedPreferences mPreferences;
-     public static CalcPanchang  getInstance(Context app){
+    private String soura;
+
+    public static CalcPanchang  getInstance(Context app){
         if(instance == null) {
             mapp = app;
             instance = new CalcPanchang();
@@ -74,6 +76,7 @@ public class CalcPanchang {
         //Configuration conf = resource.getConfiguration();
         //conf.locale = myLocale;
         //resource.updateConfiguration(conf, null);
+        //String lang=resource.getConfiguration().locale.getDisplayLanguage();
 
         space        = resource.getString(R.string.blank_space);
         sukla        = resource.getString(R.string.sukla);
@@ -109,6 +112,7 @@ public class CalcPanchang {
         supra = resource.getString(R.string.supra);
         wake = resource.getString(R.string.wakeup);
         chandra = resource.getString(R.string.chandra);
+        soura = resource.getString(R.string.soura);
         garu = resource.getString(R.string.garu);
         mahanubhava = resource.getString(R.string.mahanubhava);
     }
@@ -149,10 +153,11 @@ public class CalcPanchang {
 
         double sunrise = dbl[7];
         double sunset = dbl[8];
-//
-        //int nk_today=-1;
-        //Log.d("LUN", "thi="+dbl[0]+":thiend="+dbl[1]+":d12="+dbl[12]+":LM="+dbl[13]+"tz="+dTzoffset);
-        str = LunarMonth(dbl[13],(int)dbl[0], year,month+1);str+="\n";
+        if(mPreferences.getBoolean("KEY_SOURAMANA",false))
+            str = solarMonth(dbl[12],year,month+1);
+        else
+        str = LunarMonth(dbl[13],(int)dbl[0], year,month+1);
+        str+="\n";
 
         str += ThithiToString((int)dbl[0]);
         str += HourToString(dbl[1],sunrise);
@@ -194,7 +199,7 @@ public class CalcPanchang {
 
 
         // str+="\n"+ String.format("lm=%f:ld =%f:yr=%d:m=%d:d=%d",dbl[13],dbl[0],year,month,dayOfMonth) ;  //+","
-        //      + String.format(":%4.2f", dbl[3]) +","
+        //   str      +=String.format("\njdn:%f", dbl[14]);
         //      +  String.format(":% 4.2f",dbl[11]) ;
         //       String.format(":%4.2f", dblVarjyam1)+
         //      String.format(":%4.2f",dblVarjyam2);
@@ -204,51 +209,60 @@ public class CalcPanchang {
         return str;
     }
 
+    /**************
+     * Rahukalam, divide day sunrise to sunset 8 parts
+     * Monday- 2nd  * Tuesday-7th * Wednesday-5th part* Thursday-6th part* Friday-4th part*Saturday-3rd part* Sunday-8th part
+     * @param dbl
+     * @param sunrise
+     * @param sunset
+     * @return
+     */
     private String getStringDurmuhurthaAndRahukalam(double[] dbl, double sunrise, double sunset) {
         String str = "";
-        double durmuhurtha1 = 0; double durmuhurtha2 = 0; double rhkalam=0;
+        double durmuhurtha1 = 0; double durmuhurtha2 = 0; double rhkalam=(sunset-sunrise)/8;
         int weekday = (int) dbl[9];
         double muhurtha = (dbl[8]-dbl[7])/15;
+        double rahukalamlength=rhkalam;
         switch (weekday)
         {
             case 0:    //mon
                 durmuhurtha1 =sunrise + muhurtha *8; //9th muhurtha
                 durmuhurtha2 = sunrise + muhurtha * 11 ; //12th muhurtha
-                rhkalam = sunrise  + 2.0 ;
+                rhkalam =sunrise+rhkalam ;
                 break; //mon
             case 1:
                 durmuhurtha1 =sunrise + muhurtha *3; //9th muhurtha
-                durmuhurtha2 = sunset + (1.6 - muhurtha) * 6 ; //12th muhurtha
-                rhkalam = sunrise  + 9.5 ;
+                durmuhurtha2 = sunset + (1.6 - muhurtha) * 6 ; //22 muhurtha
+                rhkalam = sunrise  + 6*rhkalam ;
 
                 break; //tue
             case 2:
-                durmuhurtha1 =sunrise + muhurtha *7; //7th muhurtha
+                durmuhurtha1 =sunrise + muhurtha *7; //8th muhurtha
 
-                rhkalam = sunrise  + 6.5 ;
+                rhkalam = sunrise  + 4*rhkalam ;
 
                 break;  //wed
             case 3:
-                durmuhurtha1 =sunrise + muhurtha *5; //5th muhurtha
-                durmuhurtha2 = sunrise + muhurtha * 11 ; //11th muhurtha
-                rhkalam = sunrise  + 8.0 ;
+                durmuhurtha1 =sunrise + muhurtha *5; //6th muhurtha
+                durmuhurtha2 = sunrise + muhurtha * 11 ; //12th muhurtha
+                rhkalam = sunrise  + rhkalam*5 ;
 
                 break;  //thu
             case 4:
-                durmuhurtha1 =sunrise + muhurtha *3; //3rd muhurtha
-                durmuhurtha2 = sunrise + muhurtha * 8 ; //8th muhurtha
-                rhkalam = sunrise  + 5.0 ;
+                durmuhurtha1 =sunrise + muhurtha *3; //4rd muhurtha
+                durmuhurtha2 = sunrise + muhurtha * 8 ; //9th muhurtha
+                rhkalam = sunrise  + rhkalam*3 ;
 
                 break;  //fri
             case 5:
                 durmuhurtha1 =sunrise ; //1st muhurtha
                 durmuhurtha2 = sunrise + muhurtha ; //2nd muhurtha
-                rhkalam = sunrise  + 3.5 ;
+                rhkalam = sunrise  + rhkalam*2 ;
 
                 break;  //sat
             case 6:
-                durmuhurtha1 =sunrise + muhurtha *13; //9th muhurtha
-                rhkalam = sunrise  + 11.0 ;
+                durmuhurtha1 =sunrise + muhurtha *13; //14th muhurtha
+                rhkalam = sunrise  + rhkalam*7 ;
                 break;  //sun
 
         }
@@ -256,7 +270,7 @@ public class CalcPanchang {
         str += HourToString(durmuhurtha1,0);
         str += ","+HourToString(durmuhurtha2,0);
         str += "\n" + rahukala ;
-        str += HourToString(rhkalam,0) + "-" + HourToString(rhkalam +1.6,0);
+        str += HourToString(rhkalam,0) + "-" + HourToString(rhkalam + rahukalamlength,0);
         return str;
     }
 
@@ -356,6 +370,25 @@ public class CalcPanchang {
         if (dblVarjyam2 < 24+sunrise && (int) nextLength != 0)
             str += HourToString(dblVarjyam2, sunrise);
         return str;
+    }
+    private String solarMonth(double v, int greg_year, int greg_month) {
+        int solar = (int)v/100;
+
+        int lunarMonth ;
+        int hYear = greg_year - 1867;
+        boolean bAdhika = false;
+        String strmonth="",stryear;
+
+        String strmonthprefix= suadhi;
+        hYear %= 60;
+        if(greg_month<=4 && solar<=11 && solar!=0) hYear-=1;
+
+        stryear = soura+strHinduYears[hYear]+samvath + "\n";
+       // strmonth += strmonthprefix;
+        strmonth += strSolarMonths[solar%12];
+        strmonth += masa;
+        //if(bAdhika) strmonth = adhika+strmonth;
+        return stryear+strmonth;
     }
 
     private String LunarMonth(double v, int thithi, int greg_year, int greg_month) {

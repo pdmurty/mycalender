@@ -21,7 +21,14 @@
         android:title="Set Voice"
         android:defaultValue="true"
         />
-
+<PreferenceCategory
+    android:title="Pachang style"
+    />
+    <SwitchPreference
+        android:key="KEY_SOURAMANA"
+        android:title="Set Souramana"
+        android:defaultValue="false"
+        />
     <com.pdmurty.mycalender.SpinnerPreference
         android:key="monthstyle"
         app:title="Month-Style"

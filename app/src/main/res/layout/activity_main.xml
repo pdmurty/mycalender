@@ -14,7 +14,7 @@
             android:textStyle="bold"
             android:background="#00E5FF"
             android:padding="6dp"
-            android:textSize="20dp"
+            android:textSize="25dp"
             android:textAlignment="center"
             android:textAppearance=
             "@android:style/TextAppearance.DeviceDefault.Large"
@@ -52,8 +52,6 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textSize="20dp"
-            android:fontFamily="sans-serif-thin"
-
             android:layout_marginLeft="@dimen/alert_def_padding"
 
         />
