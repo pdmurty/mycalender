@@ -13,7 +13,7 @@ import android.widget.TextView;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
-
+//  this class is designed to user action for stoping alaram -unfinihed.
 public class DoAlaram extends AppCompatActivity {
     TextToSpeech tts;
     String str;

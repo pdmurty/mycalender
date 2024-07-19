@@ -3,7 +3,9 @@
     package="com.pdmurty.mycalender">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
 
 
@@ -34,7 +36,10 @@
             </intent-filter>
             -->
         </activity>
-        <activity android:name=".launcher">
+
+        <activity
+            android:name=".launcher"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -83,6 +88,7 @@
 
             <!-- Any inner elements would go here. -->
         </service>
+
     </application>
 
 </manifest>

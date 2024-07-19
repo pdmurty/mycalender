@@ -101,6 +101,7 @@ public class LocationActivity extends AppCompatActivity {
             public void onSuccess(Location location) {
                 if(location!=null) {
                     mCurrentLocation=location;
+                    //Log.d("locadd","get lastloc" +" lat=" + location.getLatitude() + " lon=" + location.getLongitude());
                     getAddress(location);
                 }
                 else {
@@ -226,7 +227,7 @@ public class LocationActivity extends AppCompatActivity {
     }
     private void startLocationUpdates() {
         // Begin by checking if the device has the necessary location settings.
-
+       // Log.d("locadd","start loc update");
     findViewById(R.id.locwarn).setVisibility(View.VISIBLE);
         createLocationCallback();
         createLocationRequest();
@@ -237,6 +238,7 @@ public class LocationActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
                         //noinspection MissingPermission
+                        //Log.d("locadd","startlocupdate on sucess");
                         mLocationProvider.requestLocationUpdates(mLocationRequest,
                                 mLocationCallback, Looper.myLooper());
                           }
@@ -283,6 +285,7 @@ public class LocationActivity extends AppCompatActivity {
     }
 
     private void getAddress( Location loc) {
+        //Log.d("locadd","curr location get address"+ "lat="+loc.getLatitude() +"; long=" + loc.getLongitude());
         if (!Geocoder.isPresent()) {
             showSnackbar(getString(R.string.no_geocoder_available));
             return;

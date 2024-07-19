@@ -13,18 +13,13 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.preference.PreferenceManager;
-import androidx.work.ExistingPeriodicWorkPolicy;
-import androidx.work.ExistingWorkPolicy;
-import androidx.work.OneTimeWorkRequest;
-import androidx.work.PeriodicWorkRequest;
-import androidx.work.WorkManager;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
-import java.util.concurrent.TimeUnit;
+
 
 import static android.content.Context.NOTIFICATION_SERVICE;
 
@@ -95,8 +90,8 @@ public class AlaramWorker extends Worker {
         Intent contentIntent = new Intent(context, MainActivity.class);
 
         PendingIntent contentPendingIntent = PendingIntent.getActivity
-                (context, NOTIFICATION_ID, contentIntent, PendingIntent
-                        .FLAG_UPDATE_CURRENT);
+                (context, NOTIFICATION_ID, contentIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_IMMUTABLE);
         // Build the notification
         NotificationCompat.Builder builder = new NotificationCompat.Builder
                 (context, NOTIFY_CHANNEL_ID)

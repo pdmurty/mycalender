@@ -8,39 +8,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.PowerManager;
-import android.os.SystemClock;
 import android.speech.tts.TextToSpeech;
-import android.speech.tts.UtteranceProgressListener;
-import android.util.Log;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
-import androidx.fragment.app.DialogFragment;
-import androidx.legacy.content.WakefulBroadcastReceiver;
 import androidx.preference.PreferenceManager;
-
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Locale;
-import java.util.Queue;
 import java.util.TimeZone;
-
 import static android.content.Context.ALARM_SERVICE;
 import static android.content.Context.NOTIFICATION_SERVICE;
 import static android.content.Context.POWER_SERVICE;
-import static android.content.Context.SENSOR_SERVICE;
+
 
 public class AlaramReciever extends BroadcastReceiver
 {
@@ -97,7 +78,7 @@ public class AlaramReciever extends BroadcastReceiver
         CalcPanchang calc = CalcPanchang.getInstance(appContext);
         str= calc.getPanchangNotify(year,month,day,tzOffset);
         if (mPreferences.getBoolean("KEY_ALRMSET", true))
-        tts = new TextToSpeech(appContext, new TextToSpeech.OnInitListener() {
+            tts = new TextToSpeech(appContext, new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int i) {
                 if (i != TextToSpeech.ERROR) {
@@ -114,24 +95,26 @@ public class AlaramReciever extends BroadcastReceiver
                 }
 
             }
-        });
+        }, "com.google.android.tts");
 
 
     Intent contentIntent = new Intent(context, MainActivity.class);
 
     PendingIntent contentPendingIntent = PendingIntent.getActivity
             (context, NOTIFICATION_ID, contentIntent, PendingIntent
-                    .FLAG_UPDATE_CURRENT);
+                    .FLAG_UPDATE_CURRENT|PendingIntent.FLAG_IMMUTABLE);
     // Build the notification
     NotificationCompat.Builder builder = new NotificationCompat.Builder
             (context, NOTIFY_CHANNEL_ID)
             .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
             .setSmallIcon(R.drawable.ic_noti_panchang)
-            .setContentTitle("Panachangam")
+            .setContentTitle("Panchangam")
             .setContentText(str)
             .setContentIntent(contentPendingIntent)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setAutoCancel(true)
+            .setStyle(new NotificationCompat.BigTextStyle()
+                    .bigText(str))
             .setDefaults(NotificationCompat.DEFAULT_ALL);
 
       mNotificationManager.notify(NOTIFICATION_ID, builder.build());
@@ -145,7 +128,7 @@ public class AlaramReciever extends BroadcastReceiver
        notifyPendingIntent
        = PendingIntent.getBroadcast
                 (context, NOTIFICATION_ID, notifyIntent,
-                        PendingIntent.FLAG_UPDATE_CURRENT);
+                        PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_IMMUTABLE);
 
         final AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
 
@@ -168,7 +151,7 @@ public class AlaramReciever extends BroadcastReceiver
 
         final PendingIntent notifyPendingIntent = PendingIntent.getBroadcast
                 (context, NOTIFICATION_ID, notifyIntent,
-                        PendingIntent.FLAG_UPDATE_CURRENT);
+                        PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_IMMUTABLE);
 
         final AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
 

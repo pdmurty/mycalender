@@ -30,18 +30,18 @@
     <item
         android:id="@+id/action_eph"
         android:orderInCategory="60"
-        android:title="ShowEphimris"
+        android:title="Show Ephimris"
         android:icon="@drawable/ic_action_reset"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_Tabs"
-        android:orderInCategory="60"
-        android:title="ShowEvents"
         android:icon="@drawable/ic_action_reset"
+        android:orderInCategory="60"
+        android:title="Show Events"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_help"
         android:orderInCategory="60"
-        android:title="ShowHelp"
+        android:title="Show Help"
         app:showAsAction="never" />
 </menu>

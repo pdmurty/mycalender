@@ -1,5 +1,6 @@
 package com.pdmurty.mycalender;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -11,6 +12,8 @@ import androidx.preference.PreferenceManager;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import static java.lang.Math.round;
 
 public class CalcPanchang {
 
@@ -125,9 +128,14 @@ public class CalcPanchang {
         double[] dbl = Swlib.WritePanchang(year,month, dayOfMonth, dTzoffset);
         double sunrise = dbl[7];
         String name =  mPreferences.getString("USERNAME", "" );
-        if(!name.isEmpty()) name+=garu;
+        if(!name.isEmpty()) name +=garu ;
         else name= mahanubhava;
-        strret = name + wake + supra + LunarMonth(dbl[13], (int)dbl[0], year,month+1);
+        strret = name + wake + supra ;
+        if(mPreferences.getBoolean("KEY_SOURAMANA",false))
+            strret += solarMonth(dbl[12],year,month+1);
+        else
+            strret += LunarMonth(dbl[13],(int)dbl[0], year,month+1);
+        //+ LunarMonth(dbl[13], (int)dbl[0], year,month+1);
         str  = ThithiToString((int)dbl[0]);str+="\n";
         if(dbl[3]>=sunrise)
         {
@@ -141,6 +149,7 @@ public class CalcPanchang {
 
 
     }
+    @SuppressLint("SuspiciousIndentation")
     public String ShowPanchang(int year , int month, int dayOfMonth, int tzoff){
         LoadStringResources();
         int tzone = mPreferences.getInt("KEY_TZONE",19800000);
@@ -156,7 +165,7 @@ public class CalcPanchang {
         if(mPreferences.getBoolean("KEY_SOURAMANA",false))
             str = solarMonth(dbl[12],year,month+1);
         else
-        str = LunarMonth(dbl[13],(int)dbl[0], year,month+1);
+            str = LunarMonth(dbl[13]/*lunar month*/,(int)dbl[0], year,month+1);
         str+="\n";
 
         str += ThithiToString((int)dbl[0]);
@@ -185,24 +194,29 @@ public class CalcPanchang {
         str += getStringVarjyam(dbl, sunrise);
         str += getStringDurmuhurthaAndRahukalam(dbl, sunrise, sunset);
         str +="\n" + udayalgna ;
-        //str+= String.format("%f",dbl[12]);str+="\n";
-        int tmpdbl = (int) dbl[12]/100;
+
+        long dbl12 = (long) dbl[12]/10000;
+        int tmpdbl = (int) (dbl12/10000);
+        long sankarathitodays=dbl12%10000;
         // dbl holds diff between sankranthi day and current day
-          double dblSankranthi = dbl[12]-tmpdbl*100;
-        dblSankranthi*=24;
+          double dblSankranthi = (double) sankarathitodays/100;
+          dblSankranthi*=24;
         if(dblSankranthi<30) {
             str += strSolarMonths[(tmpdbl + 1) % 12];
             str += ",";
             str += sankranthi;
             str += HourToString(dblSankranthi , sunrise);
-        }else str += strSolarMonths[tmpdbl];
+        }else
+        str += strSolarMonths[(tmpdbl)%12];
+
+
 
 
         // str+="\n"+ String.format("lm=%f:ld =%f:yr=%d:m=%d:d=%d",dbl[13],dbl[0],year,month,dayOfMonth) ;  //+","
-        //   str      +=String.format("\njdn:%f", dbl[14]);
-        //      +  String.format(":% 4.2f",dbl[11]) ;
-        //       String.format(":%4.2f", dblVarjyam1)+
-        //      String.format(":%4.2f",dblVarjyam2);
+          // str      +=String.format("\njdn:%f", dbl[14]);
+            //  +  String.format(":% 4.2f",dbl[11]) ;
+              // String.format(":%4.2f", dblVarjyam1)+
+             // String.format(":%4.2f",dblVarjyam2);
         //////////////
 
         ////////////////////
@@ -372,8 +386,30 @@ public class CalcPanchang {
         return str;
     }
     private String solarMonth(double v, int greg_year, int greg_month) {
-        int solar = (int)v/100;
 
+        long  daysforsolarmonth = (long) v;
+        daysforsolarmonth =daysforsolarmonth%10000; // day count between to sankranthis
+        if(daysforsolarmonth>3200) daysforsolarmonth= -10000 + daysforsolarmonth;
+        double dblsolarday = (double)daysforsolarmonth/100 ;
+        int isolarday = (int)dblsolarday;
+        // as per malbar rule day count starts at sankaranthi cutoff (0.55 of the day 3/5 of day), Tamil rule the cuttoff is 0.75 sunset
+        // if sankranthi happens before the cutoff then the day is 1 else next day is the 1st day of month.
+        float sankranthi_cutoff = Float.valueOf( mPreferences.getString("KEY_SOURAMASA","0.449"));
+
+        if( dblsolarday-isolarday>=sankranthi_cutoff) isolarday+=2;
+        else isolarday +=1;
+        long dbl12 = (long) v/10000;
+        int solarmonth = (int) (dbl12/10000);
+        long sankarathitodays=dbl12%10000;
+        // dbl holds diff between sankranthi day and current day
+        double dblSankranthi = (double) sankarathitodays/100;
+        int dayofsolarmonth = (int) dblSankranthi;
+        //int solar = (int)v/100;
+        if(dblsolarday<sankranthi_cutoff)  isolarday = 1;
+        else if(dblSankranthi<=(1.0-sankranthi_cutoff)) {
+            isolarday = 1;
+            solarmonth+=1;
+        }
         int lunarMonth ;
         int hYear = greg_year - 1867;
         boolean bAdhika = false;
@@ -381,31 +417,36 @@ public class CalcPanchang {
 
         String strmonthprefix= suadhi;
         hYear %= 60;
-        if(greg_month<=4 && solar<=11 && solar!=0) hYear-=1;
+        if(greg_month<=4 && solarmonth<=11 && solarmonth!=0) hYear-=1;
 
         stryear = soura+strHinduYears[hYear]+samvath + "\n";
        // strmonth += strmonthprefix;
-        strmonth += strSolarMonths[solar%12];
+        strmonth += strSolarMonths[solarmonth%12];
         strmonth += masa;
+        strmonth+="("+(isolarday)+")";
         //if(bAdhika) strmonth = adhika+strmonth;
         return stryear+strmonth;
     }
 
     private String LunarMonth(double v, int thithi, int greg_year, int greg_month) {
-        int lunar = (int)v;
+        int lunar = (int)v; /*lunar month*/
         int lunarMonth ;
-        int hYear = greg_year - 1867;
+        int hYear = greg_year - 1867; // 0 based index into hindhu years 0- prabhava
         boolean bAdhika = false;
         String strmonth="",stryear;
         String strMonthstyle = mPreferences.getString("monthstyle","1");
         String strmonthprefix= suadhi;
         hYear %= 60;
-        if(greg_month<=4 && lunar<=11 && lunar!=0) hYear-=1;
+        // hindhu year changes after ugadhi first lunar month 0
+        // lunar month before mesha(0) sankranthi
+        // hyear reduced by 1, new lunar year starts in mar-apr, greg-year starts from Jan
+        if(greg_month<=4 && lunar<=11 && lunar>=8) hYear-=1;
         if ((v-lunar)==0) {
             lunarMonth= (int)v;
 
          }
-        else {
+        else { // if v is not an integer it is adhika masa
+               // 0 based index , 1-vysakha, 0.5 adhika vysakha
             bAdhika = true;
             lunarMonth= (int)(v+1);
             strmonth =  adhika ; //+ strLunarMonths[(int) (v + 1)];
@@ -437,7 +478,7 @@ public class CalcPanchang {
     }
     String HourToString(double hrs, double sunrise){
 
-
+        String lan = mPreferences.getString("lan_style", "te" );
         String strPrefix = "";
         if(sunrise!=0)
             if(hrs>24+sunrise) return full;
@@ -450,9 +491,16 @@ public class CalcPanchang {
         if (hrs>=19 || hrs<3 ){strPrefix = rathri; }
         if (hrs>13 ) hrs-=12;
         double min = hrs*60;
-        String strhrs =strPrefix + (int) min / 60;
-        strhrs += ":";
-        strhrs += String.format("%02d",(int)min%60);
+        int ihrs = (int) hrs;
+        String strhrs = String.format("%02d:%02d",ihrs,(int)min%60);  //=strPrefix + (int) min / 60;
+        if(lan.equals("en")){
+            strhrs += strPrefix;
+
+        }
+        else
+            strhrs = strPrefix +strhrs;
+       // strhrs += ":";
+        //strhrs += String.format("%02d",(int)min%60);
 
 
 

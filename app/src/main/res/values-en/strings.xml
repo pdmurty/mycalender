@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Mythreya-1.1</string>
+    <string name="app_name">Mythreya</string>
 
-    <string name="thithi">     thithi        </string>
+    <string name="thithi">     thithi :        </string>
 
-    <string name="Nakshatra">  nakshthra:     </string>
+    <string name="Nakshatra">  nakshathra:     </string>
     <string name="Yoga">        yoga :        </string>
     <string name="sukla">       "sukla "         </string>
-    <string name="bahula">      "krishna "           </string>
-    <string name="sur_udayam">  sunraise:        </string>
-    <string name="sur_astham">  sunset:          </string>
-    <string name="varjyam">     vishghati:      </string>
+    <string name="bahula">      "krishna :"           </string>
+    <string name="sur_udayam">  sunrise :        </string>
+    <string name="sur_astham">  sunset :          </string>
+    <string name="varjyam">     vishghati :      </string>
     <string name="DurMuhurtham">durmuhurtha :    </string>
     <string name="the">         am               </string>
     <string name="sayam">       pm               </string>
@@ -18,8 +18,8 @@
     <string name="rathri">      pm         </string>
     <string name="udayam">      am          </string>
     <string name="full">        full      </string>
-    <string name="rahukal">     rahu kalam    </string>
-    <string name="adhika">      upari\u0020  </string>
+    <string name="rahukal">     rahu kalam :    </string>
+    <string name="adhika">      "upari "  </string>
     <string name="kshaya">      (kshaya)      </string>
     <string name="udaya_lgna">  lagna :  </string>
     <string name="sankranthi">" ingress "</string>
@@ -64,9 +64,9 @@
 
     <string-array name="solar_months">
         <item>Mesha</item>
-        <item>vrishabh</item>
+        <item>vrishabha</item>
         <item>Mithuna</item>
-        <item>Karkatak</item>
+        <item>Karkataka</item>
         <item>Simha</item>
         <item>Kanya</item>
         <item>Thula</item>
@@ -102,7 +102,7 @@
         <item>Uththarashada    </item>
         <item>Sravana    </item>
         <item>Dhanishta    </item>
-        <item>Sthabhisha     </item>
+        <item>Sathabhisha     </item>
         <item>Poorvabhadhra  </item>
         <item>Uththarabhadra   </item>
         <item>Revathi     </item>
@@ -110,8 +110,8 @@
     <string-array name="thithis">
         <item> Pradhama   </item>
         <item> Dvitheeya </item>
-        <item> Thruthuya   </item>
-        <item> Chathirdhi </item>
+        <item> Thruthiya   </item>
+        <item> Chathurdhi </item>
         <item> Panchami    </item>
         <item> Shashti   </item>
         <item> Sapthami  </item>
@@ -127,9 +127,9 @@
     </string-array>
     <string-array name="yogas">
         <item>Vishkumbha              </item>
-        <item>Prethi                </item>
+        <item>Preethi                </item>
         <item>Aayushman         </item>
-        <item>Suobhagya           </item>
+        <item>Soubhagya           </item>
         <item>Shobhana                  </item>
         <item>Athiganda       </item>
         <item>Sukarma      </item>
@@ -172,8 +172,8 @@
         <item>Vrusha            </item>
         <item>Chithrabhanu      </item>
         <item>Subhanau         </item>
-        <item>Tharana           </item>
-        <item>Pardhiva        </item>
+        <item>Thaarana           </item>
+        <item>Paardhiva        </item>
         <item>Vyaya           </item>
         <item>Saarvajith      </item>
         <item>Sarvadhari       </item>
@@ -196,7 +196,7 @@
         <item>Viswavasu   </item>
         <item>Parabhava       </item>
         <item>Plavanga      </item>
-        <item>Keelak        </item>
+        <item>Keelaka        </item>
         <item>Soumya       </item>
         <item>Saadharana      </item>
         <item>Virodhikrutha   </item>
@@ -223,12 +223,12 @@
         <item>nandha ekadhasi    </item>
         <item>Sankashta chathurdhi       </item>
         <item>Saphala ekadhasi       </item>
-        <item>Meru thryodhasu       </item>
+        <item>Meru thrayodhasu       </item>
         <item>Mouni amavasya       </item>
         <item>Thila chathurdhi     </item>
         <item>Vasantha panchami       </item>
         <item>Rathasapthami   </item>
-        <item>Bhisma ashtami.     </item>
+        <item>Bheeshma ashtami.     </item>
         <item>Bheeshama ekadhasi       </item>
         <item>Magha purnima       </item>
         <item>Vijaya ekadhasi        </item>
@@ -238,26 +238,26 @@
         <item>Ranga panchami       </item>
         <item>Seethalashtami       </item>
         <item>Papavimochana ekadhasi </item>
-        <item>Madhikrishana thryodhasi       </item>
+        <item>Madhukrishana thryodhasi       </item>
         <item>Ugadhi          </item>
-        <item>Guari thrithiya      </item>
+        <item>Guari thruthiya      </item>
         <item>Lakshmi panchami       </item>
         <item>Skanda shashti       </item>
         <item>Ashokasthami, Annapurna pooja       </item>
         <item>Sriramanavami          </item>
         <item>Kamadha ekadhasi   </item>
-        <item>Ananga thryodhasi       </item>
+        <item>Ananga thrayodhasi       </item>
         <item>Hanuman jayanthi        </item>
         <item>Varudhini ekadhasi          </item>
         <item>Prasurma jayanthi       </item>
-        <item>Akshaya thrithiya         </item>
+        <item>Akshaya thruthiya         </item>
         <item>Sankara jayanthi       </item>
         <item>Ramanuja jayanthi       </item>
         <item>Gangothpaththi       </item>
         <item>Mohini ekadhasi    </item>
-        <item>Nrisimha jayanthi       </item>
+        <item>Nrusimha jayanthi       </item>
         <item>Bhadhrakali ekadasi         </item>
-        <item>Rambha thrithiya       </item>
+        <item>Rambha thruthiya       </item>
         <item>Nirjala ekadhasi           </item>
         <item>Champa ekadhasi       </item>
         <item>vata savithri vratham       </item>
@@ -269,14 +269,14 @@
         <item>kamika ekadhasi           </item>
         <item>Naga panchami            </item>
         <item>Vara mahalakshmi vratham        </item>
-        <item>Puthrdhaa ekadhasi       </item>
+        <item>Puthradhaa ekadhasi       </item>
         <item>Varaaha jayanthi       </item>
         <item>Rakhi purnima    </item>
 
         <item>Sankhashta chathurdhi    </item>
         <item>Krishnashthami    </item>
         <item>Aaja ekadhasi     </item>
-        <item>Vinayaka chathirdhi   </item>
+        <item>Vinayaka chathurdhi   </item>
         <item>Rishi panchami    </item>
         <item>Surya shashti       </item>
         <item>Radhaashtami, kedhara vratham       </item>
@@ -326,14 +326,14 @@
     <string name="wakeup">" please wakeup "</string>
     <string name="mahanubhava"></string>
     <string name="garu">" Sir "</string>
-    <string name="supra">" good moring "</string>
+    <string name="supra">" good morning "</string>
     <string name="krishna">" krishnadhi "</string>
     <string name="sukladi">" sukladhi "</string>
-    <string name="chandra">" chandraman "</string>
+    <string name="chandra">" chandramana "</string>
     <string name="soura">" souramana "</string>
     <string name="helptxt">
         This program will give you panchangam elements, year, month, thithi, nakshatra, yoga,
-sunrise/sunset, Durmuhurtha, varjyam/vishaghati, Rahukalam,yamagandam and udaya lagnam.
+sunrise/sunset, Durmuhurtha, varjyam/vishaghati, Rahukalam, yamagandam and udaya lagnam.
 The application will find out your current location and use it to calculate sunrise/sunset.
 Sunrise and sunset depend on location. It can also give all the above details for any location
 other than your current location. Cities in five countries India, US, UK, Australia and Canada are

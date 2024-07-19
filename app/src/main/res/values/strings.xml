@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">మైత్రేయ-1.1</string>
+    <string name="app_name">మైత్రేయ</string>
     <string name="action_year" translatable="false">Set Year</string>
     <string name="action_status" translatable="false">Location</string>
     <string name="thithi">      తిథి :        </string>
@@ -8,8 +8,8 @@
     <string name="Yoga">        యోగం :        </string>
     <string name="sukla">       "శుక్ల "         </string>
     <string name="bahula">      "క్రిష్ణ "           </string>
-    <string name="sur_udayam">  సూర్యోదయం:  </string>
-    <string name="sur_astham">  అస్తమయం:  </string>
+    <string name="sur_udayam">  సూర్యోదయం :  </string>
+    <string name="sur_astham">  అస్తమయం :  </string>
     <string name="varjyam">     వర్జ్యం    :</string>
     <string name="DurMuhurtham">దుర్ముహుర్త :</string>
     <string name="the">         తె.         </string>

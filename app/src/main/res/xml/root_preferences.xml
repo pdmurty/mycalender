@@ -30,9 +30,16 @@
         android:defaultValue="false"
         />
     <com.pdmurty.mycalender.SpinnerPreference
+        android:key="KEY_SOURAMASA"
+        app:title="Month-Style"
+        android:defaultValue="Malabar"
+        app:entries="@array/souramana_entries"
+        app:entryValues="@array/souramana_values"
+        android:dependency="KEY_SOURAMANA"/>
+    <com.pdmurty.mycalender.SpinnerPreference
         android:key="monthstyle"
         app:title="Month-Style"
-        android:defaultValue="Amantha"
+        android:defaultValue="Sukladhi"
         app:entries="@array/month_entries"
         app:entryValues="@array/month_values" />
     <com.pdmurty.mycalender.SpinnerPreference

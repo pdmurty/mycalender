@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">मैत्रेय-1.1</string>
+    <string name="app_name">मैत्रेय</string>
     <string name="action_year">Set Year</string>
     <string name="action_status">Location</string>
     <string name="thithi">      तिथि :          </string>
@@ -8,6 +8,7 @@
     <string name="sukla">       शूकल           </string>
     <string name="bahula">      क्रिषण          </string>
     <string name="sur_udayam">  सूर्योदय :     </string>
+    <string name="sur_astham">  अस्तमय :</string>
     <string name="varjyam">     विषघटि :       </string>
     <string name="DurMuhurtham"> दुरमुहूरत :   </string>
     <string name="the">         प्रा.          </string>
@@ -325,7 +326,7 @@
     <string name="sukladi">" शुक्लादि "</string>
     <string name="chandra">" चांद्रमान " </string>
     <string name="soura">" सौरमान "</string>
-    <string name="sur_astham">" अस्तमय "</string>
+
     <string name="sankranthi">" संक्रांति "</string>
     <string name="karthari">" कार्तो "</string>
     <string name="helptxt">

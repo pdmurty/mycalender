@@ -46,6 +46,7 @@ import com.google.android.play.core.tasks.OnSuccessListener;
 import com.google.android.play.core.tasks.Task;
 
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
@@ -188,11 +189,6 @@ public class MainActivity extends AppCompatActivity
         Calendar c = Calendar.getInstance();
         final int day = c.get(Calendar.DAY_OF_MONTH);
         final int month = c.get(Calendar.MONTH);
-        if(installday!=0 && installmonth!=0){
-            int dayslast = (month-installmonth)*30 + (day-installday);
-            if (dayslast<10) return;
-        }
-
         request.addOnCompleteListener(new OnCompleteListener<ReviewInfo>() {
         @Override
         public void onComplete(@NonNull Task<ReviewInfo> task) {
@@ -218,7 +214,6 @@ public class MainActivity extends AppCompatActivity
         }
     });
   }
-
     private void hookCalender(Bundle savedInstanceState) {
 
         if (cv == null) cv = findViewById(R.id.calendarView);
@@ -229,16 +224,13 @@ public class MainActivity extends AppCompatActivity
             String thithi = savedInstanceState.getString("Thithi");
             WriteText(thithi);
 
-
         }
 
         cv.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
            int prevday=0;
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-
                    ShowPanchang(year, month, dayOfMonth, tzOffset);
-
             }
 
         });
@@ -259,14 +251,12 @@ public class MainActivity extends AppCompatActivity
         String thithi = tv.getText().toString();
         outState.putLong("SavedDate", date);
         outState.putString("Thithi", thithi);
-
-
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==REQUESTCURRENTLOC) {
+        if(requestCode==REQUESTCURRENTLOC || requestCode==REQUESTDBLOC) {
             if (resultCode == Activity.RESULT_CANCELED)
                 showSnackbar("Unable get current location, Set to default location");
             UpdateUI();
@@ -312,10 +302,8 @@ public class MainActivity extends AppCompatActivity
 
     }
     private void SetLocationHeader(){
-
        TextView tv=  findViewById(R.id.locTxt);
        tv.setText(mPreferences.getString("KEY_LOCNAME","Hyderabad,India(default)"));
-
     }
 
     private void ShowSettings() {
@@ -377,10 +365,16 @@ public class MainActivity extends AppCompatActivity
                 instancePanchang.ShowPanchang(year, month, dayOfMonth, tzOffset);
         WriteText(str);
         if (mPreferences.getBoolean("KEY_VOICE", true) && curDay!=dayOfMonth) {
-           tts.setLanguage(new Locale(GetLocale()));
+            String engine = tts.getDefaultEngine();
+            if(engine != null )
+                if(!engine.contains("google"))
+                    showSnackbar("Set google as default TTS engine for clear speech");
+            tts.setLanguage(new Locale(GetLocale()));
             tts.speak(str, TextToSpeech.QUEUE_FLUSH, null);
             curDay=dayOfMonth;
         }
+
+
         showReview();
         return str;
     }
@@ -394,7 +388,7 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-
+//creates repeat alaram broadcast reciever for the prefered time.
     void setUpalaramservice() {
 
         int alaramMinutes = mPreferences.getInt("KEY_ALARAM", 300);
@@ -550,8 +544,6 @@ public class MainActivity extends AppCompatActivity
              if(s.contentEquals("KEY_ALARAM")) {
 
                 this.setUpalaramservice();
-
-
              }
             }
     private void UpdateUI() {

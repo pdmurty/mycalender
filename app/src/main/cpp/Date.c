@@ -489,7 +489,7 @@ Java_com_pdmurty_mycalender_Swlib_WritePanchang(JNIEnv *env, jclass clazz, jint 
     //__android_log_print(ANDROID_LOG_DEBUG, "DATEC", "yr=%d:m=%d:d=%d:tz=%4.2f\n",year,month,day,timezone);
 
     swe_set_ephe_path("");
-    //get julian-day
+    //get julian-day at UT
     jdn = swe_julday(year,month+1,day,0, SE_GREG_CAL);
 
     // __android_log_print(ANDROID_LOG_DEBUG, "DATEC", "jdn=%f\n",jdn);
@@ -545,6 +545,7 @@ Java_com_pdmurty_mycalender_Swlib_WritePanchang(JNIEnv *env, jclass clazz, jint 
     jdn_prathama = jdn +jdn_prathama-2 + jdn_prathama_start;  // start of pradhama
     //__android_log_print(ANDROID_LOG_DEBUG, "LUN", "jdn_prastrt=%f\n",jdn_prathama);
     jdn_sank = get_sankranthi_day( jdn_prathama, &sankranthi) + (jdn_prathama);
+
     // __android_log_print(ANDROID_LOG_DEBUG, "DATEC", "jdn_sank=%f: snk= %d\n",jdn_sank,sankranthi);
     // first sankranthi after pradhama start
     xx[13]= sankranthi%12; // lunar month
@@ -554,13 +555,27 @@ Java_com_pdmurty_mycalender_Swlib_WritePanchang(JNIEnv *env, jclass clazz, jint 
     // reduce the month by 0.5 to let the caller know.
     if(jdn_sank > xx[12]+jdn) xx[13]-=0.5;
 
-    jdn_sank = get_sankranthi_day( jdn, &sankranthi);
+    jdn_sank = get_sankranthi_day( jdn, &sankranthi); // next sankarathi time
+
+    double jdn_prev_sank= get_sankranthi_day( jdn+jdn_sank-32, &sankranthi); // prev sankarathi time;
+    double solarmonthdays = 32-jdn_sank-jdn_prev_sank-timezone/24;
+    double jdnp_sank = jdn+jdn_sank-32 + jdn_prev_sank;
+    //jdnp_sank = round(jdnp_sank);
+  //  __android_log_print(ANDROID_LOG_DEBUG, "DATEC", "jdn=%f:san_prev=%f:san_nxt=%f\n",jdn,jdnp_sank,jdn_sank);
+
+    //solarmonthdays*=100;
    // xx[13]= sankranthi%12; // snakranthi number
-    xx[12] = sankranthi-1;
-    xx[12]*=100;
+    xx[12] = sankranthi;
+   // xx[12]*=100;
     jdn_sank+=timezone/24;
+    jdn_sank*=100;
+
     //if( jdn_sank <=1.0 )
-    xx[12]+= jdn_sank;
+    xx[12]*=10000;
+    xx[12]+= (int)(round(jdn_sank)); //next sankranthi time
+    xx[12]*=10000;
+    xx[12]+=(int)(round(solarmonthdays*100)); // daycount from last sankranthi
+   //__android_log_print(ANDROID_LOG_DEBUG, "DATEC", "jdn=%f:san_prev=%f:san_nxt=%f:dbl12:%f\n",jdn,solarmonthdays,jdn_sank,xx[12]);
     // do nakshatra
     int nkCount = (int) (mlon) * 3 / 40;
 

@@ -9,6 +9,15 @@
         <item>"1"</item>
         <item>"2"</item>
     </string-array>
+    <string-array name="souramana_entries">
+        <item>Malabar</item>
+        <item>Tamil</item>
+    </string-array>
+
+    <string-array name="souramana_values">
+        <item>0.449</item>
+        <item>0.249</item>
+    </string-array>
     <string-array name="lan_entries">
         <item>తెలుగు</item>
         <item>हिंदि</item>
