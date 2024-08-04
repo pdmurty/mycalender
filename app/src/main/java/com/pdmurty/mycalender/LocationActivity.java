@@ -68,7 +68,6 @@ public class LocationActivity extends AppCompatActivity {
         mResultReceiver= new AddressResultReceiver(new Handler());
         mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mSettingsClient = LocationServices.getSettingsClient(this);
-        mSettingsClient = LocationServices.getSettingsClient(this);
         GetCurLocation();
 
 
@@ -208,10 +207,6 @@ public class LocationActivity extends AppCompatActivity {
                 mCurrentLocation = locationResult.getLastLocation();
                 List<Location> locs = locationResult.getLocations();
 
-                for (Location loc:locs) {
-
-                    
-                }
                 if(mCurrentLocation!=null){
                     if(!mLocUpdate) {
                        mLocUpdate=true;
