@@ -20,10 +20,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.ResultReceiver;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.api.ApiException;
@@ -37,15 +34,11 @@ import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResponse;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.location.SettingsClient;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
-
-import java.text.DateFormat;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.List;
 
 public class LocationActivity extends AppCompatActivity {
 
@@ -75,7 +68,9 @@ public class LocationActivity extends AppCompatActivity {
         mResultReceiver= new AddressResultReceiver(new Handler());
         mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mSettingsClient = LocationServices.getSettingsClient(this);
+        mSettingsClient = LocationServices.getSettingsClient(this);
         GetCurLocation();
+
 
     }
     //////////////////////////////////////////////////////////
@@ -83,25 +78,30 @@ public class LocationActivity extends AppCompatActivity {
     // in some cases getlast location returns a null location, no one requested location update sofar
     // if the last location is null start request for location updates
     private void GetCurLocation() {
+
         if(!checkPermissions())
         {
 
             requestPermissions();
         }
-        else
+        else {
+
             getLastLocation();
+        }
 
     }
 
 
     @SuppressLint("MissingPermission")
     private void getLastLocation() {
-        mLocationProvider.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+
+    mLocationProvider.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+
             @Override
             public void onSuccess(Location location) {
                 if(location!=null) {
                     mCurrentLocation=location;
-                    //Log.d("locadd","get lastloc" +" lat=" + location.getLatitude() + " lon=" + location.getLongitude());
+
                     getAddress(location);
                 }
                 else {
@@ -115,6 +115,8 @@ public class LocationActivity extends AppCompatActivity {
 
             }
         });
+
+
     }
 ////////////location permissions//////////////
     private boolean checkPermissions() {
@@ -124,6 +126,7 @@ public class LocationActivity extends AppCompatActivity {
     }
 
     private void requestPermissions() {
+
         boolean shouldProvideRationale =
                 ActivityCompat.shouldShowRequestPermissionRationale(this,
                         Manifest.permission.ACCESS_FINE_LOCATION);
@@ -203,11 +206,17 @@ public class LocationActivity extends AppCompatActivity {
                 super.onLocationResult(locationResult);
 
                 mCurrentLocation = locationResult.getLastLocation();
+                List<Location> locs = locationResult.getLocations();
+
+                for (Location loc:locs) {
+
+                    
+                }
                 if(mCurrentLocation!=null){
                     if(!mLocUpdate) {
-                        mLocUpdate=true;
+                       mLocUpdate=true;
                        stopLocationUpdates();
-                        getAddress(mCurrentLocation);
+                       getAddress(mCurrentLocation);
                     }
                 }
             }
@@ -218,6 +227,7 @@ public class LocationActivity extends AppCompatActivity {
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         mLocationRequest.setInterval(SET_INTERVAL);
         mLocationRequest.setFastestInterval(FASTEST_INTERVAL);
+        //mLocationRequest.setMaxWaitTime(SET_INTERVAL*10);
 
     }
     private void buildLocationSettingsRequest() {
@@ -227,18 +237,17 @@ public class LocationActivity extends AppCompatActivity {
     }
     private void startLocationUpdates() {
         // Begin by checking if the device has the necessary location settings.
-       // Log.d("locadd","start loc update");
-    findViewById(R.id.locwarn).setVisibility(View.VISIBLE);
+
+        findViewById(R.id.locwarn).setVisibility(View.VISIBLE);
         createLocationCallback();
         createLocationRequest();
         buildLocationSettingsRequest();
-
         mSettingsClient.checkLocationSettings(mLocationSettingsRequest)
                 .addOnSuccessListener(this, new OnSuccessListener<LocationSettingsResponse>() {
                     @Override
                     public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
                         //noinspection MissingPermission
-                        //Log.d("locadd","startlocupdate on sucess");
+
                         mLocationProvider.requestLocationUpdates(mLocationRequest,
                                 mLocationCallback, Looper.myLooper());
                           }
@@ -285,7 +294,7 @@ public class LocationActivity extends AppCompatActivity {
     }
 
     private void getAddress( Location loc) {
-        //Log.d("locadd","curr location get address"+ "lat="+loc.getLatitude() +"; long=" + loc.getLongitude());
+
         if (!Geocoder.isPresent()) {
             showSnackbar(getString(R.string.no_geocoder_available));
             return;
@@ -377,5 +386,6 @@ public class LocationActivity extends AppCompatActivity {
         edit.commit();
 
     }
+
 
 }

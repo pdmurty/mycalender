@@ -131,7 +131,7 @@ public class AlaramReciever extends BroadcastReceiver
                         PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_IMMUTABLE);
 
         final AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
-
+        // from SDK 34  need to USE permission for exactAlarm
         if (alarmManager != null)
             if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M) {
                 alarmManager.setExactAndAllowWhileIdle

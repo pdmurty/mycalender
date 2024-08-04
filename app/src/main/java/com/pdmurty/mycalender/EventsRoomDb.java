@@ -21,7 +21,8 @@ public abstract class EventsRoomDb extends RoomDatabase {
         if(Instance == null){
             appContext = context.getApplicationContext();
             Instance = Room.databaseBuilder(context.getApplicationContext(),EventsRoomDb.class,"events")
-                    .createFromAsset("databases/events.db")
+                    .createFromAsset("databases/Events.db")
+                    //from SDK 34 file names are case sensitive before it was fine.
                     .addMigrations(new Migration(1,2) {
                         @Override
                         public void migrate(@NonNull SupportSQLiteDatabase database) {

@@ -122,6 +122,7 @@ public class ShowEvents extends AppCompatActivity
         }
 
         protected Integer doInBackground(Integer... years) {
+
             updateEvents(years[0].intValue());
             return years[0];
         }
@@ -166,6 +167,7 @@ public class ShowEvents extends AppCompatActivity
             Eventdays vinkuntaevt = new Eventdays();
             mEventlist =  eventsdao.getAllEventsD();
             int listSize = mEventlist.size();
+
             listEventdays = new ArrayList<Eventdays>();
             pendingEvents = new ArrayList<Events>();
             /////////////////// initiate swiss ephimiris LIB
@@ -318,8 +320,6 @@ public class ShowEvents extends AppCompatActivity
 
             }// end of month
             eventsdao.UpdateEventdays(listEventdays);
-
-
         }
 
         private void DoMakara(double[] dblsank, int year, int month) {

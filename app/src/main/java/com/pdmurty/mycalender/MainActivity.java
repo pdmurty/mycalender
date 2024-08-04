@@ -1,5 +1,6 @@
 package com.pdmurty.mycalender;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -8,10 +9,9 @@ import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.location.Location;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
+import android.os.Looper;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.Menu;
@@ -28,27 +28,38 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.PreferenceManager;
-import androidx.work.PeriodicWorkRequest;
-import androidx.work.WorkManager;
 
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.ResolvableApiException;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResponse;
+import com.google.android.gms.location.LocationSettingsStatusCodes;
+import com.google.android.gms.location.SettingsClient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.play.core.appupdate.AppUpdateInfo;
+import com.google.android.play.core.appupdate.AppUpdateManager;
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
+import com.google.android.play.core.appupdate.AppUpdateOptions;
 import com.google.android.play.core.install.model.AppUpdateType;
 import com.google.android.play.core.install.model.UpdateAvailability;
 import com.google.android.play.core.review.ReviewInfo;
 import com.google.android.play.core.review.ReviewManager;
-import com.google.android.play.core.appupdate.AppUpdateManager;
 import com.google.android.play.core.review.ReviewManagerFactory;
-import com.google.android.play.core.tasks.OnCompleteListener;
-import com.google.android.play.core.tasks.OnSuccessListener;
-import com.google.android.play.core.tasks.Task;
 
+import java.text.DateFormat;
 import java.util.Calendar;
-import java.util.List;
+import java.util.Date;
 import java.util.Locale;
-import java.util.concurrent.TimeUnit;
 
 
 public class MainActivity extends AppCompatActivity
@@ -57,19 +68,17 @@ public class MainActivity extends AppCompatActivity
     private static final int REQUESTCURRENTLOC = 1;
     private static final int REQUESTDBLOC = 2;
     private static final int UPDATE_REQUEST =10;
-    private static final String PRIMARY_CHANNEL_ID = "panchang_notification_channel";
+    //private static final String PRIMARY_CHANNEL_ID = "panchang_notification_channel";
     private static final String NOTIFY_CHANNEL_ID = "panchang_notification";
-    private NotificationManager mNotificationManager;
-    private WorkManager mWorkManager;
+    //private WorkManager mWorkManager;
     private DialogFragment dlg;
     private long currTime;
     private int tzOffset;
     private CalendarView cv = null;
-    private static int NOTIFICATION_ID = 0;
-    String locale;
+
     public static TextToSpeech tts;
     public static Location mCurrentLocation;
-    public static String   mCurrentLocName;
+    //public static String   mCurrentLocName;
     CalcPanchang instancePanchang;
     public static SharedPreferences mPreferences;
     private int locselected=0;
@@ -80,19 +89,17 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mCurrentLocation = new Location("");
         mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mPreferences.registerOnSharedPreferenceChangeListener(this);
         //this situation is ulikely but safe side
         mCurrentLocation = new Location("");
-
         if(mPreferences.getInt("LOC_PREF",0)==0) GetCurLocation();
 
         LocalManager.setLocale(this);
         setContentView(R.layout.activity_main);
         SharedPreferences.Editor edit = mPreferences.edit();
         edit.putBoolean("KEY_STOP",false );
-        edit.commit();
+        edit.apply();
         tts = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int i) {
@@ -112,7 +119,7 @@ public class MainActivity extends AppCompatActivity
         currTime = c.getTime().getTime();
         tzOffset = c.get(Calendar.ZONE_OFFSET);
          if (savedInstanceState == null) {
-            ShowPanchang(year, month, day, tzOffset);
+            ShowPanchang(year, month, day);
             createNotificationChannel();
         }
         if (mPreferences.getBoolean("KEY_ALRMSET", true))
@@ -128,28 +135,11 @@ public class MainActivity extends AppCompatActivity
         });
 
         CheckForUpdates();
-       // Poweroptimise();
+
 
     }
 
-    void Poweroptimise()
-    {
-        Intent intent = new Intent();
-        intent.setAction(
-                Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
-        Uri uri = Uri.fromParts("package",
-                BuildConfig.APPLICATION_ID, null);
-       // Log.d("URI",uri.toString());
-       // intent.setData( uri);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        try {
-            startActivity(intent);
-        }
-        catch (Exception e){
-            showSnackbar(e.getMessage());
-        }
 
-    }
    void CheckForUpdates(){
 
        final AppUpdateManager appUpdateManager = AppUpdateManagerFactory.create(this);
@@ -168,8 +158,10 @@ public class MainActivity extends AppCompatActivity
                        && result.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
                    // Request the update.
                     resultinfo = result;
+                    AppUpdateOptions options =  AppUpdateOptions.newBuilder(AppUpdateType.IMMEDIATE).build();
                    try {
-                       appUpdateManager.startUpdateFlowForResult(resultinfo,AppUpdateType.IMMEDIATE,MainActivity.this,UPDATE_REQUEST);
+                      // appUpdateManager.startUpdateFlowForResult(resultinfo,AppUpdateType.IMMEDIATE,MainActivity.this,UPDATE_REQUEST);
+                       appUpdateManager.startUpdateFlowForResult(resultinfo,MainActivity.this, options,UPDATE_REQUEST);
                    } catch (IntentSender.SendIntentException e) {
                        e.printStackTrace();
                    }
@@ -184,8 +176,6 @@ public class MainActivity extends AppCompatActivity
         final ReviewManager reviewManager = ReviewManagerFactory.create(this);
         Task<ReviewInfo> request = reviewManager.requestReviewFlow();
 
-        int installday = mPreferences.getInt("KEY_INSTALL_DAY",0);
-        int installmonth = mPreferences.getInt("KEY_INSTALL_MONTH",0);
         Calendar c = Calendar.getInstance();
         final int day = c.get(Calendar.DAY_OF_MONTH);
         final int month = c.get(Calendar.MONTH);
@@ -203,13 +193,11 @@ public class MainActivity extends AppCompatActivity
                         SharedPreferences.Editor editor = mPreferences.edit();
                         editor.putInt("KEY_INSTALL_DAY",day);
                         editor.putInt("KEY_INSTALL_MONTH",month);
-                        editor.commit();
+                        editor.apply();
                     }
                 });
             }
-            else{
 
-            }
 
         }
     });
@@ -222,15 +210,18 @@ public class MainActivity extends AppCompatActivity
             long date = savedInstanceState.getLong("SavedDate");
             cv.setDate(date /*c.getTimeInMillis()*/);
             String thithi = savedInstanceState.getString("Thithi");
-            WriteText(thithi);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                WriteText(thithi);
+            }
 
         }
 
         cv.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-           int prevday=0;
+           //int prevday=0;
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                   ShowPanchang(year, month, dayOfMonth, tzOffset);
+                   ShowPanchang(year, month, dayOfMonth);
             }
 
         });
@@ -259,14 +250,23 @@ public class MainActivity extends AppCompatActivity
         if(requestCode==REQUESTCURRENTLOC || requestCode==REQUESTDBLOC) {
             if (resultCode == Activity.RESULT_CANCELED)
                 showSnackbar("Unable get current location, Set to default location");
-            UpdateUI();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                UpdateUI();
+            }
         }
         if(requestCode==UPDATE_REQUEST){
             if (resultCode!= RESULT_OK)
                 showSnackbar("Failed to update, Try again later !");
         }
+
+//        if(requestCode==REQUEST_CHECK_SETTINGS && resultCode==RESULT_OK)
+//            if(requestCode==REQUEST_CHECK_SETTINGS && resultCode==RESULT_CANCELED)
+//            {  setResult(Activity.RESULT_CANCELED);
+//                finish();
+//            }
  }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
@@ -353,13 +353,8 @@ public class MainActivity extends AppCompatActivity
 
 
 
-    public void DisplayToast(String msg) {
-        Toast t = Toast.makeText(this, msg, Toast.LENGTH_LONG);
-        t.show();
-
-    }
-
-    public String ShowPanchang(int year, int month, int dayOfMonth, int tzoff) {
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void ShowPanchang(int year, int month, int dayOfMonth) {
 
         String str = //instancePanchang.getEvent(year);
                 instancePanchang.ShowPanchang(year, month, dayOfMonth, tzOffset);
@@ -376,7 +371,7 @@ public class MainActivity extends AppCompatActivity
 
 
         showReview();
-        return str;
+        //return str;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -404,7 +399,7 @@ public class MainActivity extends AppCompatActivity
         AlaramReciever.SetupNextAlaramClock(this, triggerTime);
         createNotificationChannel();
     }
-    void setUpAlaramWork(){
+    /*void setUpAlaramWork(){
 
         int alaramMinutes = mPreferences.getInt("KEY_ALARAM", 300);
         int alrmHour = alaramMinutes / 60;
@@ -431,12 +426,11 @@ public class MainActivity extends AppCompatActivity
                 .cancelAllWork();
         WorkManager.getInstance(getApplicationContext()).enqueue(alaramRequest);
 
- }
+ }*/
     public void createNotificationChannel() {
 
         // Create a notification manager object.
-        mNotificationManager =
-                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        NotificationManager mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
         // Notification channels are only available in OREO and higher.
         // So, add a check on SDK version.
@@ -458,8 +452,10 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void GetCurLocation() {
+
         Intent locintent = new Intent(this, LocationActivity.class);
         startActivityForResult(locintent,REQUESTCURRENTLOC);
+
 
     }
 
@@ -480,6 +476,7 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    @SuppressLint("NonConstantResourceId")
     public void onClickLOC(View view) {
 
         switch(view.getId()) {
@@ -505,6 +502,7 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    @SuppressLint("CommitTransaction")
     public void OnLocationSelected(int locSelection) {
         FragmentManager fm = getSupportFragmentManager();
         fm.beginTransaction();
@@ -526,6 +524,7 @@ public class MainActivity extends AppCompatActivity
 
 
 
+
     }
 
     private void showMap() {
@@ -541,11 +540,12 @@ public class MainActivity extends AppCompatActivity
      @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
 
-             if(s.contentEquals("KEY_ALARAM")) {
+             if(s != null && s.contentEquals("KEY_ALARAM")) {
 
                 this.setUpalaramservice();
              }
             }
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void UpdateUI() {
 
         SetLocationHeader();
@@ -557,7 +557,7 @@ public class MainActivity extends AppCompatActivity
         tzOffset = c.get(Calendar.ZONE_OFFSET);
         CalendarView cv= findViewById(R.id.calendarView);
         cv.setDate(c.getTimeInMillis());
-        ShowPanchang(year, month, day, tzOffset);
+        ShowPanchang(year, month, day);
     }
 
     private String GetLocale() {
