@@ -1,11 +1,11 @@
 <component name="libraryTable">
-  <library name="Gradle: com.google.android.play:review:2.0.1@aar">
+  <library name="Gradle: com.google.android.play:review:2.0.1@aar" external-system-id="GRADLE">
     <ANNOTATIONS>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/0c826c49c48f965ba02e936e0e265dd6/transformed/jetified-review-2.0.1/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/8.9/transforms/949efc3ab749c45a69e82d9289fb929c/transformed/jetified-review-2.0.1/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/0c826c49c48f965ba02e936e0e265dd6/transformed/jetified-review-2.0.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/0c826c49c48f965ba02e936e0e265dd6/transformed/jetified-review-2.0.1/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/8.9/transforms/949efc3ab749c45a69e82d9289fb929c/transformed/jetified-review-2.0.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/8.9/transforms/949efc3ab749c45a69e82d9289fb929c/transformed/jetified-review-2.0.1/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

@@ -6,6 +6,7 @@ add_library( # Specifies the name of the library.
              SHARED
 
              # Provides a relative path to your source file(s).
+
         src/main/cpp/Date.c
         src/main/cpp/swedate.c
         src/main/cpp/sweph.c
@@ -16,6 +17,7 @@ add_library( # Specifies the name of the library.
         src/main/cpp/swehouse.c
         src/main/cpp/swecl.c
         src/main/cpp/sqlite3.c
+
 
         )
 
