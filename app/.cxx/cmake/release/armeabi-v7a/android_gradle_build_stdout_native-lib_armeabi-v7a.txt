@@ -1,0 +1,58 @@
+ninja: Entering directory `G:\mycalender\app\.cxx\cmake\release\armeabi-v7a'
+[1/11] Building C object CMakeFiles/native-lib.dir/src/main/cpp/swedate.c.o
+[2/11] Building C object CMakeFiles/native-lib.dir/src/main/cpp/Date.c.o
+../../../../src/main/cpp/Date.c:406:12: warning: incompatible pointer types initializing 'jchar *' (aka 'unsigned short *') with an expression of type 'char [23]' [-Wincompatible-pointer-types]
+    jchar *result = "data base open success";
+           ^        ~~~~~~~~~~~~~~~~~~~~~~~~
+../../../../src/main/cpp/Date.c:407:12: warning: incompatible pointer types initializing 'jchar *' (aka 'unsigned short *') with an expression of type 'char [22]' [-Wincompatible-pointer-types]
+    jchar *resultfail = "data base open failed";
+           ^            ~~~~~~~~~~~~~~~~~~~~~~~
+../../../../src/main/cpp/Date.c:421:15: warning: using the result of an assignment as a condition without parentheses [-Wparentheses]
+    if(iresult=sqlite3_open(dbpath, &db)) {
+       ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~
+../../../../src/main/cpp/Date.c:421:15: note: place parentheses around the assignment to silence this warning
+    if(iresult=sqlite3_open(dbpath, &db)) {
+              ^
+       (                                )
+../../../../src/main/cpp/Date.c:421:15: note: use '==' to turn this assignment into an equality comparison
+    if(iresult=sqlite3_open(dbpath, &db)) {
+              ^
+              ==
+../../../../src/main/cpp/Date.c:623:39: warning: incompatible pointer types passing 'jchar [255]' to parameter of type 'char *' [-Wincompatible-pointer-types]
+    swe_calc_ut(tjd  , ipl, iflag, x, error);
+                                      ^~~~~
+../../../../src/main/cpp/swephexp.h:687:20: note: passing argument to parameter 'serr' here
+        double *xx, char *serr);
+                          ^
+../../../../src/main/cpp/Date.c:629:37: warning: incompatible pointer types passing 'jchar [255]' to parameter of type 'const char *' [-Wincompatible-pointer-types]
+    return (*env)->NewStringUTF(env,error);
+                                    ^~~~~
+5 warnings generated.
+[3/11] Building C object CMakeFiles/native-lib.dir/src/main/cpp/swemmoon.c.o
+[4/11] Building C object CMakeFiles/native-lib.dir/src/main/cpp/swejpl.c.o
+../../../../src/main/cpp/swejpl.c:718:5: warning: implicit declaration of function 'fseeko' is invalid in C99 [-Wimplicit-function-declaration]
+    FSEEK(js->jplfptr, (off_t64) (1L * irecsz), 0);
+    ^
+../../../../src/main/cpp/swejpl.c:83:17: note: expanded from macro 'FSEEK'
+  #define FSEEK fseeko
+                ^
+../../../../src/main/cpp/swejpl.c:730:12: warning: implicit declaration of function 'ftello' is invalid in C99 [-Wimplicit-function-declaration]
+    flen = FTELL(js->jplfptr);
+           ^
+../../../../src/main/cpp/swejpl.c:84:17: note: expanded from macro 'FTELL'
+  #define FTELL ftello
+                ^
+../../../../src/main/cpp/swejpl.c:796:9: warning: implicit declaration of function 'fseeko' is invalid in C99 [-Wimplicit-function-declaration]
+    if (FSEEK(js->jplfptr, (off_t64) (nr * ((off_t64) irecsz)), 0) != 0) {
+        ^
+../../../../src/main/cpp/swejpl.c:83:17: note: expanded from macro 'FSEEK'
+  #define FSEEK fseeko
+                ^
+3 warnings generated.
+[5/11] Building C object CMakeFiles/native-lib.dir/src/main/cpp/swemplan.c.o
+[6/11] Building C object CMakeFiles/native-lib.dir/src/main/cpp/swehouse.c.o
+[7/11] Building C object CMakeFiles/native-lib.dir/src/main/cpp/swephlib.c.o
+[8/11] Building C object CMakeFiles/native-lib.dir/src/main/cpp/swecl.c.o
+[9/11] Building C object CMakeFiles/native-lib.dir/src/main/cpp/sweph.c.o
+[10/11] Building C object CMakeFiles/native-lib.dir/src/main/cpp/sqlite3.c.o
+[11/11] Linking C shared library ..\..\..\..\build\intermediates\cmake\release\obj\armeabi-v7a\libnative-lib.so

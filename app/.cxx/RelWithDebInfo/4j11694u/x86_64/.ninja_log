@@ -1,0 +1,24 @@
+# ninja log v5
+55	4255	7424789256268296	CMakeFiles/native-lib.dir/src/main/cpp/swedate.c.o	73302ae42d0637a8
+5	4765	7424789262372026	CMakeFiles/native-lib.dir/src/main/cpp/Date.c.o	f5d7d74f0e376178
+207	5309	7424789267527325	CMakeFiles/native-lib.dir/src/main/cpp/swemmoon.c.o	3e9bd4fc225eba89
+96	5736	7424789271888540	CMakeFiles/native-lib.dir/src/main/cpp/swemplan.c.o	da06dac7b8fcc623
+550	7092	7424789286353237	CMakeFiles/native-lib.dir/src/main/cpp/swejpl.c.o	d2e713359efe3672
+345	9007	7424789305640851	CMakeFiles/native-lib.dir/src/main/cpp/swehouse.c.o	780d38bd3fa5db67
+302	12452	7424789339896340	CMakeFiles/native-lib.dir/src/main/cpp/swephlib.c.o	40122e1b40d54f0d
+432	16214	7424789377670876	CMakeFiles/native-lib.dir/src/main/cpp/swecl.c.o	ece615f434dde60e
+140	19462	7424789402146559	CMakeFiles/native-lib.dir/src/main/cpp/sweph.c.o	c3849100304c93b5
+392	137863	7424790590276475	CMakeFiles/native-lib.dir/src/main/cpp/sqlite3.c.o	1a655f16c11a626
+137868	138776	7424790603465528	../../../../build/intermediates/cxx/RelWithDebInfo/4j11694u/obj/x86_64/libnative-lib.so	b058549cf579348
+1	33	0	clean	70406dfe19ef722
+30	1216	7530202831762783	CMakeFiles/native-lib.dir/src/main/cpp/swedate.c.o	73302ae42d0637a8
+10	1230	7530202832547166	CMakeFiles/native-lib.dir/src/main/cpp/Date.c.o	f5d7d74f0e376178
+44	1263	7530202833493378	CMakeFiles/native-lib.dir/src/main/cpp/swemmoon.c.o	3e9bd4fc225eba89
+94	1581	7530202836782215	CMakeFiles/native-lib.dir/src/main/cpp/swemplan.c.o	da06dac7b8fcc623
+161	1754	7530202838672802	CMakeFiles/native-lib.dir/src/main/cpp/swejpl.c.o	d2e713359efe3672
+271	2166	7530202842737915	CMakeFiles/native-lib.dir/src/main/cpp/swehouse.c.o	780d38bd3fa5db67
+70	2596	7530202847065351	CMakeFiles/native-lib.dir/src/main/cpp/swephlib.c.o	40122e1b40d54f0d
+340	3501	7530202855918888	CMakeFiles/native-lib.dir/src/main/cpp/swecl.c.o	ece615f434dde60e
+56	3937	7530202860467450	CMakeFiles/native-lib.dir/src/main/cpp/sweph.c.o	c3849100304c93b5
+106	41729	7530203237387571	CMakeFiles/native-lib.dir/src/main/cpp/sqlite3.c.o	1a655f16c11a626
+41729	43276	7530203253718147	../../../../build/intermediates/cxx/RelWithDebInfo/4j11694u/obj/x86_64/libnative-lib.so	b058549cf579348

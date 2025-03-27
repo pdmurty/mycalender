@@ -1,0 +1,24 @@
+# ninja log v5
+26	4461	7424788495438728	CMakeFiles/native-lib.dir/src/main/cpp/Date.c.o	2f52f606fa3b9858
+2	4683	7424788496689927	CMakeFiles/native-lib.dir/src/main/cpp/swedate.c.o	fc07fe75eab140e
+106	5109	7424788500095449	CMakeFiles/native-lib.dir/src/main/cpp/swemmoon.c.o	553de45753202bf0
+83	6874	7424788519872858	CMakeFiles/native-lib.dir/src/main/cpp/swemplan.c.o	64f03e89811a7c75
+305	7391	7424788525898857	CMakeFiles/native-lib.dir/src/main/cpp/swejpl.c.o	a70af8a07058b065
+162	9795	7424788549748381	CMakeFiles/native-lib.dir/src/main/cpp/swehouse.c.o	7fa201a7aef49421
+44	11630	7424788568165021	CMakeFiles/native-lib.dir/src/main/cpp/swephlib.c.o	c5b4c9c468a094b1
+253	14759	7424788599888714	CMakeFiles/native-lib.dir/src/main/cpp/swecl.c.o	a0869e5e99dac8a7
+64	17151	7424788623717863	CMakeFiles/native-lib.dir/src/main/cpp/sweph.c.o	abe38484ae180f0c
+132	69143	7424789143066825	CMakeFiles/native-lib.dir/src/main/cpp/sqlite3.c.o	840da9d07480b9f4
+69144	69521	7424789147946014	../../../../build/intermediates/cxx/RelWithDebInfo/4j11694u/obj/x86/libnative-lib.so	a1995f4bdcccb8
+0	36	0	clean	70406dfe19ef722
+4	2011	7530202397960481	CMakeFiles/native-lib.dir/src/main/cpp/swedate.c.o	fc07fe75eab140e
+30	2041	7530202397960481	CMakeFiles/native-lib.dir/src/main/cpp/swemmoon.c.o	553de45753202bf0
+19	2060	7530202398116718	CMakeFiles/native-lib.dir/src/main/cpp/Date.c.o	2f52f606fa3b9858
+114	2277	7530202401663069	CMakeFiles/native-lib.dir/src/main/cpp/swemplan.c.o	64f03e89811a7c75
+306	2513	7530202404077828	CMakeFiles/native-lib.dir/src/main/cpp/swejpl.c.o	a70af8a07058b065
+385	3022	7530202409147311	CMakeFiles/native-lib.dir/src/main/cpp/swehouse.c.o	7fa201a7aef49421
+52	3228	7530202411273675	CMakeFiles/native-lib.dir/src/main/cpp/swephlib.c.o	c5b4c9c468a094b1
+149	3945	7530202418527131	CMakeFiles/native-lib.dir/src/main/cpp/swecl.c.o	a0869e5e99dac8a7
+77	4523	7530202424287436	CMakeFiles/native-lib.dir/src/main/cpp/sweph.c.o	abe38484ae180f0c
+174	42312	7530202801326563	CMakeFiles/native-lib.dir/src/main/cpp/sqlite3.c.o	840da9d07480b9f4
+42313	43856	7530202817448986	../../../../build/intermediates/cxx/RelWithDebInfo/4j11694u/obj/x86/libnative-lib.so	a1995f4bdcccb8

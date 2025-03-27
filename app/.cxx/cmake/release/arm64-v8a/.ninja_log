@@ -1,0 +1,12 @@
+# ninja log v5
+38	4102	741957229	CMakeFiles/native-lib.dir/src/main/cpp/swedate.c.o	95685cb41cacc94a
+2	4127	741957229	CMakeFiles/native-lib.dir/src/main/cpp/Date.c.o	cff094a52a81a45b
+163	5208	741957230	CMakeFiles/native-lib.dir/src/main/cpp/swemmoon.c.o	7433f34360929c4e
+225	6149	741957231	CMakeFiles/native-lib.dir/src/main/cpp/swemplan.c.o	c9f388e2c760bb92
+195	6680	741957232	CMakeFiles/native-lib.dir/src/main/cpp/swejpl.c.o	f4546c70d96dba87
+127	8766	741957234	CMakeFiles/native-lib.dir/src/main/cpp/swehouse.c.o	45ab37092976944c
+93	12457	741957237	CMakeFiles/native-lib.dir/src/main/cpp/swephlib.c.o	854b0d3bac020cf
+260	15998	741957241	CMakeFiles/native-lib.dir/src/main/cpp/swecl.c.o	eb9e9f0528c3004f
+66	17426	741957243	CMakeFiles/native-lib.dir/src/main/cpp/sweph.c.o	d2c535013dc6ca49
+323	77525	741957303	CMakeFiles/native-lib.dir/src/main/cpp/sqlite3.c.o	78b3f0c2c1bdf8cf
+77526	78054	741957303	../../../../build/intermediates/cmake/release/obj/arm64-v8a/libnative-lib.so	c33d8da4a4ba20e0

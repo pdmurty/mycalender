@@ -1,0 +1,3 @@
+G:/mycalender/app/.cxx/RelWithDebInfo/4j11694u/armeabi-v7a/CMakeFiles/native-lib.dir
+G:/mycalender/app/.cxx/RelWithDebInfo/4j11694u/armeabi-v7a/CMakeFiles/edit_cache.dir
+G:/mycalender/app/.cxx/RelWithDebInfo/4j11694u/armeabi-v7a/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,3 @@
+G:/mycalender/app/.cxx/Debug/3o22y5p3/x86/CMakeFiles/native-lib.dir
+G:/mycalender/app/.cxx/Debug/3o22y5p3/x86/CMakeFiles/edit_cache.dir
+G:/mycalender/app/.cxx/Debug/3o22y5p3/x86/CMakeFiles/rebuild_cache.dir
