@@ -65,7 +65,9 @@ public class AlaramReciever extends BroadcastReceiver
         day = c.get(Calendar.DAY_OF_MONTH);
         hour = c.get(Calendar.HOUR_OF_DAY) ;
         minits = c.get(Calendar.MINUTE);
-        SetupNextAlaramClock( context,c.getTimeInMillis());
+
+
+            SetupNextAlaramClock( context,c.getTimeInMillis());
        // setupNextAlaram(context,c.getTimeInMillis());
 
 
@@ -159,7 +161,12 @@ public class AlaramReciever extends BroadcastReceiver
             if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP) {
 
                 AlarmManager.AlarmClockInfo alarmClockInfo = new AlarmManager.AlarmClockInfo(triggertime, null);
-                alarmManager.setAlarmClock(alarmClockInfo, notifyPendingIntent);
+                if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.S ){
+                    if(alarmManager.canScheduleExactAlarms())
+                        alarmManager.setAlarmClock(alarmClockInfo, notifyPendingIntent);
+                }
+                else
+                    alarmManager.setAlarmClock(alarmClockInfo, notifyPendingIntent);
             }
             else if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.KITKAT) {
 

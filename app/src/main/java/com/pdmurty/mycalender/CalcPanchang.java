@@ -282,7 +282,9 @@ public class CalcPanchang {
         }
         str += "\n"+durmuhurtha;
         str += HourToString(durmuhurtha1,0);
-        str += ","+HourToString(durmuhurtha2,0);
+        str += "-" + HourToString(durmuhurtha1+ muhurtha,0);
+        str += ",\n\t\t\t\t\t\t\t\t\t\t" + HourToString(durmuhurtha2,0);
+        str += "-" + HourToString(durmuhurtha2+ muhurtha,0);
         str += "\n" + rahukala ;
         str += HourToString(rhkalam,0) + "-" + HourToString(rhkalam + rahukalamlength,0);
         return str;
@@ -301,6 +303,7 @@ public class CalcPanchang {
         int loop=0;
         int nk = (int) dl[2];
         double nkLength = dl[3]- dl[10];
+        double Var_len = nkLength/15;
 
 
         //varjyam start
@@ -376,13 +379,19 @@ public class CalcPanchang {
         }
 
         str += "\n" + strVarjyam ;
-        if( (int) dl[2]==18 && dblVarjyam_moola1 >sunrise && (int) nkLength!=0 )str += HourToString(dblVarjyam_moola1,sunrise) + ";" ;
-        if(dblVarjyam1 >sunrise && (int) nkLength!=0) str += HourToString(dblVarjyam1,sunrise) + ";" ;
+        if( (int) dl[2]==18 && dblVarjyam_moola1 >sunrise && (int) nkLength!=0 )
+            str += HourToString(dblVarjyam_moola1,sunrise) +
+                     "-" + HourToString(dblVarjyam_moola1 + Var_len,sunrise) + ";" ;
+        if(dblVarjyam1 >sunrise && (int) nkLength!=0)
+            str += HourToString(dblVarjyam1,sunrise) +
+            "-" + HourToString(dblVarjyam1 + Var_len,sunrise)+ ";" ;
 
         if ((int) dl[2] == 17 && dblVarjyam_moola2 < 24+sunrise)
-            str += HourToString(dblVarjyam_moola2, sunrise) + ";";
+            str += HourToString(dblVarjyam_moola2, sunrise)
+                    + "-" + HourToString(dblVarjyam_moola2 + Var_len,sunrise) + ";";
         if (dblVarjyam2 < 24+sunrise && (int) nextLength != 0)
-            str += HourToString(dblVarjyam2, sunrise);
+            str += HourToString(dblVarjyam2, sunrise) +
+                    "-" + HourToString(dblVarjyam2 + Var_len,sunrise);
         return str;
     }
     private String solarMonth(double v, int greg_year, int greg_month) {

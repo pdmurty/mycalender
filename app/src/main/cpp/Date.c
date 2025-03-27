@@ -189,8 +189,8 @@ double get_sankranthi_day( double jdn, int *tgt_sak /*sankranthi count.*/)
     return ddif;
 
 }
-// get next-sankarthi day after given jdn
-double get_karthari_day( double jdn, int *tgt_kar /*sankranthi count.*/) {
+// get next-karthari day after given jdn, 27 kartharis in one full sun-cycle.
+double get_karthari_day( double jdn, int *tgt_kar /*karthari count.*/) {
     double xx[6], slon, sspeed, dif = 0, ddif = 0;
     char err[255];
     int cur_kar, count = 0, next_kar;
@@ -537,7 +537,7 @@ Java_com_pdmurty_mycalender_Swlib_WritePanchang(JNIEnv *env, jclass clazz, jint 
 
     } else xx[6] = -1.1111; // let caller know there is thithi kshaya
     // sankranthi and lunar month
-    jdn_prathama = get_thithi_pradhama(jdn);  // end of pratham
+    jdn_prathama = get_thithi_pradhama(jdn);  // end of prathama before the jdn
      //__android_log_print(ANDROID_LOG_DEBUG, "LUN", "jdn=%f:jdn_pra=%f\n",jdn,jdn_prathama);
 
     jdn_prathama_start     = get_thithi_amantha(jdn +jdn_prathama-2); // get start of pradhama,
@@ -556,6 +556,10 @@ Java_com_pdmurty_mycalender_Swlib_WritePanchang(JNIEnv *env, jclass clazz, jint 
     if(jdn_sank > xx[12]+jdn) xx[13]-=0.5;
 
     jdn_sank = get_sankranthi_day( jdn, &sankranthi); // next sankarathi time
+    // when the day is pradhama lunar month decided from next sankranthi, panchang calculated at 5:30 AM IST for the day
+    // in some cases where at that time it is not pradhama but by sunrise it is pradhama, lunar month is written as
+    // prevoius one for the day.
+    if(xx[0]==0 || xx[0]==30) xx[13] = sankranthi%12;
 
     double jdn_prev_sank= get_sankranthi_day( jdn+jdn_sank-32, &sankranthi); // prev sankarathi time;
     double solarmonthdays = 32-jdn_sank-jdn_prev_sank-timezone/24;

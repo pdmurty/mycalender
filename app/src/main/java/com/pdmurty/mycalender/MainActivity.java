@@ -61,7 +61,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-
+/************ emulator
+ takes default location from avd.conf in emulator folder under avd.
+ set the lat/lons in the config file for default location when the emulator starts first time.
+ clear the emulator data and restart. Hyderabad lat=17.37,lon=78.51
+ ***********************/
 public class MainActivity extends AppCompatActivity
         implements GetYear.OnButtonDone,
         SharedPreferences.OnSharedPreferenceChangeListener{
