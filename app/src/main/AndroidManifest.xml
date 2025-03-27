@@ -19,13 +19,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".AlarmActivity" />
+        <activity android:name=".AlarmActivity"
+
+            />
         <activity
             android:name=".HelpActivity"
             android:label="Help"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".InitActivity" />
-        <activity android:name=".LocationActivity" />
+        <activity android:name=".LocationActivity"
+
+            />
         <activity
             android:name=".MainActivity"
             android:windowSoftInputMode="adjustResize">
@@ -48,13 +52,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DoAlaram" />
+        <activity android:name=".DoAlaram"
+
+            />
         <activity
             android:name=".ShowEvents"
             android:label="Events"
             android:parentActivityName=".MainActivity" />
 
         <meta-data
+
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
@@ -76,7 +83,8 @@
             android:name=".Geolocations"
             android:label="Selet Location"
             android:parentActivityName=".MainActivity"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateHidden"
+            android:exported="true"/>
 
         <receiver
             android:name=".AlaramReciever"
@@ -86,10 +94,13 @@
 
         <service
             android:name=".MainActivity"
-            android:foregroundServiceType="location">
+            android:foregroundServiceType="location"
+            android:exported="true">
 
             <!-- Any inner elements would go here. -->
         </service>
+
+
 
     </application>
 
