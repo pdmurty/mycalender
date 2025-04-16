@@ -3,6 +3,7 @@
     <string name="action_year" translatable="false">Set Year</string>
     <string name="action_status" translatable="false">Location</string>
     <string name="thithi">      తిథి :        </string>
+    <string name="karana">      కరణం :        </string>
     <string name="blank_space" translatable="false">\u0020     </string>
     <string name="Nakshatra">   నక్షత్రం :     </string>
     <string name="Yoga">        యోగం :        </string>
@@ -124,6 +125,20 @@
         <item> చతుర్దశి. </item>
         <item> పూర్ణిమ.  </item>
         <item> అమావశ్య. </item>
+    </string-array>
+    <string-array name="karanas">
+        <item> బవ      </item>
+        <item> బాలవ      </item>
+        <item> కౌలవ     </item>
+        <item> తైతుల       </item>
+        <item> గరజి     </item>
+        <item> వణిజ     </item>
+        <item> భద్ర       </item>
+        <item> శకుని        </item>
+        <item> చతుష్పాద    </item>
+        <item> నాగవం          </item>
+        <item> కింస్తుఘ్నం      </item>
+
     </string-array>
     <string-array name="yogas">
         <item>విష్కుంభ.              </item>

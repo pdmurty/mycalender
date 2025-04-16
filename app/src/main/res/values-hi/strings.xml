@@ -123,6 +123,20 @@
         <item> पूर्णिमा </item>
         <item> अमावश्य</item>
     </string-array>
+    <string-array name="karanas">
+        <item> बावा  </item>
+        <item> बलवा </item>
+        <item> कौलवा   </item>
+        <item> तैतिला </item>
+        <item> गारा    </item>
+        <item> वणिजा   </item>
+        <item> विष्टि  </item>
+        <item> शकुनि  </item>
+        <item> चतुष्पादा    </item>
+        <item> नागा    </item>
+        <item> कौस्तुवा  </item>
+
+    </string-array>
     <string-array name="yogas">
         <item>विषकुंभ             </item>
         <item>प्रीति             </item>
@@ -379,5 +393,6 @@
          पंचांग के स्पष्ट भाषण के लिए उपयुक्त स्पीच रेट और पिच रेट सेट कीजिये।
          आप इस सेटिंग को अपने डिवाइस के आधार पर जनरल वा लेंग्वेज और इनपुट सेटिंग में पा सकते हैं।
     </string>
+    <string name="karana">करणा</string>
 
 </resources>

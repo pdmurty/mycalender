@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name"> മൈ ത്രേയ </string>
     <string name="thithi"> തിഥി       </string>
+    <string name="karana">കരണം       </string>
     <string name="Nakshatra">  നക്ഷത്ര</string>
     <string name="Yoga"> യോഗ </string>
     <string name="sukla"> ശുക്ല </string>
@@ -126,6 +127,20 @@
     <item> ചതുർദശി  </item>
     <item> പൗർണമി   </item>
     <item> അമാവാസി  </item>
+    </string-array>
+    <string-array name="karanas">
+        <item> ബവ       </item>
+        <item> ബാലവ     </item>
+        <item> കൌലവ     </item>
+        <item> തൈതുല    </item>
+        <item> ഗരജി         </item>
+        <item> വണിജ         </item>
+        <item> ഭദ്ര         </item>
+        <item> ശകുനി        </item>
+        <item> ചതുഷ്പാദ   </item>
+        <item> നാഗവം        </item>
+        <item> കിംസ്തുഘ്നം </item>
+
     </string-array>
 
     <string-array name="yogas">
@@ -369,4 +384,5 @@
 
     </string>
 
-    </resources>
+
+</resources>

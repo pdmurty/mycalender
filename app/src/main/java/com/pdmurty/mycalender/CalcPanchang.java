@@ -1,5 +1,7 @@
 package com.pdmurty.mycalender;
 
+
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -18,6 +20,7 @@ import static java.lang.Math.round;
 public class CalcPanchang {
 
     String thithiPrefix;
+    String karanaPrefix;
     String sukla;
     String space;
     String bahula;
@@ -26,6 +29,7 @@ public class CalcPanchang {
     String strYoga;
     String[] strYogas;
     String[] strThithi;
+    String[] strKarana;
     String[] strLunarMonths;
     String[] strSolarMonths;
     String[] strHinduYears;
@@ -85,10 +89,12 @@ public class CalcPanchang {
         sukla        = resource.getString(R.string.sukla);
         bahula       = resource.getString(R.string.bahula);
         thithiPrefix = resource.getString(R.string.thithi);
+        karanaPrefix = resource.getString(R.string.karana);
         strNak       = resource.getString(R.string.Nakshatra);
         strYoga      = resource.getString(R.string.Yoga) ;
         strYogas     = resource.getStringArray(R.array.yogas);
         strThithi    = resource.getStringArray(R.array.thithis);
+        strKarana    = resource.getStringArray(R.array.karanas);
         strNaks      = resource.getStringArray(R.array.Nakshatras);
         strLunarMonths= resource.getStringArray(R.array.lunar_months);
         strSolarMonths= resource.getStringArray(R.array.solar_months);
@@ -126,6 +132,12 @@ public class CalcPanchang {
         String str ;
         String strret ;
         double[] dbl = Swlib.WritePanchang(year,month, dayOfMonth, dTzoffset);
+        // dbl[]0-thithicount,1-thith-end-time,6-nxt-thithi-end or -1.1111,
+        // 2-nakcount,3-nak-end-time,10-nak-start,11-next-nak-length
+        // 4-yoga-count,5-yoga-end-time, 14- jdn, 15-thithistart
+        // 7-sunrise,8-sunset, 9-weekday,12-sankranthi-count+time,13-lunarmonth
+
+
         double sunrise = dbl[7];
         String name =  mPreferences.getString("USERNAME", "" );
         if(!name.isEmpty()) name +=garu ;
@@ -158,6 +170,7 @@ public class CalcPanchang {
         float loc_lon =(float) mPreferences.getFloat("KEY_LON",(float)78.45);
         float loc_lat =(float) mPreferences.getFloat("KEY_LAT",(float)17.44);
         Swlib.SetLocation(loc_lon, loc_lat);
+        // pamchang caclated at UT 0.0
         double[] dbl = Swlib.WritePanchang(year,month, dayOfMonth, dTzoffset );
 
         double sunrise = dbl[7];
@@ -188,6 +201,8 @@ public class CalcPanchang {
             str+="\n";}
         str += YogaToString((int)dbl[4]);
         str += HourToString(dbl[5],sunrise);
+        str += "\n" + KaranaToString((int)dbl[0],dbl[15],dbl[1],dbl[16], sunrise);
+        //str += HourToString(dbl[1],sunrise);
         str += "\n" + suryodayam;
         str += HourToString(dbl[7],0);
         str += "\n" + suryastham + HourToString(dbl[8],0);  //sunset
@@ -483,6 +498,57 @@ public class CalcPanchang {
         else dispThithi  += sukla;
 
         return dispThithi + strThithi[thithi] +space;
+
+    }
+    String KaranaToString(int thithi, double thithiStart,double thithiEnd,double thithiNxt, double sunrise){
+
+
+        int karana = (thithi+1)*2-1; // thithi count 0 based
+        // first Karana starts from second half of sukla pradhama , 30*2 karanas
+        int kPrev = karana-1, kNxt = karana+1, kEnd = kNxt+1;
+        if(kPrev==0) kPrev=60;
+
+        double karanaLength = (thithiEnd-thithiStart)/2;
+        //Log.d("LUN", String.format("KL=%f,ts=%f,tend=%f, th= %d",karanaLength,thithiStart,thithiEnd,thithi));
+        if(karana<57) karana = karana%7;  // 7 karanas repeat 8 times.
+        else karana = karana-49; // fixed karana from 8 to 11
+        double thithilength = thithiEnd -thithiStart;
+        if(karana==0) karana =7;
+        if(kPrev <57) kPrev = kPrev%7;
+        else kPrev = kPrev-49;
+        if(kPrev ==0) kPrev =7;
+
+        String dispKarana = karanaPrefix ;
+        if(thithiEnd > karanaLength && (thithiStart+karanaLength) > sunrise) // only if karana happens at sunrise
+            dispKarana += space + strKarana[kPrev-1] + space + HourToString(thithiStart+karanaLength,sunrise) +",";
+        if(thithiEnd <24 + sunrise) {
+            dispKarana += space + strKarana[karana - 1];
+            dispKarana += space;
+            dispKarana += HourToString(thithiEnd, sunrise) +",";
+        }
+
+        if(thithiNxt != thithiEnd) {
+            //if the previou thithi is khaya bothh are same ignore nxt karanas
+            if ((thithiNxt + thithiEnd) / 2 < 24 + sunrise) {  // next karana happens during the day
+                if (kNxt < 57) kNxt = kNxt % 7;
+                else kNxt = kNxt - 49;
+                if (kNxt == 0) kNxt = 7;
+                dispKarana += space + strKarana[kNxt - 1];
+                dispKarana += space;
+                dispKarana += HourToString((thithiNxt + thithiEnd) / 2, sunrise) +",";
+            }
+            if (thithiNxt < 24 + sunrise) {  // next karana happens during the day
+                if (kEnd < 57) kEnd = kEnd % 7;
+                else kEnd = kEnd - 49;
+                if (kEnd == 0) kEnd = 7;
+                dispKarana += "\n" + space + strKarana[kEnd - 1];
+                dispKarana += space;
+                dispKarana += HourToString(thithiNxt, sunrise);
+            }
+        }
+
+
+        return dispKarana;
 
     }
     String HourToString(double hrs, double sunrise){

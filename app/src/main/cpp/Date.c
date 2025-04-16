@@ -88,7 +88,7 @@ double get_yoga_end( double jd, int yog )
 
 }
 
-//gets target thithi after given julian-day in hrs
+//gets target thithi after given julian-day in hrs, -ve target pos may not work as expected.
 double get_thithi_tgt( double jd, int target)
 {
 
@@ -472,7 +472,7 @@ Java_com_pdmurty_mycalender_Swlib_SetLocation(JNIEnv *env, jclass clazz, jfloat 
 JNIEXPORT jdoubleArray JNICALL
 Java_com_pdmurty_mycalender_Swlib_WritePanchang(JNIEnv *env, jclass clazz, jint year, jint month,
                                                 jint day, jdouble timezone) {
-    double jdn,jdn_prathama,jdn_prathama_start,jdn_amantha, jdn_sank=0, retjdn[1], xx[15], slon,mlon,dif;
+    double jdn,jdn_prathama,jdn_prathama_start,jdn_amantha, jdn_sank=0, retjdn[1], xx[17], slon,mlon,dif;
     double geopos[3];
     double tmp;
     int wkday;
@@ -480,12 +480,14 @@ Java_com_pdmurty_mycalender_Swlib_WritePanchang(JNIEnv *env, jclass clazz, jint 
     int sankranthi =0;
     char err[255];
     char starname[30];
-    double nkStart, nextLength, thithiEnd, thithiNext;
+    double nkStart, nextLength, thithiEnd, thithiNext,thithiStart;
     double sunrise, nextsunrise, sunset;
     int syear,smonth,sday;
     double shour;
     int prev_thithi =0;
     int errcode;
+    int k1, k2,k3;
+    double k1end,k2end,k3end;
     //__android_log_print(ANDROID_LOG_DEBUG, "DATEC", "yr=%d:m=%d:d=%d:tz=%4.2f\n",year,month,day,timezone);
 
     swe_set_ephe_path("");
@@ -521,21 +523,37 @@ Java_com_pdmurty_mycalender_Swlib_WritePanchang(JNIEnv *env, jclass clazz, jint 
     dif = (mlon-slon);
     //do thithi
     if (dif < 0) {
-        thithi = (int)(dif+360) / 12 ; }
-    else thithi = (int)(dif) / 12 ;
+        thithi = (int)(dif+360) / 12 ;
+        }
+    else {
+        thithi = (int) (dif) / 12;
+        }
+
+
     prev_thithi=thithi;
     thithiEnd = get_thithi_tgt(jdn, thithi)+timezone;
-    thithiNext = get_thithi_tgt(jdn, prev_thithi+1)+timezone;
-//    __android_log_print(ANDROID_LOG_DEBUG, "LUN", "thithi=%d;thithiend=%f;thithinxt=%f;SR=%f;NSR=%f\n",
-    //        thithi,thithiEnd,thithiNext,sunrise,nextsunrise);
+    if(thithi==0)
+        xx[15] = thithiStart = (get_thithi_tgt(jdn-1, 29)+timezone-24); // start of thithi for Karanas
+    else
+        xx[15] = thithiStart = (get_thithi_tgt(jdn-1, thithi-1)+timezone-24); // start of thithi for Karanas
+
+    xx[16] = thithiNext =  get_thithi_tgt(jdn, prev_thithi+1)+timezone ;
+
+    //__android_log_print(ANDROID_LOG_DEBUG, "LUN", "thithi=%d;thithiend=%f;thithinxt=%f; thiStart=%f\n",
+      //      thithi,thithiEnd,thithiNext,xx[15]);
     if (thithiEnd > sunrise) { //thithi normal
         xx[0] = thithi; xx[1] = thithiEnd ;
-    }else {xx[0] = thithi+1; xx[1] = thithiNext ;} // there is thithikshaya
+    }else {xx[0] = thithi+1; xx[1] = thithiNext ;
+            xx[15] = thithiEnd; // previous thithi is kshaya, hence that end is start of current
+            } // there is thithikshaya
     //kshaya thithi
     if (thithiEnd > sunrise && thithiNext <= 24.0 + nextsunrise) {
         xx[6] = thithiNext;
 
-    } else xx[6] = -1.1111; // let caller know there is thithi kshaya
+    } else{ // default behavior
+        xx[6] = -1.1111; // let caller know there is thithi kshaya
+
+    }
     // sankranthi and lunar month
     jdn_prathama = get_thithi_pradhama(jdn);  // end of prathama before the jdn
      //__android_log_print(ANDROID_LOG_DEBUG, "LUN", "jdn=%f:jdn_pra=%f\n",jdn,jdn_prathama);
@@ -599,12 +617,12 @@ Java_com_pdmurty_mycalender_Swlib_WritePanchang(JNIEnv *env, jclass clazz, jint 
     xx[4]= yog;
     xx[5]= dif+timezone;
     xx[14]=jdn;
-    jdoubleArray jdbl = (*env)->NewDoubleArray(env,15);
-    (*env)->SetDoubleArrayRegion(env,jdbl,0,15,xx);
+    jdoubleArray jdbl = (*env)->NewDoubleArray(env,17);
+    (*env)->SetDoubleArrayRegion(env,jdbl,0,17,xx);
 // xx[]0-thithicount,1-thith-end-time,6-nxt-thithi-end or -1.1111,
 // 2-nakcount,3-nak-end-time,10-nak-start,11-next-nak-length
-// 4-yoga-count,5-yoga-end-time,
-// 7-sunrise,8-sunset, 9-weekday,12-sankranthi-count+time,13-lunarmonth
+// 4-yoga-count,5-yoga-end-time, 16- thithiNxt
+// 7-sunrise,8-sunset, 9-weekday,12-sankranthi-count+time,13-lunarmonth,14,jdn, 15-thithi_start
     return jdbl;
 
 }

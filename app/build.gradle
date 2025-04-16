@@ -13,11 +13,14 @@ android {
 
     defaultConfig {
         applicationId "com.pdmurty.mycalender_new"
+        namespace "com.pdmurty.mycalender" // name space retained as previous appId , general clasees
+                                           // such as R, Buildconfig used in app are dependent on namespace.
+                                           //
         minSdkVersion 16
         //noinspection EditedTargetSdkVersion
         targetSdkVersion 34
-        versionCode 26
-        versionName "1.1.26"
+        versionCode 27
+        versionName "1.1.27"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

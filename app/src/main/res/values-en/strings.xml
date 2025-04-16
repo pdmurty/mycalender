@@ -125,6 +125,20 @@
         <item> Purnima  </item>
         <item> Amavasya </item>
     </string-array>
+    <string-array name="karanas">
+        <item> Baava   </item>
+        <item> Balava </item>
+        <item> Kualava   </item>
+        <item> thithila </item>
+        <item> Gara    </item>
+        <item> Vanija   </item>
+        <item> Vishti  </item>
+        <item> Sakuni  </item>
+        <item> Chathushpadha    </item>
+        <item> Naga    </item>
+        <item> Kuasthuva  </item>
+
+    </string-array>
     <string-array name="yogas">
         <item>Vishkumbha              </item>
         <item>Preethi                </item>
@@ -389,4 +403,5 @@ will read the panchang for you.
         You can find this setting under general management or language and input depending on your device.
 
     </string>
+    <string name="karana">Karana</string>
 </resources>
