@@ -20,35 +20,55 @@
         android:textStyle="italic"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:id="@+id/eula"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/welcome"
-    app:layout_constraintBottom_toTopOf="@id/butAgree">
-    <TextView
+    <ScrollView
+        android:id="@+id/prefFrame"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/pref"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/welcome" >
 
+        <FrameLayout
+            android:id="@+id/pref_launcher"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/welcome" />
+    </ScrollView>
+    <Button
+        android:id="@+id/pref"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:textSize="20dp"
-        android:textAppearance=
-            "@android:style/TextAppearance.DeviceDefault.Medium"
-        android:text="@string/eulatxt"
-        android:textStyle="italic"
-
-        />
-</ScrollView>
-
-    <FrameLayout
-        android:id="@+id/pref_launcher"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:onClick="onClickPreferences"
+        android:text="Set Preferences"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/welcome" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 
+    <ScrollView
+        android:id="@+id/eula"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/butAgree"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/welcome">
+
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@string/eulatxt"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+            android:textSize="20sp"
+            android:textStyle="italic"
+
+            />
+    </ScrollView>
 
     <Button
         android:id="@+id/butAgree"
@@ -57,12 +77,11 @@
         android:layout_marginStart="40dp"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="40dp"
         android:onClick="onClickAgree"
         android:text="Agree"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/eula"
         app:layout_constraintBottom_toBottomOf="parent"/>
     <Button
         android:id="@+id/butdisAgree"
@@ -71,25 +90,10 @@
         android:layout_marginEnd="40dp"
         android:layout_marginRight="40dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="40dp"
         android:onClick="onClickdisagree"
         android:text="DisAgree"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/eula"
         app:layout_constraintBottom_toBottomOf="parent"/>
-
-    <Button
-        android:id="@+id/pref"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:onClick="onClickPreferences"
-        android:text="Set Preferences"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pref_launcher" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

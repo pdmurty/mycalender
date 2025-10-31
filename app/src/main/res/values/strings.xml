@@ -63,6 +63,22 @@
         <item>మాఘ</item>
         <item>ఫాల్గుణ</item>
     </string-array>
+    <string-array name="ruthus">
+        <item>వసంత</item>
+        <item>వసంత</item>
+        <item>గ్రీష్మ</item>
+        <item>గ్రీష్మ</item>
+        <item>వర్ష</item>
+        <item>వర్ష</item>
+        <item>శరద్</item>
+        <item>శరద్</item>
+        <item>హేమంత</item>
+        <item>హేమంత</item>
+        <item>శశిర</item>
+        <item>శశిర</item>
+
+    </string-array>
+
     <string-array name="solar_months">
         <item>మేష</item>
         <item>వృషభ</item>
@@ -337,6 +353,7 @@
     </string-array>
     <string name="samvtsara">" సంవత్సరం "</string>
     <string name="masam">" మాసం "</string>
+    <string name="ruthu">" ఋతు "</string>
     <string name="wakeup"> " మేలు కోండి "</string>
     <string name="mahanubhava"> " మహానుభావ " </string>
     <string name="garu"> "గారు" </string>

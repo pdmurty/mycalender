@@ -26,11 +26,13 @@ public class CalcPanchang {
     String bahula;
     String[] strNaks;
     String strNak;
+    String strKarthari;
     String strYoga;
     String[] strYogas;
     String[] strThithi;
     String[] strKarana;
     String[] strLunarMonths;
+    String[] strRuthus;
     String[] strSolarMonths;
     String[] strHinduYears;
     String suryodayam;
@@ -50,6 +52,7 @@ public class CalcPanchang {
     String sankranthi;
     String samvath;
     String masa;
+    String strrutu;
     String kadhi;
     String suadhi;
     String supra;
@@ -91,12 +94,15 @@ public class CalcPanchang {
         thithiPrefix = resource.getString(R.string.thithi);
         karanaPrefix = resource.getString(R.string.karana);
         strNak       = resource.getString(R.string.Nakshatra);
+        strKarthari  = resource.getString(R.string.karthari);
         strYoga      = resource.getString(R.string.Yoga) ;
+        strrutu = resource.getString(R.string.ruthu) ;
         strYogas     = resource.getStringArray(R.array.yogas);
         strThithi    = resource.getStringArray(R.array.thithis);
         strKarana    = resource.getStringArray(R.array.karanas);
         strNaks      = resource.getStringArray(R.array.Nakshatras);
         strLunarMonths= resource.getStringArray(R.array.lunar_months);
+        strRuthus= resource.getStringArray(R.array.ruthus);
         strSolarMonths= resource.getStringArray(R.array.solar_months);
         strHinduYears = resource.getStringArray(R.array.hindhu_years);
         suryodayam   = resource.getString(R.string.sur_udayam);
@@ -179,6 +185,8 @@ public class CalcPanchang {
             str = solarMonth(dbl[12],year,month+1);
         else
             str = LunarMonth(dbl[13]/*lunar month*/,(int)dbl[0], year,month+1);
+        //str+=",";
+        str += KarthariToString((int)dbl[17]);
         str+="\n";
 
         str += ThithiToString((int)dbl[0]);
@@ -460,6 +468,7 @@ public class CalcPanchang {
         String strmonth="",stryear;
         String strMonthstyle = mPreferences.getString("monthstyle","1");
         String strmonthprefix= suadhi;
+        String ruthu = " ";
         hYear %= 60;
         // hindhu year changes after ugadhi first lunar month 0
         // lunar month before mesha(0) sankranthi
@@ -475,7 +484,8 @@ public class CalcPanchang {
             lunarMonth= (int)(v+1);
             strmonth =  adhika ; //+ strLunarMonths[(int) (v + 1)];
         }
-       if(!bAdhika)
+
+        if(!bAdhika)
        if( Integer.parseInt(strMonthstyle)== 2 && thithi >14)
        {
            lunarMonth++;
@@ -483,11 +493,14 @@ public class CalcPanchang {
        }
        if( Integer.parseInt(strMonthstyle)== 2) strmonthprefix= kadhi;
        stryear = chandra+strHinduYears[hYear]+samvath + "\n";
+       ruthu = strRuthus[(lunarMonth%12)];
+       ruthu += " ";
+       ruthu += strrutu;
        strmonth += strmonthprefix;
         strmonth += strLunarMonths[lunarMonth%12];
         strmonth += masa;
         //if(bAdhika) strmonth = adhika+strmonth;
-        return stryear+strmonth;
+        return stryear+ruthu +strmonth;
     }
     String ThithiToString(int thithi){
         String dispThithi    = thithiPrefix + space+space;
@@ -507,6 +520,7 @@ public class CalcPanchang {
         // first Karana starts from second half of sukla pradhama , 30*2 karanas
         int kPrev = karana-1, kNxt = karana+1, kEnd = kNxt+1;
         if(kPrev==0) kPrev=60;
+        if(kEnd>60) kEnd-=60; //added on 24/5/25 version 28,application crash
 
         double karanaLength = (thithiEnd-thithiStart)/2;
         //Log.d("LUN", String.format("KL=%f,ts=%f,tend=%f, th= %d",karanaLength,thithiStart,thithiEnd,thithi));
@@ -584,6 +598,12 @@ public class CalcPanchang {
     String NakshatraToString(int nak){
 
         return strNak +space + strNaks[nak%27]+ space;
+
+
+    }
+    String KarthariToString(int nak){
+
+        return strKarthari +space + strNaks[nak%27]+ space;
 
 
     }

@@ -61,6 +61,20 @@
         <item>മാഘ</item>
         <item>ഫാല്ഗുണ</item>
     </string-array>
+    <string-array name="ruthus">
+        <item>വസംത</item>
+        <item>വസംത</item>
+        <item>ഗ്രീഷ്മ</item>
+        <item>ഗ്രീഷ്മ</item>
+        <item>വര്ഷ</item>
+        <item>വര്ഷ</item>
+        <item>ശരദ</item>
+        <item>ശരദ</item>
+        <item>ഹേമംത</item>
+        <item>ഹേമംത</item>
+        <item>ശശിര</item>
+        <item>ശശിര</item>
+    </string-array>
 
     <string-array name="solar_months">
         <item>      മേടം     </item>
@@ -347,6 +361,7 @@
     </string-array>
     <string name="samvtsara">   " വർഷം "          </string>
     <string name="masam">       " മാസം "         </string>
+    <string name="ruthu">ഋതു</string>
     <string name="wakeup">      " ഉണരൂ "         </string>
     <string name="mahanubhava">" മഹാനുഭാവ "      </string>
     <string name="garu">        " പൂജ്യ "           </string>

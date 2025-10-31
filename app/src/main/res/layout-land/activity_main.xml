@@ -4,27 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/mLay"
     tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/locTxt"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="locClick"
         android:textAlignment="center"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
         android:textStyle="bold"
         android:textSize="25dp"
-        app:layout_constraintBottom_toTopOf="@+id/scrtxt"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/calendarView"
         app:layout_constraintTop_toTopOf="parent"
         android:gravity="center_horizontal"
-        android:layout_marginTop="20dp"/>
+        android:background="#00E5FF"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+    <!--
+    android:layout_marginTop="20dp"
+     android:layout_marginTop="20dp"
+     app:layout_constraintStart_toEndOf="@+id/calendarView"
+     app:layout_constraintBottom_toTopOf="@+id/scrtxt" -->
     <ScrollView
         android:id="@+id/scrtxt"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/calendarView"
@@ -57,9 +63,9 @@
         android:weekDayTextAppearance="@style/TextAppearance.AppCompat.Medium"
         android:weekSeparatorLineColor="#651FFF"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/locTxt"
+        app:layout_constraintEnd_toStartOf="@id/scrtxt"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/locTxt" />
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"

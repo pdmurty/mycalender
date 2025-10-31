@@ -400,31 +400,6 @@ Java_com_pdmurty_mycalender_Swlib_SWeCalcNextSankaranthi(JNIEnv *env, jclass cla
     return jdbl;
 }
 
-JNIEXPORT jint JNICALL
-Java_com_pdmurty_mycalender_Swlib_SWeSqlitetest(JNIEnv *env, jclass clazz, jstring dbpath) {
-    sqlite3 *db;
-    jchar *result = "data base open success";
-    jchar *resultfail = "data base open failed";
-    jstring strret;
-    int iresult;
-    int ERROR_STATE =-1;
-    //iresult =sqlite3_open(dbpath,&db);
-
-    // strret = (*env)->NewString(env,result,20);
-//else strret = (*env)->NewString(env,resultfail,30);
-
-    char TAG[20] = "NATIVE_SQL";
-
-    char *err = 0;
-    // __android_log_print(ANDROID_LOG_DEBUG, TAG, "calling sqliteopen.%s" ,(*env)->GetCharArrayElements(env,dbpath,false));
-
-    if(iresult=sqlite3_open(dbpath, &db)) {
-        __android_log_print(ANDROID_LOG_DEBUG, TAG, "Error opened database.%s\n",sqlite3_errmsg(db));
-    }
-
-    return iresult;
-
-}
 
 JNIEXPORT jdoubleArray JNICALL
 Java_com_pdmurty_mycalender_Swlib_CalcEphimeris(JNIEnv *env, jclass clazz, jint year, jint month,
@@ -472,7 +447,7 @@ Java_com_pdmurty_mycalender_Swlib_SetLocation(JNIEnv *env, jclass clazz, jfloat 
 JNIEXPORT jdoubleArray JNICALL
 Java_com_pdmurty_mycalender_Swlib_WritePanchang(JNIEnv *env, jclass clazz, jint year, jint month,
                                                 jint day, jdouble timezone) {
-    double jdn,jdn_prathama,jdn_prathama_start,jdn_amantha, jdn_sank=0, retjdn[1], xx[17], slon,mlon,dif;
+    double jdn,jdn_prathama,jdn_prathama_start,jdn_amantha, jdn_sank=0, retjdn[1], xx[18], slon,mlon,dif;
     double geopos[3];
     double tmp;
     int wkday;
@@ -494,10 +469,11 @@ Java_com_pdmurty_mycalender_Swlib_WritePanchang(JNIEnv *env, jclass clazz, jint 
     //get julian-day at UT
     jdn = swe_julday(year,month+1,day,0, SE_GREG_CAL);
 
-    // __android_log_print(ANDROID_LOG_DEBUG, "DATEC", "jdn=%f\n",jdn);
+     __android_log_print(ANDROID_LOG_DEBUG, "DATEC", "jdn=%f\n",jdn);
 
     swe_calc_ut(jdn, SE_SUN,SEFLG_MOSEPH | SEFLG_SPEED | SEFLG_SIDEREAL,xx, err);
     slon = xx[0];
+    k1 = (int) slon*3/40; // karthari
     swe_calc_ut(jdn, SE_MOON,SEFLG_MOSEPH | SEFLG_SPEED | SEFLG_SIDEREAL,xx, err);
     mlon = xx[0];
     //__android_log_print(ANDROID_LOG_DEBUG, "DATEC", "lon=%f:lat=%f\n",mloc_lon,mloc_lat);
@@ -617,11 +593,12 @@ Java_com_pdmurty_mycalender_Swlib_WritePanchang(JNIEnv *env, jclass clazz, jint 
     xx[4]= yog;
     xx[5]= dif+timezone;
     xx[14]=jdn;
-    jdoubleArray jdbl = (*env)->NewDoubleArray(env,17);
-    (*env)->SetDoubleArrayRegion(env,jdbl,0,17,xx);
+    xx[17] = k1; // karthari
+    jdoubleArray jdbl = (*env)->NewDoubleArray(env,18);
+    (*env)->SetDoubleArrayRegion(env,jdbl,0,18,xx);
 // xx[]0-thithicount,1-thith-end-time,6-nxt-thithi-end or -1.1111,
 // 2-nakcount,3-nak-end-time,10-nak-start,11-next-nak-length
-// 4-yoga-count,5-yoga-end-time, 16- thithiNxt
+// 4-yoga-count,5-yoga-end-time, 16- thithiNxt, 17- karthari
 // 7-sunrise,8-sunset, 9-weekday,12-sankranthi-count+time,13-lunarmonth,14,jdn, 15-thithi_start
     return jdbl;
 

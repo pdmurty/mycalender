@@ -1,0 +1,14 @@
+# ninja log v5
+145	3543	7664009774071760	CMakeFiles/native-lib.dir/src/main/cpp/swedate.c.o	fc07fe75eab140e
+1020	3586	7664009785660042	CMakeFiles/native-lib.dir/src/main/cpp/swemmoon.c.o	553de45753202bf0
+1350	3907	7664009791766684	CMakeFiles/native-lib.dir/src/main/cpp/swemplan.c.o	64f03e89811a7c75
+650	3919	7664009794078117	CMakeFiles/native-lib.dir/src/main/cpp/swephlib.c.o	c5b4c9c468a094b1
+0	4285	7664009801298818	CMakeFiles/native-lib.dir/src/main/cpp/Date.c.o	2f52f606fa3b9858
+318	4696	7664009808605244	CMakeFiles/native-lib.dir/src/main/cpp/sweph.c.o	abe38484ae180f0c
+2434	4863	7664009810613375	CMakeFiles/native-lib.dir/src/main/cpp/swejpl.c.o	a70af8a07058b065
+2912	5648	7664009818563834	CMakeFiles/native-lib.dir/src/main/cpp/swehouse.c.o	7fa201a7aef49421
+1685	5660	7664009818724032	CMakeFiles/native-lib.dir/src/main/cpp/swecl.c.o	a0869e5e99dac8a7
+2027	39491	7664010156319759	CMakeFiles/native-lib.dir/src/main/cpp/sqlite3.c.o	840da9d07480b9f4
+39492	40674	7664010168904785	../../../../build/intermediates/cxx/RelWithDebInfo/1i3d3j1k/obj/x86/libnative-lib.so	c02652c214263624
+6	528	7792850258661449	CMakeFiles/native-lib.dir/src/main/cpp/Date.c.o	2f52f606fa3b9858
+529	1766	7792850270681134	../../../../build/intermediates/cxx/RelWithDebInfo/1i3d3j1k/obj/x86/libnative-lib.so	c02652c214263624

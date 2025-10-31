@@ -1,9 +1,13 @@
 package com.pdmurty.mycalender;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -11,6 +15,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 //import androidx.lifecycle.ViewModelProviders;
@@ -38,6 +45,7 @@ public class Geolocations extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_geolocations);
+        ApplyWindowInsets();
         final EditText edt = findViewById(R.id.searchtxt);
         edt.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -104,6 +112,47 @@ public class Geolocations extends AppCompatActivity {
 
 
     }
+
+    void ApplyWindowInsets(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            getWindow().setStatusBarContrastEnforced(true);
+        }
+        if (Build.VERSION.SDK_INT >= 36) {
+            // Additional configuration for Android 16 (API level 36)
+            View decorView = getWindow().getDecorView();
+// Hide the status bar.
+            int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+            decorView.setSystemUiVisibility(uiOptions);
+
+            getWindow().setFlags(
+                    WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+                    WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+            );
+        }
+        View tv = findViewById(R.id.countries);
+        ViewCompat.setOnApplyWindowInsetsListener(
+                tv, (v, windowInsets) -> {
+                    Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars());
+                    // Apply the insets as a margin to the view. This solution sets only the
+                    // bottom, left, and right dimensions, but you can apply whichever insets are
+                    // appropriate to your layout. You can also update the view padding if that's
+                    // more appropriate.
+                    ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
+                    // mlp.leftMargin = insets.left;
+                    //topM mlp.bottomMargin = insets.bottom;
+                    mlp.topMargin = insets.top;
+
+                    v.setLayoutParams(mlp);
+
+                    // Return CONSUMED if you don't want the window insets to keep passing
+                    // down to descendant views.
+                    return WindowInsetsCompat.CONSUMED;
+                }
+
+
+        );
+
+    }
     String GetSelectedCountry(){
        String strCountry = MainActivity.mPreferences.getString("KEY_LOCNAME","Hyderabad,India");
         return TextUtils.split(strCountry,",")[1];
@@ -133,8 +182,8 @@ public class Geolocations extends AppCompatActivity {
                 for (int i =0; i<countries.size();++i) {
                     strCountryName = countries.get(i).countryName;
                     arrCountries.add(strCountryName);
-                    if(TextUtils.equals(strCountryName,strSelCountryname))
-                    spCountries.setSelection(i);
+                     if(TextUtils.equals(strCountryName,strSelCountryname))
+                        spCountries.setSelection(i);
                 }
                 arrCountries.notifyDataSetChanged();
                 mCountryList=countries;

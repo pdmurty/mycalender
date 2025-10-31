@@ -4,22 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity"
-    android:id = "@+id/main_activity_container"
-    >
+    android:id="@+id/mLay">
+
     <TextView
             android:id="@+id/locTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:background="#00E5FF"
+            android:background="#00FFFF"
             android:padding="6dp"
             android:textSize="25dp"
             android:textAlignment="center"
             android:textAppearance=
             "@android:style/TextAppearance.DeviceDefault.Large"
             android:onClick="locClick"
-            android:gravity="center_horizontal" />
+            android:gravity="center_horizontal"
+
+            />
     <View
         android:id="@+id/blank"
         android:layout_width="match_parent"
@@ -30,8 +33,9 @@
         android:id="@+id/calendarView"
         style="@android:style/Widget.Holo.CalendarView"
         android:layout_width="match_parent"
-        android:layout_height="306dp"
-        android:background="#00E5FF"
+        android:layout_height="300dp"
+        android:layout_below="@+id/blank"
+        android:background="#00FFFF"
         android:clickable="true"
         android:dateTextAppearance="@style/TextAppearance.AppCompat.Body1"
         android:focusedMonthDateColor="#FF3D00"
@@ -41,11 +45,14 @@
         android:visibility="visible"
         android:weekDayTextAppearance="@style/TextAppearance.AppCompat.Body1"
         android:weekSeparatorLineColor="#651FFF"
-        android:layout_below="@id/blank" />
+
+        />
     <ScrollView
+        android:id="@+id/scrVW"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/calendarView">
+        android:layout_below="@id/calendarView"
+         >
         <TextView
             android:id="@+id/myTxt"
             android:layout_width="wrap_content"

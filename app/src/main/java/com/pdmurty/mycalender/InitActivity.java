@@ -2,16 +2,21 @@ package com.pdmurty.mycalender;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.preference.PreferenceManager;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -25,6 +30,36 @@ public class InitActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
          super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launcher);
+        ApplyWindowInsets();
+
+    }
+
+    void ApplyWindowInsets(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            getWindow().setStatusBarContrastEnforced(true);
+        }
+        TextView tv = findViewById(R.id.welcome);
+        ViewCompat.setOnApplyWindowInsetsListener(
+                tv, (v, windowInsets) -> {
+                    Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars());
+                    // Apply the insets as a margin to the view. This solution sets only the
+                    // bottom, left, and right dimensions, but you can apply whichever insets are
+                    // appropriate to your layout. You can also update the view padding if that's
+                    // more appropriate.
+                    ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
+                    //mlp.leftMargin = insets.left;
+                    //mlp.bottomMargin = insets.bottom;
+                    mlp.topMargin = insets.top;
+                    v.setLayoutParams(mlp);
+
+                    // Return CONSUMED if you don't want the window insets to keep passing
+                    // down to descendant views.
+                    return WindowInsetsCompat.CONSUMED;
+                }
+
+
+        );
+
     }
     public void onClickAgree(View view) {
         //Intent prefer = new Intent(this,SettingsActivity.class);
@@ -49,14 +84,13 @@ public class InitActivity extends AppCompatActivity {
         ///////////////loc permisions///////////
         Intent locintent = new Intent(this, LocationActivity.class);
         startActivityForResult(locintent,REQUESTCODE);
-
-
         findViewById(R.id.butAgree).setVisibility(View.GONE);
         findViewById(R.id.butdisAgree).setVisibility(View.GONE);
         findViewById(R.id.eula).setVisibility(View.GONE);
         TextView tv = findViewById(R.id.welcome);
         tv.setTextSize(12);
         tv.setText(" Select your preferences and set your name in your prefered language, you can change the preference anytime later ");
+
     }
     private void showSnackbar(final int mainTextStringId, final int actionStringId,
                               View.OnClickListener listener) {

@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 
 android {
 
-    compileSdk 34
+    compileSdk 35
 
     bundle{
         language{
@@ -18,9 +18,9 @@ android {
                                            //
         minSdkVersion 16
         //noinspection EditedTargetSdkVersion
-        targetSdkVersion 34
-        versionCode 27
-        versionName "1.1.27"
+        targetSdkVersion 36
+        versionCode 29
+        versionName "1.1.29"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -39,11 +39,14 @@ android {
             path file('CMakeLists.txt')
         }
     }
-    ndkVersion '21.3.6528147'
-   // compileOptions {
-     //   sourceCompatibility JavaVersion.VERSION_1_8
-       // targetCompatibility JavaVersion.VERSION_17
-   // }
+    ndkVersion '29.0.14033849 rc4'
+    //'21.3.6528147'
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+
+
+    }
 
 }
 
@@ -61,8 +64,8 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.3.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.7.0'
    // preferences compat
 
     implementation "androidx.preference:preference:$preference_version"

@@ -60,6 +60,21 @@
         <item> माघ    </item>
         <item> फल्गुण    </item>
     </string-array>
+    <string-array name="ruthus">
+    <item>बसंत</item>
+    <item>बसंत</item>
+    <item>ग्रीष्म</item>
+    <item>ग्रीष्म</item>
+    <item>वर्ष</item>
+    <item>वर्ष</item>
+    <item>शरद</item>
+    <item>शरद</item>
+    <item>हेमंत</item>
+    <item>हेमंत</item>
+    <item>शशिर</item>
+    <item>शशिर</item>
+    </string-array>
+
     <string-array name="solar_months">
         <item>मेष       </item>
         <item>वृषभ      </item>
@@ -332,6 +347,7 @@
     </string-array>
     <string name="samvtsara">" संवत्सर "</string>
     <string name="masam">" माह "</string>
+    <string name="ruthu">ऋतु</string>
     <string name="wakeup"> " जागिेए "</string>
     <string name="mahanubhava"> श्रीमान </string>
     <string name="garu"> जी </string>

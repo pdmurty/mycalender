@@ -52,6 +52,22 @@
         <item>maagha</item>
         <item>phalguna</item>
     </string-array>
+    <string-array name="ruthus">
+        <item>vasantha</item>
+        <item>vasantha</item>
+        <item>greeshma</item>
+        <item>greeshma</item>
+        <item>varsha</item>
+        <item>varsha</item>
+        <item>saradh</item>
+        <item>saradh</item>
+        <item>hemantha</item>
+        <item>hemantha</item>
+        <item>sasira</item>
+        <item>sasira</item>
+
+    </string-array>
+
     <string-array name="wkdays">
         <item>Mon</item>
         <item>Tue</item>
@@ -337,6 +353,7 @@
     </string-array>
     <string name="samvtsara">" samvathsara "</string>
     <string name="masam">" masa "</string>
+    <string name="ruthu">ruthu</string>
     <string name="wakeup">" please wakeup "</string>
     <string name="mahanubhava"></string>
     <string name="garu">" Sir "</string>

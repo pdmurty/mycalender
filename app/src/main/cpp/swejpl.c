@@ -80,8 +80,8 @@
   #define FTELL _ftelli64
 #else
   typedef off_t off_t64;
-  #define FSEEK fseeko
-  #define FTELL ftello
+  #define FSEEK fseek
+  #define FTELL ftell
 #endif
 
 #define DEBUG_DO_SHOW	FALSE

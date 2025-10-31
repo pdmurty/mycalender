@@ -11,37 +11,28 @@ import android.graphics.Color;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Looper;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.CalendarView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.PreferenceManager;
-
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.common.api.ResolvableApiException;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationCallback;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationResult;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.LocationSettingsRequest;
-import com.google.android.gms.location.LocationSettingsResponse;
-import com.google.android.gms.location.LocationSettingsStatusCodes;
-import com.google.android.gms.location.SettingsClient;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -56,9 +47,9 @@ import com.google.android.play.core.review.ReviewInfo;
 import com.google.android.play.core.review.ReviewManager;
 import com.google.android.play.core.review.ReviewManagerFactory;
 
-import java.text.DateFormat;
+
 import java.util.Calendar;
-import java.util.Date;
+
 import java.util.Locale;
 
 /************ emulator
@@ -95,12 +86,12 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mPreferences.registerOnSharedPreferenceChangeListener(this);
-        //this situation is ulikely but safe side
+
         mCurrentLocation = new Location("");
         if(mPreferences.getInt("LOC_PREF",0)==0) GetCurLocation();
-
         LocalManager.setLocale(this);
-        setContentView(R.layout.activity_main);
+        ApplyWindowInsets();
+
         SharedPreferences.Editor edit = mPreferences.edit();
         edit.putBoolean("KEY_STOP",false );
         edit.apply();
@@ -113,7 +104,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        instancePanchang = CalcPanchang.getInstance(this);
+       instancePanchang = CalcPanchang.getInstance(this);
         Swlib.SWSetSidmode(1, 0, 0);
         dlg = new GetYear();
         Calendar c = Calendar.getInstance();
@@ -126,9 +117,9 @@ public class MainActivity extends AppCompatActivity
             ShowPanchang(year, month, day);
             createNotificationChannel();
         }
-        if (mPreferences.getBoolean("KEY_ALRMSET", true))
+         if (mPreferences.getBoolean("KEY_ALRMSET", true))
            setUpalaramservice();
-        hookCalender(savedInstanceState);
+          hookCalender(savedInstanceState);
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,7 +134,46 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    void ApplyWindowInsets(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            getWindow().setStatusBarContrastEnforced(true);
+        }
+        if (Build.VERSION.SDK_INT >= 36) {
+            // Additional configuration for Android 16 (API level 36)
+            View decorView = getWindow().getDecorView();
+// Hide the status bar.
+            int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+            decorView.setSystemUiVisibility(uiOptions);
 
+            getWindow().setFlags(
+                    WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+                    WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+            );
+        }
+        TextView tv = findViewById(R.id.locTxt);
+        ViewCompat.setOnApplyWindowInsetsListener(
+                tv, (v, windowInsets) -> {
+                    Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars());
+                    // Apply the insets as a margin to the view. This solution sets only the
+                    // bottom, left, and right dimensions, but you can apply whichever insets are
+                    // appropriate to your layout. You can also update the view padding if that's
+                    // more appropriate.
+                    ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
+                    //mlp.leftMargin = insets.left;
+                    //mlp.bottomMargin = insets.bottom;
+                    mlp.topMargin = insets.top;
+
+                    v.setLayoutParams(mlp);
+
+                    // Return CONSUMED if you don't want the window insets to keep passing
+                    // down to descendant views.
+                    return WindowInsetsCompat.CONSUMED;
+                }
+
+
+        );
+
+    }
    void CheckForUpdates(){
 
        final AppUpdateManager appUpdateManager = AppUpdateManagerFactory.create(this);
@@ -214,9 +244,9 @@ public class MainActivity extends AppCompatActivity
             long date = savedInstanceState.getLong("SavedDate");
             cv.setDate(date /*c.getTimeInMillis()*/);
             String thithi = savedInstanceState.getString("Thithi");
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
                 WriteText(thithi);
-            }
+
 
         }
 
@@ -254,20 +284,15 @@ public class MainActivity extends AppCompatActivity
         if(requestCode==REQUESTCURRENTLOC || requestCode==REQUESTDBLOC) {
             if (resultCode == Activity.RESULT_CANCELED)
                 showSnackbar("Unable get current location, Set to default location");
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                UpdateUI();
-            }
+            //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            UpdateUI();
+           // }
         }
         if(requestCode==UPDATE_REQUEST){
             if (resultCode!= RESULT_OK)
                 showSnackbar("Failed to update, Try again later !");
         }
 
-//        if(requestCode==REQUEST_CHECK_SETTINGS && resultCode==RESULT_OK)
-//            if(requestCode==REQUEST_CHECK_SETTINGS && resultCode==RESULT_CANCELED)
-//            {  setResult(Activity.RESULT_CANCELED);
-//                finish();
-//            }
  }
 
     @SuppressLint("NonConstantResourceId")
@@ -357,12 +382,14 @@ public class MainActivity extends AppCompatActivity
 
 
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
+
     public void ShowPanchang(int year, int month, int dayOfMonth) {
 
         String str = //instancePanchang.getEvent(year);
                 instancePanchang.ShowPanchang(year, month, dayOfMonth, tzOffset);
-        WriteText(str);
+
+            WriteText(str);
+
         if (mPreferences.getBoolean("KEY_VOICE", true) && curDay!=dayOfMonth) {
             String engine = tts.getDefaultEngine();
             if(engine != null )
@@ -378,7 +405,7 @@ public class MainActivity extends AppCompatActivity
         //return str;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
+
     void WriteText(String str) {
 
         TextView tv = findViewById(R.id.myTxt);
@@ -403,34 +430,7 @@ public class MainActivity extends AppCompatActivity
         AlaramReciever.SetupNextAlaramClock(this, triggerTime);
         createNotificationChannel();
     }
-    /*void setUpAlaramWork(){
 
-        int alaramMinutes = mPreferences.getInt("KEY_ALARAM", 300);
-        int alrmHour = alaramMinutes / 60;
-        int alrmMinute = alaramMinutes % 60;
-        Calendar calendardue = Calendar.getInstance();
-        long curtime = calendardue.getTimeInMillis();
-        calendardue.set(Calendar.HOUR_OF_DAY, alrmHour);
-        calendardue.set(Calendar.MINUTE, alrmMinute);
-        Calendar calendarcur = Calendar.getInstance();
-        if(calendardue.before(calendarcur)){
-            calendardue.add(Calendar.HOUR_OF_DAY, 24);
-        }
-        long delay = calendardue.getTimeInMillis()-calendarcur.getTimeInMillis();
-
-
-        PeriodicWorkRequest alaramRequest =
-                new  PeriodicWorkRequest.Builder(AlaramWorker.class,
-                        1,TimeUnit.HOURS,5,TimeUnit.MINUTES
-                        )
-                        .setInitialDelay(delay, TimeUnit.MILLISECONDS)
-                        .build();
-
-        WorkManager.getInstance(getApplicationContext())
-                .cancelAllWork();
-        WorkManager.getInstance(getApplicationContext()).enqueue(alaramRequest);
-
- }*/
     public void createNotificationChannel() {
 
         // Create a notification manager object.
@@ -472,11 +472,14 @@ public class MainActivity extends AppCompatActivity
 
     }
     private void onMenuLocation(){
-        LocationDlgFragment locDlg = new LocationDlgFragment();
+
+       LocationDlgFragment locDlg = new LocationDlgFragment();
        locDlg.setLocselected( mPreferences.getInt("LOC_PREF", 0));
         FragmentManager fm = getSupportFragmentManager();
         if (fm.findFragmentByTag("SetLocation") == null)
             locDlg.show(getSupportFragmentManager(), "SetLocation");
+
+
 
     }
 
@@ -525,10 +528,6 @@ public class MainActivity extends AppCompatActivity
                 break;
 
         }
-
-
-
-
     }
 
     private void showMap() {
@@ -539,7 +538,6 @@ public class MainActivity extends AppCompatActivity
     public void locClick(View view) {
         onMenuLocation();
     }
-
      @RequiresApi(api = Build.VERSION_CODES.M)
      @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
@@ -549,9 +547,9 @@ public class MainActivity extends AppCompatActivity
                 this.setUpalaramservice();
              }
             }
-    @RequiresApi(api = Build.VERSION_CODES.O)
+   // @RequiresApi(api = Build.VERSION_CODES.O)
     private void UpdateUI() {
-
+Log.d("UI","upadteUI");
         SetLocationHeader();
         Calendar c = Calendar.getInstance();
         int day = c.get(Calendar.DAY_OF_MONTH);
@@ -569,7 +567,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void showSnackbar(final String text) {
-        View container = findViewById(R.id.main_activity_container);
+        View container = findViewById(R.id.mLay);
         if (container != null) {
             Snackbar.make(container, text, Snackbar.LENGTH_LONG).show();
         }
