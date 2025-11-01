@@ -515,7 +515,7 @@ public class CalcPanchang {
     }
     String KaranaToString(int thithi, double thithiStart,double thithiEnd,double thithiNxt, double sunrise){
 
-
+        if(thithi==30) thithi=0; // karana goes out of bounds, fixed 1nov25
         int karana = (thithi+1)*2-1; // thithi count 0 based
         // first Karana starts from second half of sukla pradhama , 30*2 karanas
         int kPrev = karana-1, kNxt = karana+1, kEnd = kNxt+1;
