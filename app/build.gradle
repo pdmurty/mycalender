@@ -19,8 +19,8 @@ android {
         minSdkVersion 16
         //noinspection EditedTargetSdkVersion
         targetSdkVersion 36
-        versionCode 29
-        versionName "1.1.29"
+        versionCode 30
+        versionName "1.1.30"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -39,7 +39,7 @@ android {
             path file('CMakeLists.txt')
         }
     }
-    ndkVersion '29.0.14033849 rc4'
+    ndkVersion '29.0.14206865'
     //'21.3.6528147'
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17

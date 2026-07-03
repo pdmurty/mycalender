@@ -469,7 +469,7 @@ Java_com_pdmurty_mycalender_Swlib_WritePanchang(JNIEnv *env, jclass clazz, jint 
     //get julian-day at UT
     jdn = swe_julday(year,month+1,day,0, SE_GREG_CAL);
 
-     __android_log_print(ANDROID_LOG_DEBUG, "DATEC", "jdn=%f\n",jdn);
+     //__android_log_print(ANDROID_LOG_DEBUG, "DATEC", "jdn=%f\n",jdn);
 
     swe_calc_ut(jdn, SE_SUN,SEFLG_MOSEPH | SEFLG_SPEED | SEFLG_SIDEREAL,xx, err);
     slon = xx[0];

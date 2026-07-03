@@ -404,7 +404,7 @@ private void buildLocationSettingsRequest() {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         // ((TextView)findViewById(R.id.locwarn)).setText("ActivityResult");
-        Log.d("LOCActivity", "activity result - chksettings ");
+       // Log.d("LOCActivity", "activity result - chksettings ");
         if(requestCode==REQUEST_CHECK_SETTINGS && resultCode==RESULT_OK)
             if(requestCode==REQUEST_CHECK_SETTINGS && resultCode==RESULT_CANCELED)
             {  setResult(Activity.RESULT_CANCELED);
@@ -417,12 +417,12 @@ private void createLocationCallback() {
             @Override
             public void onLocationResult(LocationResult locationResult) {
                 super.onLocationResult(locationResult);
-                Log.d("LOCActivity", "onLOcresult ");
+                //Log.d("LOCActivity", "onLOcresult ");
                 mCurrentLocation = locationResult.getLastLocation();
                 List<Location> locs = locationResult.getLocations();
 
                 if(mCurrentLocation!=null){
-                    Log.d("LOCActivity", "mcurLoc notnull ");
+                   // Log.d("LOCActivity", "mcurLoc notnull ");
                     if(!mLocUpdate) {
                        mLocUpdate=true;
                        stopLocationUpdates();
@@ -434,7 +434,7 @@ private void createLocationCallback() {
     }
     private void createLocationRequest(){
 
-        Log.d("LOCActivity", "location request");
+       // Log.d("LOCActivity", "location request");
         mLocationRequest = LocationRequest.create();
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         mLocationRequest.setInterval(SET_INTERVAL);
@@ -450,13 +450,13 @@ private void createLocationCallback() {
         createLocationCallback();
         createLocationRequest();
         buildLocationSettingsRequest();
-        Log.d("LOCActivity", "in loc updates ");
+        //Log.d("LOCActivity", "in loc updates ");
         mSettingsClient.checkLocationSettings(mLocationSettingsRequest)
                 .addOnSuccessListener(this, new OnSuccessListener<LocationSettingsResponse>() {
                     @Override
                     public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
                         //noinspection MissingPermission
-                        Log.d("LOCActivity", "on success-locsettings ");
+                        //Log.d("LOCActivity", "on success-locsettings ");
                         mLocationProvider.requestLocationUpdates(mLocationRequest,
                                 mLocationCallback, Looper.myLooper());
                           }
@@ -465,7 +465,7 @@ private void createLocationCallback() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         int statusCode = ((ApiException) e).getStatusCode();
-                        Log.d("LOCActivity", "onFail-locsttings ");
+                        //Log.d("LOCActivity", "onFail-locsttings ");
                         switch (statusCode) {
                             case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
                                 try {

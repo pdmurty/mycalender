@@ -153,8 +153,6 @@ public class ShowEvents extends AppCompatActivity
     class EventsAync extends AsyncTask<Integer, Integer, Integer> {
 
 
-        int mday, mmonth;
-        int mcount =2;
         double dTzoffset;
         List<Events> pendingEvents;
         boolean newpendingevent = false;
@@ -201,24 +199,19 @@ public class ShowEvents extends AppCompatActivity
             double[] dblprev=null;
             double[] dblsank;
             double[] dblkarthari;
-            String txt;
-            boolean vikuntafound=false;
             double[] dbleclarr; // arr of 7*5 elements 7 for each eclips, 2 solar eclips + 3 lunar if exist.
             // 1.type, 2.year,3.month,4.day,5.weekday,6.time begin, 7. time end
 
             int pos = 0;
             int maxday;
-            double[] geo = new double[3];
             Eventdays cevt ;
-            Eventdays vinkuntaevt = new Eventdays();
-            mEventlist =  eventsdao.getAllEventsD();
-            int listSize = mEventlist.size();
 
+            mEventlist =  eventsdao.getAllEventsD();
             listEventdays = new ArrayList<Eventdays>();
             pendingEvents = new ArrayList<Events>();
             /////////////////// initiate swiss ephimiris LIB
             Swlib.SWSetSidmode(1, 0, 0);
-            Events tmpevt;
+
             ////////////////eclips///////////////////////
             int eclskip;
             dbleclarr=Swlib.CalcSolarAndLunarEclipse(year, dTzoffset);
@@ -239,26 +232,29 @@ public class ShowEvents extends AppCompatActivity
                 listEventdays.add(cevt);
              }
 
-            ////////////////////////////////////////////
+            ///////////////////////////////////////////eclips end/
 
-            dbl = Swlib.WritePanchang(year, 0, 1, dTzoffset);
-            int lm =(int) dbl[13];
-            int ld = (int) dbl[0];
-            tmpevt = mEventlist.get(0);
+            dbl = Swlib.WritePanchang(year, 0, 1, dTzoffset); // first day of the new greg year
+            int lm =(int) dbl[13]; // lunar month
+            int ld = (int) dbl[0]; // lunar day - thithi
 
+            //set the list position to the first event in the current calender(greg) year
+            if(lm==mEventlist.get(0).lunarmonth){
+                if(ld<=mEventlist.get(0).thithi) pos=0;
+                else {
+                    while( ld>=mEventlist.get(pos).thithi) ++pos;
+                      }
+            }
+            else{
 
-            while(lm>tmpevt.lunarmonth || ld>tmpevt.thithi) {
-                mEventlist.remove(0);
-                if(tmpevt.event!=0)
-                mEventlist.add(tmpevt);
-                tmpevt = mEventlist.get(0);
-
+                pos = mEventlist.size()-1;
+                while(ld<=mEventlist.get(pos).thithi) --pos;
+                ++pos;
             }
 
             dblkarthari = Swlib.SWeCalcKarthariDays(year, 5.5);
             int skip=0;
             for(int i=0 ;i<27;++i){
-
                 skip=i*5;
                 cevt = new Eventdays();
                 cevt.day = (int)dblkarthari[1+skip];//day;
@@ -271,9 +267,14 @@ public class ShowEvents extends AppCompatActivity
             }
             /////////////////
 
-
+            int dhanuday=14 ;
+            int makaraday=14;
+            int listSize = mEventlist.size();
+            // loop through each day of the year , check for listed events.
             for (int month = 0; month < 12 && pos < listSize; ++month) {
                 dblsank =Swlib.SWeCalcNextSankaranthi(year,month,dTzoffset);
+                //[0]weekday;[1]day;[2]time;[3]sankranthi;
+
                 cevt = new Eventdays();
                 cevt.day = (int)dblsank[1];//day;
                 cevt.month = month + 1;
@@ -282,10 +283,19 @@ public class ShowEvents extends AppCompatActivity
                 cevt.eventid = 100+(int)dblsank[3];//mEventlist.get(pos).event;
                 cevt.weekday = (int)dblsank[0];
                 listEventdays.add(cevt);
-                if((int)dblsank[3]==9)DoMakara(dblsank,year,month);
+                if((int)dblsank[3]==8) dhanuday = (int)dblsank[1];
+                if((int)dblsank[3]==9){
+                    DoMakara(dblsank,year,month);
+                    makaraday = (int)dblsank[1];
+                }
                 maxday = maxdays[month];
-                if (year % 4 == 0 && month == 1) ++maxday;
-                for (int day = 1; day <= maxday && pos < listSize; ++day) {
+                if (year % 4 == 0 && month == 1) ++maxday; // leap year february
+//loop through each day of the month
+// xx[]0-thithicount,1-thith-end-time,6-nxt-thithi-end or -1.1111,
+// 2-nakcount,3-nak-end-time,10-nak-start,11-next-nak-length
+// 4-yoga-count,5-yoga-end-time, 16- thithiNxt, 17- karthari
+// 7-sunrise,8-sunset, 9-weekday,12-sankranthi-count+time,13-lunarmonth,14,jdn, 15-thithi_start
+             for (int day = 1; day <= maxday && pos < listSize; ++day) {
                     dbl = Swlib.WritePanchang(year, month, day, dTzoffset);
                 AddGregEvent(year,month,day,(int)dbl[9]);
                     if(pendingEvents.size()!=0){
@@ -313,8 +323,8 @@ public class ShowEvents extends AppCompatActivity
                             Events curevt =mEventlist.get(pos);
                             if(dblprev!=null){
                                 if(curevt.eventtype==3  ){
-                                    if(dbl[1]<12.0) {
-                                        cevt.day = day-1;
+                                    if(dbl[1]<12.0) { // thithi ends before 12 noon
+                                        cevt.day = day-1; // event happens prev day
                                         if(cevt.day==0){
                                             cevt.month = month;
                                             cevt.day = maxdays[month-1];
@@ -323,8 +333,8 @@ public class ShowEvents extends AppCompatActivity
                                       }
                                 }
                                 if(curevt.eventtype==4){
-                                    if(dbl[1]<dbl[8]) {
-                                        cevt.day = day-1;
+                                    if(dbl[1]<dbl[8]) { // thtithi ends before sunset
+                                        cevt.day = day-1; // event happens prev day
                                         if(cevt.day==0){
                                             cevt.month = month;
                                             cevt.day = maxdays[month-1];
@@ -333,8 +343,8 @@ public class ShowEvents extends AppCompatActivity
                                     }
                                 }
                                 if(curevt.eventtype==5) {
-                                if (dbl[1] < 24.0) {
-                                    cevt.day = day - 1;
+                                if (dbl[1] < 24.0) { // thithi less than 24 hrs - kshaya
+                                    cevt.day = day - 1; // event happens prev day
                                     if (cevt.day == 0) {
                                         cevt.month = month;
                                         cevt.day = maxdays[month - 1];
@@ -343,24 +353,22 @@ public class ShowEvents extends AppCompatActivity
                                 }
                             }
                             }
-                            if(month==0 && day<14 ) // vikunta ekadhasi
-                            if(mEventlist.get(pos).thithi==10||mEventlist.get(pos).thithi==25)
-                            {   cevt.eventid =90; cevt.highlight=1; vikuntafound = true;}
-                            if(!vikuntafound && month==11 && day>14 )
-                            if(mEventlist.get(pos).thithi==10||mEventlist.get(pos).thithi==25)
-                            { cevt.eventid =90;cevt.highlight=1;}
-                            if( month==11 && day==31)  // special condition 2 vikunta in 1 year.
-                                if(mEventlist.get(pos).thithi==10||mEventlist.get(pos).thithi==25)
+
+                        if(month==0 && day<makaraday ) // vikunta ekadhasi
+                            if(mEventlist.get(pos).thithi==10)
+                            {   cevt.eventid =90; cevt.highlight=1; }
+                            if( month==11 && day >= dhanuday )  // special condition 2 vikunta in 1 year.
+                                if(mEventlist.get(pos).thithi==10)
                                 { cevt.eventid =90;cevt.highlight=1;}
+
                             listEventdays.add(cevt);
                         }
                         ++pos;
+                        if(pos>=listSize) pos=0; // reset list position to start
+
                         newpendingevent = false;
-
-
                         publishProgress((int)(pos*100/listSize));
                     }
-
                     dblprev= dbl;
                 } //end of day
 
@@ -494,7 +502,7 @@ public class ShowEvents extends AppCompatActivity
 
             }
 
-
+        //    Log.d("EVT","pos:"+pos +"found:"+found);
             return found;
         }
 

@@ -526,6 +526,7 @@ public class CalcPanchang {
         //Log.d("LUN", String.format("KL=%f,ts=%f,tend=%f, th= %d",karanaLength,thithiStart,thithiEnd,thithi));
         if(karana<57) karana = karana%7;  // 7 karanas repeat 8 times.
         else karana = karana-49; // fixed karana from 8 to 11
+        if (karana>11) karana = 11;
         double thithilength = thithiEnd -thithiStart;
         if(karana==0) karana =7;
         if(kPrev <57) kPrev = kPrev%7;

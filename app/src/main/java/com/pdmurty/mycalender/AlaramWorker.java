@@ -53,7 +53,7 @@ public class AlaramWorker extends Worker {
         int tzOffset = c.get(Calendar.ZONE_OFFSET);
         int H= c.get(Calendar.HOUR);
         int M= c.get(Calendar.MINUTE);
-        Log.d("Dowork","Hr="+H+"Mn="+M);
+        //Log.d("Dowork","Hr="+H+"Mn="+M);
                    deliverNotification(context,year,month,day,tzOffset);
 
         return Result.success();
